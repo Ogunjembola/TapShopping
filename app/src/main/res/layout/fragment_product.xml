@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_product_details_activity"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/app_gradient_color_background"
+        app:menu="@menu/delete_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.tapshopping.utillz.TPTextViewBold
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/toolbar_title_paddingStart"
+            android:paddingEnd="0dp"
+            android:text="Product Details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/toolbar_title_text_size"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_product_details_activity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_product_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/product_detail_image_height"
+                android:background="@color/colorImageViewBackground"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/ll_product_details_title_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/product_details_title_price_marginTop"
+                android:background="@color/dashboard_item_details_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/product_details_title_price_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_product_detail_image">
+
+                <com.example.tapshopping.utillz.TPTextViewBold
+                    android:id="@+id/tv_product_details_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/item_value_text_color"
+                    android:textSize="@dimen/product_details_title_textSize"
+                    tools:text="Product Title" />
+
+                <com.example.tapshopping.utillz.TPTextView
+                    android:id="@+id/tv_product_details_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/item_value_text_color"
+                    android:textSize="@dimen/product_details_price_textSize"
+                    tools:text="$100" />
+            </LinearLayout>
+
+            <com.example.tapshopping.utillz.TPTextViewBold
+                android:id="@+id/tv_product_details_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_label_margin"
+                android:text="Product Description"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/product_details_label_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_details_title_price" />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/tv_product_details_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_details_label_margin"
+                android:layout_marginEnd="@dimen/product_details_label_margin"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/product_details_description_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_details_label"
+                tools:text="This is product details description." />
+
+            <LinearLayout
+                android:id="@+id/ll_product_details_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_label_margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_details_description">
+
+                <com.example.tapshopping.utillz.TPTextViewBold
+                    android:id="@+id/tv_product_details_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:text="Stock Quantity"
+                    android:textColor="@color/item_value_text_color"
+                    android:textSize="@dimen/product_details_label_textSize" />
+
+                <com.example.tapshopping.utillz.TPTextView
+
+                    android:id="@+id/tv_product_details_stock_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_grey_border_background"
+                    android:paddingStart="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:paddingTop="@dimen/product_details_stock_quantity_paddingTopBottom"
+                    android:paddingEnd="@dimen/product_details_stock_quantity_paddingStartEnd"
+                    android:paddingBottom="@dimen/product_details_stock_quantity_paddingTopBottom"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/product_details_stock_quantity_textSize"
+                    android:textStyle="bold"
+                    tools:text="5" />
+
+
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:numStars="5"
+                android:progressBackgroundTint="#a8a8a8"
+                android:progressTint="#06CD0E"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:stepSize="0.5"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_details_quantity"
+
+                />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/ratingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_details_label_margin"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="@dimen/product_details_label_margin"
+                android:text="82 Rating"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/product_details_description_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+
+            <com.example.tapshopping.utillz.TPTextViewBold
+                android:id="@+id/tv_productReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_details_label_margin"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="@dimen/product_details_label_margin"
+                android:text="Product Rating &amp; Reviews"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/product_details_description_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingCount" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productReviewRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="60dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_productReview"
+
+                tools:listitem="@layout/item_review" />
+
+            <com.example.tapshopping.utillz.TPButton
+
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingTop="@dimen/btn_padding"
+                android:paddingBottom="@dimen/btn_padding"
+                android:text="Add To Cart"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_textSize"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productReviewRv"
+                tools:visibility="visible" />
+
+            <com.example.tapshopping.utillz.TPButton
+
+                android:id="@+id/btn_go_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingTop="@dimen/btn_padding"
+                android:paddingBottom="@dimen/btn_padding"
+                android:text="Go To Cart"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/btn_textSize"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_add_to_cart"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
