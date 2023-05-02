@@ -18,7 +18,7 @@
                 <ImageView android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:id="@+id/iv_header_bg"
-                    android:src="@drawable/background"
+                    android:src="@color/blue"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/content_description"/>
 
@@ -169,7 +169,7 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/settings_button_marginTopBottom"
                 android:layout_below="@id/ll_address"
-                android:background="@drawable/button_background"
+                android:background="@color/blue"
                 android:paddingBottom="@dimen/btn_padding"
                 android:paddingTop="@dimen/btn_padding"
                 android:foreground="?attr/selectableItemBackground"
