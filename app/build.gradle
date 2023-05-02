@@ -38,6 +38,7 @@ android {
         viewBinding true
     }
     dataBinding.enabled = true
+    namespace 'com.example.tapshopping'
 }
 def roomVersion = '2.4.3'
 def rxJavaVersion = '2.1.1'
