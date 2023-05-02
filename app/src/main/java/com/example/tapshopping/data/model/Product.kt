@@ -11,7 +11,7 @@ data class Product(
     val price: String = "",
     val description: String = "",
     val stock_quantity: String = "",
-    val image: Int = "",
+    val image: String = "",
     var product_id: String = "",
 ) : Serializable
 

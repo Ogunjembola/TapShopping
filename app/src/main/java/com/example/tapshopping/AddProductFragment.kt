@@ -17,7 +17,7 @@ class AddProductFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupSpinner()
+       // setupSpinner()
 
     }
 
@@ -30,7 +30,7 @@ class AddProductFragment : Fragment() {
         return binding.root
 
     }
-    private fun setupSpinner() {
+   /* private fun setupSpinner() {
         val categoriesNames = resources.getStringArray(R.array.Categories)
         val spinner = binding.categoriesSpinner
         if (spinner != null) {
@@ -69,7 +69,7 @@ class AddProductFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Code to perform some action when nothing is selected
             }
-        }
-    }
+       }
+    }*/
 
-    }
+}

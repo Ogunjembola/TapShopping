@@ -18,28 +18,28 @@ class HomeAdapter(private val context: ArrayList<Product>):RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return context.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val model = list[position]
+       /* val model = list[position]
         if (holder is MyViewHolder) {
 
 
 //            holder.itemView.title.text = model.title
             holder.bind(model)
 
-        }
+        }*/
     }
     class MyViewHolder(private val binding: ItemCategoriesBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(product: Product){
+       /* fun bind(product: Product){
             binding.title.text = product.title
             GlideLoader(binding.catIcon.context).loadProductPicture(
                 product.image,
                 binding.catIcon
             )
-        }
+        }*/
 
     }
 

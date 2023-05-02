@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.tapshopping.data.model.Product
 import com.example.tapshopping.data.view.adapter.HomeAdapter
-import com.example.tapshopping.databinding.FragmentCategoriesBinding
+import com.example.tapshopping.databinding.FragmentHomeBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
     private lateinit var categoriesList : ArrayList<Product>
     private lateinit var homeAdapter : HomeAdapter
-    private lateinit var binding: FragmentCategoriesBinding
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCategoriesBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
 
