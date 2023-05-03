@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavHost
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.tapshopping.ProductFragment
+import com.example.tapshopping.R
 import com.example.tapshopping.data.model.Product
 import com.example.tapshopping.data.view.adapter.HomeAdapter
 import com.example.tapshopping.databinding.FragmentHomeBinding
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class HomeFragment : Fragment() {
     private lateinit var categoriesList : ArrayList<Product>
@@ -35,10 +35,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoriesListItems()
+        setUpBottomNav()
     }
-    private fun categoriesListItems(){
 
+    private fun setUpBottomNav(){
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.homeFragment) as NavHostFragment
+        binding.bottomNavigationView.setupWithNavController(navController = navHostFragment.navController)
     }
+
+
 
 }

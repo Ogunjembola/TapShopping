@@ -167,6 +167,10 @@
     <string name="lbl_addresses">Addresses</string>
     <string name="btn_lbl_logout">Logout</string>
     <string name="selected_item">Selected item:</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="cart">Cart</string>
+    <string name="add_product">Add Product</string>
     <string-array name="Categories">
         <item>Supermarket</item>
         <item>Health &amp; Beauty</item>

@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_categories"
-        android:icon="@drawable/ic_vector_dashboard"
-        android:title="Home" />
-
-
+        android:id="@+id/productFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
     <item
-        android:id="@+id/navigation_products"
-        android:icon="@drawable/ic_vector_products"
-        android:title="@string/title_products" />
-
-
-
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_accounts"
+        android:title="@string/account" />
     <item
-        android:id="@+id/navigation_orders"
-        android:icon="@drawable/ic_vector_orders"
-        android:title="@string/title_orders" />
-
-
-    <item
-        android:id="@+id/navigation_sold_product"
-        android:icon="@drawable/ic_vector_sold_products"
-        android:title="@string/sold_products" />
-
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="@string/cart" />
 </menu>
