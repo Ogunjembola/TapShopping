@@ -4,32 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.view.HomeFragment">
-
-
-    <!--androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorLightGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/add_product">
-
-        <com.example.tapshopping.utillz.TPTextViewBold
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingStart="@dimen/toolbar_title_paddingStart"
-            android:paddingEnd="0dp"
-            android:text="@string/add_product"
-            android:textColor="@color/black"
-            android:textSize="@dimen/toolbar_title_text_size"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar -->
+    tools:context=".data.view.fragment.HomeFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/homeFragment"

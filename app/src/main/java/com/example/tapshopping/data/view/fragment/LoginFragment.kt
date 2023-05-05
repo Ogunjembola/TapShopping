@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view
+package com.example.tapshopping.data.view.fragment
 
 import android.content.Intent
 import android.os.Build

@@ -7,35 +7,30 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tapshopping.data.view.HomeFragment"
+        android:name="com.example.tapshopping.data.view.fragment.HomeFragment"
         android:label="Home fragment"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_categoriesFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
-        <action
-            android:id="@+id/action_categoriesFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="com.example.tapshopping.AddProductFragment"
+        android:name="com.example.tapshopping.data.view.fragment.AddProductFragment"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/checkoutFragment"
-        android:name="com.example.tapshopping.CheckoutFragment"
+        android:name="com.example.tapshopping.data.view.fragment.CheckoutFragment"
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" >
         <action
             android:id="@+id/action_checkoutFragment_to_categoriesFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/loginFragment">
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.example.tapshopping.data.view.LoginFragment"
+            android:name="com.example.tapshopping.data.view.fragment.LoginFragment"
             android:label="fragment_login"
             tools:layout="@layout/fragment_login">
             <action
@@ -43,11 +38,11 @@
                 app:destination="@id/registerFragment" />
             <action
                 android:id="@+id/action_loginFragment_to_categoriesFragment"
-                app:destination="@id/categoriesFragment" />
+                app:destination="@id/homeFragment" />
         </fragment>
         <fragment
             android:id="@+id/registerFragment"
-            android:name="com.example.tapshopping.data.view.RegisterFragment"
+            android:name="com.example.tapshopping.data.view.fragment.RegisterFragment"
             android:label="fragment_register"
             tools:layout="@layout/fragment_register">
             <action

@@ -1,4 +1,4 @@
-package com.example.tapshopping
+package com.example.tapshopping.data.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

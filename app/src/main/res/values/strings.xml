@@ -171,6 +171,11 @@
     <string name="account">Account</string>
     <string name="cart">Cart</string>
     <string name="add_product">Add Product</string>
+    <string name="wrist_watches">Wrist Watches</string>
+    <string name="unable_to_get_data_from_the_server">Unable to get data from the server</string>
+    <string name="image_content_description">image content description</string>
+    <string name="description">Description</string>
+    <string name="my_cart">My Cart</string>
     <string-array name="Categories">
         <item>Supermarket</item>
         <item>Health &amp; Beauty</item>
