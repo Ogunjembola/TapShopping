@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view.fragment
+package com.example.tapshopping.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

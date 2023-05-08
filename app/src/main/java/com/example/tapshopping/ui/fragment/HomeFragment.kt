@@ -1,27 +1,26 @@
-package com.example.tapshopping.data.view.fragment
+package com.example.tapshopping.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tapshopping.data.model.Category
+import androidx.fragment.app.Fragment
 import com.example.tapshopping.data.model.categories
 import com.example.tapshopping.data.model.products
-import com.example.tapshopping.data.view.adapter.CategoryAdapter
-import com.example.tapshopping.data.view.adapter.ProductAdapter
-import com.example.tapshopping.databinding.FragmentProductBinding
+import com.example.tapshopping.databinding.FragmentHomeBinding
+import com.example.tapshopping.ui.adapter.CategoryAdapter
+import com.example.tapshopping.ui.adapter.ProductAdapter
 
-class ProductFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentProductBinding
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProductBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return  binding.root
     }
 

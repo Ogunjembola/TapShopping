@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view.adapter
+package com.example.tapshopping.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import com.example.tapshopping.databinding.ItemCategoriesBinding
 class CategoryAdapter(private val categories: List<Category>):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>()
 {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):CategoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(
                 ItemCategoriesBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false

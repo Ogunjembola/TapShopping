@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view.adapter
+package com.example.tapshopping.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

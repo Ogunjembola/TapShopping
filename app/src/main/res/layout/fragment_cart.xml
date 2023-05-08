@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.view.fragment.CartFragment">
+    tools:context=".ui.fragment.CartFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cart_list_activity"

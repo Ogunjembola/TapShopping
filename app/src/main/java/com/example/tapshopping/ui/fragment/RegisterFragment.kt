@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view.fragment
+package com.example.tapshopping.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,10 +27,9 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-
-        }
+//        binding.tvLogin.setOnClickListener {
+//            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+//        }
 
     }
 }
