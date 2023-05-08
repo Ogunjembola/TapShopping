@@ -63,7 +63,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
 
-// Architectural Components
+    // Architectural Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
