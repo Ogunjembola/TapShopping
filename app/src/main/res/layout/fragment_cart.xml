@@ -4,26 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartFragment">
+    tools:context=".ui.fragment.CartFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cart_list_activity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:background="@color/colorLightGrey"
+        style="@style/ToolbarStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.example.tapshopping.utillz.TPTextViewBold
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingStart="@dimen/toolbar_title_paddingStart"
-            android:paddingEnd="0dp"
-            android:text="My Cart"
-            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/my_cart"
+            android:textColor="@color/black"
             android:textSize="@dimen/toolbar_title_text_size"
             android:textStyle="bold" />
 
@@ -138,7 +137,7 @@
                 tools:text="$110" />
         </LinearLayout>
 
-        <com.example.tapshopping.utillz.TPButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -146,14 +145,15 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/blue"
+            android:background="@color/colorLightGrey"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:paddingTop="@dimen/btn_padding"
             android:paddingBottom="@dimen/btn_padding"
             android:text="Checkout"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="@dimen/btn_textSize"
+            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_terms_and_condition" />

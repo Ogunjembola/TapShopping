@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductFragment">
+    tools:context=".ui.fragment.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_product_details_activity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:backgroundTint="@color/colorLightGrey"
         app:menu="@menu/delete_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
             android:paddingStart="@dimen/toolbar_title_paddingStart"
             android:paddingEnd="0dp"
             android:text="Product Details"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/toolbar_title_text_size"
             android:textStyle="bold" />
 
@@ -130,7 +130,6 @@
                     android:textSize="@dimen/product_details_label_textSize" />
 
                 <com.example.tapshopping.utillz.TPTextView
-
                     android:id="@+id/tv_product_details_stock_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,6 +249,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

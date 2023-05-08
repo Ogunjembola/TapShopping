@@ -1,4 +1,4 @@
-package com.example.tapshopping.data.view
+package com.example.tapshopping.ui.fragment
 
 import android.content.Intent
 import android.os.Build
@@ -31,12 +31,12 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
-        binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_categoriesFragment)
-        }
+//        binding.tvRegister.setOnClickListener {
+//            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+//        }
+//        binding.btnLogin.setOnClickListener {
+//            findNavController().navigate(R.id.action_loginFragment_to_categoriesFragment)
+//        }
     }
 
 }
