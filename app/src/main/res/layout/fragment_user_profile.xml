@@ -12,7 +12,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/app_gradient_color_background"
+            android:background="@color/blue"
             android:id="@+id/toolbar_user_profile_activity">
 
             <TextView android:layout_height="match_parent"
@@ -212,7 +212,7 @@
                     android:layout_width="match_parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:background="@drawable/button_background"
+                    android:background="@color/blue"
                     android:id="@+id/btn_save"
                     android:textSize="@dimen/btn_textSize"
                     android:textColor="@android:color/white"

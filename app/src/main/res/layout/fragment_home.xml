@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".data.view.HomeFragment"
-        >
+        tools:context=".data.view.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/app_gradient_color_background"
-                app:menu="@menu/add_product"
+                android:background="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/add_product">
 
                 <com.example.tapshopping.utillz.TPTextViewBold
                     android:id="@+id/tv_title"
@@ -36,6 +36,7 @@
                     android:textStyle="bold" />
 
             </androidx.appcompat.widget.Toolbar>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeCategoriesListRv"
                 android:layout_width="match_parent"
@@ -45,7 +46,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
-
                 tools:listitem="@layout/item_home" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -64,20 +64,21 @@
                 android:id="@+id/listError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:text="Unable to get data from the server"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
-                android:background="@drawable/background"
+                android:background="@color/blue"
                 app:itemIconTint="@color/white"
                 app:itemTextColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

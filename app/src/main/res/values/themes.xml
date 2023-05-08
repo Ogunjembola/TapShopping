@@ -17,6 +17,7 @@
     <style name="NoAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">#0E60E2</item>
 
     </style>
 
