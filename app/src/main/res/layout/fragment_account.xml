@@ -130,7 +130,6 @@
                     android:textSize="@dimen/product_details_label_textSize" />
 
                 <com.example.tapshopping.utillz.TPTextView
-
                     android:id="@+id/tv_product_details_stock_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,6 +249,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
