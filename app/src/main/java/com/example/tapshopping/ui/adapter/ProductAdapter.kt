@@ -3,10 +3,10 @@ package com.example.tapshopping.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tapshopping.data.model.Product
+import com.example.tapshopping.data.model.ProductDummy
 import com.example.tapshopping.databinding.ItemProductBinding
 
-class ProductAdapter(private val products: List<Product> = emptyList()) :
+class ProductAdapter(private val products: List<ProductDummy> = emptyList()) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -30,7 +30,7 @@ class ProductAdapter(private val products: List<Product> = emptyList()) :
     class ProductViewHolder(private val item: ItemProductBinding) :
         RecyclerView.ViewHolder(item.root) {
 
-        fun bindData(product: Product) {
+        fun bindData(product: ProductDummy) {
             item.apply {
                 productImage.setImageResource(product.image)
                 productDescription.text = product.description

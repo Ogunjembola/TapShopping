@@ -4,7 +4,7 @@ import com.example.tapshopping.R
 import java.io.Serializable
 
 
-data class Product(
+data class ProductDummy(
 
     val user_id: String = "1",
     val user_name: String = "Touch and Pay",
