@@ -9,5 +9,30 @@
         android:id="@+id/accountFragment"
         android:name="com.example.tapshopping.ui.fragment.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_accountFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.tapshopping.ui.fragment.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.tapshopping.ui.fragment.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_home" >
+
+    </fragment>
+
 </navigation>
