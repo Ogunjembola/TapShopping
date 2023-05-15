@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tapshopping.data.model.Category
 import com.example.tapshopping.databinding.ItemCategoriesBinding
 
-class CategoryAdapter(private val categories: List<Category>):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>()
+class CategoryAdapter(private val categories: List<Category> = emptyList()):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>()
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {

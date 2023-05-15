@@ -24,7 +24,7 @@ class ProductAdapter(private val products: List<ProductDummy> = emptyList()) :
         holder.bindData(product)
     }
 
-    override fun getItemCount() = com.example.tapshopping.data.model.products.size
+    override fun getItemCount() = products.size
 
 
     class ProductViewHolder(private val item: ItemProductBinding) :

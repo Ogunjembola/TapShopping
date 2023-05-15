@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.tapshopping.data.model.categories
-import com.example.tapshopping.data.model.products
 import com.example.tapshopping.databinding.FragmentHomeBinding
 import com.example.tapshopping.ui.adapter.CategoryAdapter
 import com.example.tapshopping.ui.adapter.ProductAdapter
@@ -32,12 +30,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCatAdapter(){
-        categoryAdapter = CategoryAdapter(categories = categories )
+        categoryAdapter = CategoryAdapter()
         binding.homeCategoriesListRv.adapter = categoryAdapter
     }
 
     private fun setUpProductAdapter(){
-        productAdapter = ProductAdapter(products = products )
+        productAdapter = ProductAdapter()
         binding.productRv.adapter = productAdapter
     }
 
