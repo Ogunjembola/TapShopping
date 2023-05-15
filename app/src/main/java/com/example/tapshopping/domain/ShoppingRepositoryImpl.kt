@@ -29,18 +29,3 @@ class ShoppingRepositoryImpl @Inject constructor(
         }.flowOn(flowable)
 }
 
-
-//        return withContext() {
-//            emit(Resource.Loading())
-//            try {
-//                val response = networkService.createAdmin(createAdmin)
-//                if (response.isSuccessful)
-//                    emit(Resource.Success(response.body()!!))
-//                else {
-//                    val error = response.errorBody()?.string()
-//                    emit(Resource.Error(data = getAuthErrorResponse(error)))
-//                }
-//            } catch (e: Throwable) {
-//                emit(Resource.Error(e))
-//            }
-//        }.flowOn(flowable)?\
