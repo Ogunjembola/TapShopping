@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class AdminAuthResponse(
     val content: AuthResponse,
-    val error: Error,
-    val success: ErrorSuccess
+    @SerializedName("error")
+    val errorResponse: ErrorResponse,
+    val success: Success
 )
 
 data class AuthResponse(
@@ -17,7 +18,7 @@ data class AdminResponseData(
     val token: String? = null
 )
 
-data class Error(
+data class ErrorResponse(
     val code: Int,
     val message: String,
     val status: Int

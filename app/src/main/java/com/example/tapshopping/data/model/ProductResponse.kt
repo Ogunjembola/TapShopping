@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
     val content: AuthResponse,
-    val error: Error,
-    val success: ErrorSuccess
+    val error: ErrorResponse,
+    val success: Success
 )
 
 data class Content(

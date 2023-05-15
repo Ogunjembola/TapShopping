@@ -1,5 +1,6 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -7,13 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import com.example.tapshopping.R
-import com.example.tapshopping.ui.viewModel.AdminViewModel
 import com.example.tapshopping.databinding.FragmentCreateAdminBinding
+import com.example.tapshopping.ui.viewModel.AdminViewModel
 import com.example.tapshopping.utillz.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,27 +43,49 @@ class CreateAdminFragment : Fragment() {
         textInputValidator()
 
         binding.btnRegister.setOnClickListener {
-            if (isEnabled()){
-                viewModel.createAdminAccount(fullName = fullName!!, userName = username!!, email = emailText!!, password = password!!)
-                viewModel.createAdmin.observe(viewLifecycleOwner){response ->
-                        if (response is Resource.Loading) {
+            if (isEnabled()) {
+                viewModel.createAdminAccount(
+                    fullName = fullName!!,
+                    userName = username!!,
+                    email = emailText!!,
+                    password = password!!
+                )
+                viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
+                    when (response) {
+                        is Resource.Loading -> {
                             binding.btnRegister.setText(R.string.loading)
-                        }else if( response is Resource.Success){
+                        }
+                        is Resource.Success -> {
                             binding.etEmail.setText("")
                             binding.etUsername.setText("")
                             binding.etPassword.setText("")
                             binding.etFullName.setText("")
                             binding.etConfirmPassword.setText("")
-                            Toast.makeText(requireContext(), response.data!!.success.message, Toast.LENGTH_SHORT).show()
-                    }else{
-                            Log.d("CreateAdminFragment", "onViewCreated:${response.data?.error?.message} ")
-                            binding.btnRegister.setText(R.string.retry)
-                            Toast.makeText(requireContext(), response.data?.error?.message, Toast.LENGTH_SHORT).show()
-                        }
-                }
-            }
 
-            else Toast.makeText(requireContext(), "Text input not completed", Toast.LENGTH_SHORT).show()
+                            AlertDialog.Builder(requireContext()).setTitle("Successful")
+                                .setIcon(R.drawable.successful)
+                                .setMessage(response.data!!.success.message)
+                                .setPositiveButton("Proceed"){_,_ ->
+                                    findNavController().navigateUp()
+                                }.show()
+                        }
+                        else -> {
+                            Log.d(
+                                "CreateAdminFragment",
+                                "onViewCreated:${response.error.toString()} "
+                            )
+                            binding.btnRegister.setText(R.string.retry)
+                            AlertDialog.Builder(requireContext()).setTitle("Failed")
+                                .setIcon(R.drawable.baseline_error_24)
+                                .setMessage(response.error.toString())
+                                .setPositiveButton(R.string.retry){_,_ ->
+                                    // do nothing
+                                }.show()
+                        }
+                    }
+                }
+            } else Toast.makeText(requireContext(), "Text input not completed", Toast.LENGTH_SHORT)
+                .show()
         }
 
     }
@@ -98,7 +121,7 @@ class CreateAdminFragment : Fragment() {
 
     private fun validConfirmPassword(): String? {
         confirmPassword = binding.etConfirmPassword.text.toString()
-        if (confirmPassword != password){
+        if (confirmPassword != password) {
             return "Password does not match"
         }
         return null
@@ -114,9 +137,9 @@ class CreateAdminFragment : Fragment() {
 
     private fun validFullName(): String? {
         fullName = binding.etFullName.text.toString()
-        if (!fullName!!.matches("^[A-Za-z]+ [A-Za-z]+\$".toRegex())){
+        if (!fullName!!.matches("^[A-Za-z]+ [A-Za-z]+\$".toRegex())) {
             return "Invalid Full Name"
-        }else if (fullName.isNullOrEmpty()){
+        } else if (fullName.isNullOrEmpty()) {
             return "Field cannot be empty"
         }
         return null
@@ -124,35 +147,35 @@ class CreateAdminFragment : Fragment() {
 
     private fun validUserName(): String? {
         username = binding.etUsername.text.toString()
-        if (username!!.length < 5){
+        if (username!!.length < 5) {
             return "Minimum 5 character username"
         }
         return null
     }
 
     private fun validPassword(): String? {
-        password =binding.etPassword.text.toString()
-        if (password!!.length < 8){
+        password = binding.etPassword.text.toString()
+        if (password!!.length < 8) {
             return "Minimum 8 character password"
         }
-        if (!password!!.matches(".*[A-Z].*".toRegex())){
+        if (!password!!.matches(".*[A-Z].*".toRegex())) {
             return "Must contain 1 uppercase character"
         }
-        if (password!!.matches("^[a-z]+$".toRegex())){
+        if (password!!.matches("^[a-z]+$".toRegex())) {
             return "Must contain 1 lowercase character"
         }
-        if (password!!.matches("^[@#\$%^&+=]+$".toRegex())){
+        if (password!!.matches("^[@#\$%^&+=]+$".toRegex())) {
             return "Must contain 1 special character (@#\$%^&+=)"
         }
         return null
     }
 
-    private fun isEnabled():Boolean{
+    private fun isEnabled(): Boolean {
         val validName = binding.tilFullName.helperText == null
         val validUserName = binding.tilUsername.helperText == null
         val validPassword = binding.tilPassword.helperText == null
         val validEmail = binding.tilEmail.helperText == null
-        val  validConfirmPassword = binding.tilConfirmPassword.helperText == null
+        val validConfirmPassword = binding.tilConfirmPassword.helperText == null
         return validName && validUserName && validPassword && validEmail && validConfirmPassword
     }
 

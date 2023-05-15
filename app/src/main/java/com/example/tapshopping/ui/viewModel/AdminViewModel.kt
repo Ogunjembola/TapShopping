@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.tapshopping.data.model.AdminAuthResponse
 import com.example.tapshopping.data.model.CreateAdmin
 import com.example.tapshopping.data.model.CreateAdminData
-import com.example.tapshopping.domain.ShoppingRepositoryImpl
+import com.example.tapshopping.domain.ShoppingRepository
 import com.example.tapshopping.utillz.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AdminViewModel @Inject constructor(private val repositoryImpl: ShoppingRepositoryImpl) : ViewModel() {
+class AdminViewModel @Inject constructor(private val repository: ShoppingRepository) : ViewModel() {
 
     private val viewModelJob = Job()
     private val coroutineScope: CoroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
@@ -41,10 +41,7 @@ class AdminViewModel @Inject constructor(private val repositoryImpl: ShoppingRep
             ))
 
             try {
-                repositoryImpl.createAdmin(createAdminData).catch {
-                    emit(Resource.Error(it))
-
-                }
+                repository.createAdmin(createAdminData)
                     .collect{response ->
                     _createAdmin.postValue(response)
                 }
