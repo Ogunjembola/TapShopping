@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
 import com.example.tapshopping.R
+import com.example.tapshopping.data.model.AdminAuthResponse
 import com.example.tapshopping.databinding.FragmentCreateAdminBinding
 import com.example.tapshopping.ui.viewModel.AdminViewModel
 import com.example.tapshopping.utillz.Resource
@@ -40,7 +40,9 @@ class CreateAdminFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         textInputValidator()
+        handleRegisterEvent()
 
         binding.btnRegister.setOnClickListener {
             if (isEnabled()) {
@@ -57,14 +59,12 @@ class CreateAdminFragment : Fragment() {
         binding.toolbarRegisterActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-
-        //This method houses the viewModel observer and the request logic
-        processRequest()
-
     }
 
-    private fun processRequest(){
+    private fun handleRegisterEvent() {
         viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
+
+
             when (response) {
                 is Resource.Loading -> {
                     binding.btnRegister.setText(R.string.loading)
@@ -78,25 +78,30 @@ class CreateAdminFragment : Fragment() {
 
                     AlertDialog.Builder(requireContext()).setTitle("Successful")
                         .setIcon(R.drawable.successful)
-                        .setMessage(response.data!!.success.message)
-                        .setPositiveButton("Proceed"){_,_ ->
+                        .setMessage(response?.data!!.success.message)
+                        .setPositiveButton("Proceed") { _, _ ->
                             findNavController().navigateUp()
                         }.show()
                 }
-                else -> {
-                    val errorMessage = response.data?.errorResponse?.message
-                    val unknownError = response.error.toString()
+
+                is Resource.Error ->{
+                    val errorMessage = response.error.toString()
                     Log.d(
                         "CreateAdminFragment",
-                        "onViewCreated:$unknownError  -> $errorMessage "
+                        "onViewCreated: -> $errorMessage "
                     )
                     binding.btnRegister.setText(R.string.retry)
                     AlertDialog.Builder(requireContext()).setTitle("Failed")
                         .setIcon(R.drawable.baseline_error_24)
-                        .setMessage(errorMessage?:unknownError)
-                        .setPositiveButton(R.string.retry){_,_ ->
+                        .setMessage(errorMessage)
+                        .setPositiveButton(R.string.retry) { _, _ ->
                             // do nothing
                         }.show()
+                    binding.etEmail.setText("")
+                    binding.etUsername.setText("")
+                    binding.etPassword.setText("")
+                    binding.etFullName.setText("")
+                    binding.etConfirmPassword.setText("")
                 }
             }
         }

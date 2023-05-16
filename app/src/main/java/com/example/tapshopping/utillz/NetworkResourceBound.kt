@@ -1,5 +1,6 @@
 package com.example.tapshopping.utillz
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -28,21 +29,25 @@ suspend inline fun <reified T> safeApiCall(crossinline apiToBeCalled: suspend ()
                 Resource.Success(data = response.body())
             } else {
                 val error = response.errorBody()?.string()
-                Resource.Error(data = getAuthErrorResponse(error), error = error )
+
+
+                val message = getAuthErrorResponse(error).errorResponse.message
+                Log.d("NetworkResourceBound", "safeApiCall: errorResponse -> $message ")
+                Resource.Error( message = message )
             }
 
         } catch (e: HttpException) {
             // Returning HttpException's message
             // wrapped in Resource.Error
-            Resource.Error(error = e.message ?: "An error occurred")
+            Resource.Error(message = e.message ?: "An error occurred")
         } catch (e: IOException) {
             // Returning no internet message
             // wrapped in Resource.Error
-            Resource.Error(error = "Please check your network connection")
+            Resource.Error(message = "Please check your network connection")
         } catch (e: Exception) {
             // Returning 'Something went wrong' in case
             // of unknown error wrapped in Resource.Error
-            Resource.Error(error = "An error occurred")
+            Resource.Error(message = "An error occurred")
         }
     }
 }
