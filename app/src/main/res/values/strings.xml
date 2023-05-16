@@ -189,4 +189,7 @@
     <string name="error_msg_password_and_confirm_password_mismatch">Password and confirm password does not match </string>
 
     <string name="registry_successful">Thanks for registering, Cheers!!</string>
+    <string name="unable_to_login_user_to_the_server">Unable to login user to the server</string>
+    <string name="userName">Username</string>
+    <string name="unable_to_register_user_to_the_server">Unable to register user to the server</string>
 </resources>

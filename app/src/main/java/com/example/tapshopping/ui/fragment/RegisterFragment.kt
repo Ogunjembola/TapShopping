@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.tapshopping.R
 import com.example.tapshopping.data.model.DataModel
+import com.example.tapshopping.data.model.UserRegistrationData
 import com.example.tapshopping.databinding.FragmentRegisterBinding
 import com.example.tapshopping.ui.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -138,7 +139,7 @@ class RegisterFragment : Fragment() {
             val et_full_name: EditText = binding.etFullName
             val et_username: EditText = binding.etUserName
 
-            val userData = DataModel.Data(
+            val userData = UserRegistrationData(
                 email = et_email.text.toString(),
                 name = et_full_name.text.toString(),
                 password = et_password.text.toString(),

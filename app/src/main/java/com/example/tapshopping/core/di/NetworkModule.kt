@@ -55,7 +55,8 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.
+        create())
         .client(okHttpClient)
         .build()
 
@@ -65,19 +66,3 @@ object NetworkModule {
         retrofit.create(NetworkService::class.java)
 }
 
-
-/*  @Provides
-  @Singleton
-  fun provideRetrofit(): Retrofit {
-      return Retrofit.Builder()
-          .baseUrl(BASE_URL)
-          .addConverterFactory(GsonConverterFactory.create())
-          .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-          .build()
-
-  }
-  @Provides
-  @Singleton
-  fun provideUsers(retrofit: Retrofit): NetworkService {
-      return retrofit.create(NetworkService::class.java)
-  }*/
