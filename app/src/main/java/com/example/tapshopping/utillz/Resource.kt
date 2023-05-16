@@ -1,6 +1,6 @@
 package com.example.tapshopping.utillz
 
-import com.example.tapshopping.data.model.ErrorResponse
+import com.example.tapshopping.data.model.AdminAuthResponse
 
 sealed class Resource<T>(
     val data: T? = null,

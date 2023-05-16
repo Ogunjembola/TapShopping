@@ -50,46 +50,57 @@ class CreateAdminFragment : Fragment() {
                     email = emailText!!,
                     password = password!!
                 )
-                viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
-                    when (response) {
-                        is Resource.Loading -> {
-                            binding.btnRegister.setText(R.string.loading)
-                        }
-                        is Resource.Success -> {
-                            binding.etEmail.setText("")
-                            binding.etUsername.setText("")
-                            binding.etPassword.setText("")
-                            binding.etFullName.setText("")
-                            binding.etConfirmPassword.setText("")
-
-                            AlertDialog.Builder(requireContext()).setTitle("Successful")
-                                .setIcon(R.drawable.successful)
-                                .setMessage(response.data!!.success.message)
-                                .setPositiveButton("Proceed"){_,_ ->
-                                    findNavController().navigateUp()
-                                }.show()
-                        }
-                        else -> {
-                            Log.d(
-                                "CreateAdminFragment",
-                                "onViewCreated:${response.error.toString()} "
-                            )
-                            binding.btnRegister.setText(R.string.retry)
-                            AlertDialog.Builder(requireContext()).setTitle("Failed")
-                                .setIcon(R.drawable.baseline_error_24)
-                                .setMessage(response.error.toString())
-                                .setPositiveButton(R.string.retry){_,_ ->
-                                    // do nothing
-                                }.show()
-                        }
-                    }
-                }
             } else Toast.makeText(requireContext(), "Text input not completed", Toast.LENGTH_SHORT)
                 .show()
         }
 
+        binding.toolbarRegisterActivity.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        //This method houses the viewModel observer and the request logic
+        processRequest()
+
     }
 
+    private fun processRequest(){
+        viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    binding.btnRegister.setText(R.string.loading)
+                }
+                is Resource.Success -> {
+                    binding.etEmail.setText("")
+                    binding.etUsername.setText("")
+                    binding.etPassword.setText("")
+                    binding.etFullName.setText("")
+                    binding.etConfirmPassword.setText("")
+
+                    AlertDialog.Builder(requireContext()).setTitle("Successful")
+                        .setIcon(R.drawable.successful)
+                        .setMessage(response.data!!.success.message)
+                        .setPositiveButton("Proceed"){_,_ ->
+                            findNavController().navigateUp()
+                        }.show()
+                }
+                else -> {
+                    val errorMessage = response.data?.errorResponse?.message
+                    val unknownError = response.error.toString()
+                    Log.d(
+                        "CreateAdminFragment",
+                        "onViewCreated:$unknownError  -> $errorMessage "
+                    )
+                    binding.btnRegister.setText(R.string.retry)
+                    AlertDialog.Builder(requireContext()).setTitle("Failed")
+                        .setIcon(R.drawable.baseline_error_24)
+                        .setMessage(errorMessage?:unknownError)
+                        .setPositiveButton(R.string.retry){_,_ ->
+                            // do nothing
+                        }.show()
+                }
+            }
+        }
+    }
 
     private fun textInputValidator() {
         binding.etEmail.setOnFocusChangeListener { _, focused ->

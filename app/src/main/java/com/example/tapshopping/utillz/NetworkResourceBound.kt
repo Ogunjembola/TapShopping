@@ -8,7 +8,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
-suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<T> {
+suspend inline fun <reified T> safeApiCall(crossinline apiToBeCalled: suspend () -> Response<T>): Resource<T> {
 
     // Returning api response
     // wrapped in Resource class
@@ -27,7 +27,8 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<
                 // by passing our data in it.
                 Resource.Success(data = response.body())
             } else {
-                Resource.Error(error = "An error occurred")
+                val error = response.errorBody()?.string()
+                Resource.Error(data = getAuthErrorResponse(error), error = error )
             }
 
         } catch (e: HttpException) {
