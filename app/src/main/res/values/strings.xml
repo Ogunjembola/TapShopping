@@ -185,6 +185,8 @@
     <string name="full_name">Full Name</string>
     <string name="loading">Loading...</string>
     <string name="retry">Retry</string>
+    <string name="get_admin">Get Admin</string>
+    <string name="update_admin">Update Admin</string>
     <string-array name="Categories">
         <item>Supermarket</item>
         <item>Health &amp; Beauty</item>
