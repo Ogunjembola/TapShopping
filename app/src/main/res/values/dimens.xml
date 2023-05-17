@@ -2,11 +2,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
 
 
-    <dimen name="forgot_password_text_size">14sp</dimen>
-    <dimen name="btn_text_size">18sp</dimen>
-    <dimen name="lbl_text_view_text_size">16dp</dimen>
-    <dimen name="txt_terms_conditions_textSize">18sp</dimen>
-    <dimen name="progress_textSize">16sp</dimen>
+    <dimen name="forgot_password_text_size">12sp</dimen>
+    <dimen name="btn_text_size">14sp</dimen>
+    <dimen name="lbl_text_view_text_size">14dp</dimen>
+    <dimen name="txt_terms_conditions_textSize">14sp</dimen>
+    <dimen name="progress_textSize">14sp</dimen>
     <dimen name="splash_title_text_size">35sp</dimen>
 
     <dimen name="button_background_radius">10dp</dimen>
@@ -19,9 +19,9 @@
 
     <dimen name="title_textSize">40sp</dimen>
 
-    <dimen name="et_textSize">16sp</dimen>
+    <dimen name="et_textSize">14sp</dimen>
 
-    <dimen name="et_padding">16dp</dimen>
+    <dimen name="et_padding">14dp</dimen>
 
     <dimen name="clickable_text_view_padding">5dp</dimen>
 

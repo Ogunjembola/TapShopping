@@ -54,14 +54,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/et_hint_email_id"
+        android:hint="@string/userName"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_login">
 
         <com.example.tapshopping.utillz.TPEditText
-            android:id="@+id/email_edt"
+            android:id="@+id/tv_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
@@ -125,38 +125,55 @@
         app:layout_constraintStart_toStartOf="@+id/tv_forgot_password"
         app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/listError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
+        android:visibility="gone"
+        android:text="@string/unable_to_login_user_to_the_server"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        android:layout_marginRight="16dp">
+        app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.tapshopping.utillz.TPTextView
-            android:id="@+id/dont_have_accont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/dont_have_an_account"
-            android:textSize="18sp" />
+    <com.example.tapshopping.utillz.TPTextView
+        android:id="@+id/dont_have_accont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/dont_have_an_account"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
-        <com.example.tapshopping.utillz.TPTextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:gravity="center"
-            android:text="@string/register"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+    <com.example.tapshopping.utillz.TPTextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 

@@ -31,5 +31,4 @@ class AccountFragment : Fragment() {
             }
         }
     }
-
 }
