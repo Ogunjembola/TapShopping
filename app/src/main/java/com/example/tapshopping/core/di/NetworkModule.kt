@@ -4,6 +4,7 @@ import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.API_CONNECT_TIMEOUT
 import com.example.tapshopping.utillz.API_READ_TIMEOUT
 import com.example.tapshopping.utillz.API_WRITE_TIMEOUT
+import com.example.tapshopping.utillz.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -23,17 +24,15 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-
 object NetworkModule {
     private val BASE_URL = "https://lab-ecom-api-4c56x6bkca-uc.a.run.app/"
 
     @Provides
-    @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
 
     @Singleton
     @Provides
-    fun provideHttpLogger(): HttpLoggingInterceptor {
+    fun provideHttpLogger(): HttpLoggingInterceptor{
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -41,7 +40,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(httpLogger: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(httpLogger: HttpLoggingInterceptor): OkHttpClient{
         val okHttpClient = OkHttpClient.Builder()
             .connectTimeout(API_CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(API_WRITE_TIMEOUT, TimeUnit.SECONDS)
@@ -55,8 +54,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.
-        create())
+        .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 

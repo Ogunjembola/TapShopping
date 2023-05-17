@@ -27,7 +27,7 @@
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
         <item name="colorPrimary">@color/colorLightGrey</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/blue</item>
     </style>
     
     <style name="ToolbarStyle" parent="" >
