@@ -1,8 +1,7 @@
 package com.example.tapshopping.domain
 
 import com.example.tapshopping.core.di.CoroutineModule
-import com.example.tapshopping.data.model.AdminAuthResponse
-import com.example.tapshopping.data.model.CreateAdmin
+import com.example.tapshopping.data.model.*
 import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.Resource
 import com.example.tapshopping.utillz.safeApiCall
@@ -17,8 +16,8 @@ import javax.inject.Inject
 class ShoppingRepositoryImpl @Inject constructor(
     private val networkService: NetworkService,
     @CoroutineModule.IoDispatcher private val dispatcher: CoroutineDispatcher
-) :
-    ShoppingRepository {
+) : ShoppingRepository {
+
     private val flowable = Dispatchers.IO
 
     override suspend fun createAdmin(createAdmin: CreateAdmin): Flow<Resource<AdminAuthResponse>> =
@@ -27,5 +26,19 @@ class ShoppingRepositoryImpl @Inject constructor(
                 emit(safeApiCall { networkService.createAdmin(createAdmin) })
             }
         }.flowOn(flowable)
+
+    override suspend fun createUser(createUser: UserRegistrationData): Flow<Resource<UsersResponse>> =
+        withContext(dispatcher) {
+            return@withContext flow<Resource<UsersResponse>> {
+                emit(safeApiCall { networkService.createUser(createUser) })
+            }.flowOn(flowable)
+        }
+
+    override suspend fun getUser(userLogin: UserLoginData): Flow<Resource<UsersResponse>> =
+        withContext(dispatcher) {
+            return@withContext flow<Resource<UsersResponse>> {
+                emit(safeApiCall { networkService.getRegisteredUsers(userLogin) })
+            }.flowOn(flowable)
+        }
 }
 

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/accountFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/accountFragment"
         android:name="com.example.tapshopping.ui.fragment.HomeFragment"
         android:label="Home Fragment"
         tools:layout="@layout/fragment_home" />

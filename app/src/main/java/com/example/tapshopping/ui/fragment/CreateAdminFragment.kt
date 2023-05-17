@@ -63,45 +63,47 @@ class CreateAdminFragment : Fragment() {
 
     private fun handleRegisterEvent() {
         viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
+            response?.let {result ->
 
+                when {
+                    result.isLoading() -> {
+                        binding.btnRegister.setText(R.string.loading)
+                    }
+                    result.isSuccess() -> {
+                        binding.etEmail.setText("")
+                        binding.etUsername.setText("")
+                        binding.etPassword.setText("")
+                        binding.etFullName.setText("")
+                        binding.etConfirmPassword.setText("")
 
-            when (response) {
-                is Resource.Loading -> {
-                    binding.btnRegister.setText(R.string.loading)
-                }
-                is Resource.Success -> {
-                    binding.etEmail.setText("")
-                    binding.etUsername.setText("")
-                    binding.etPassword.setText("")
-                    binding.etFullName.setText("")
-                    binding.etConfirmPassword.setText("")
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(result.data!!.success.message)
+                            .setPositiveButton("Proceed") { _, _ ->
+                                findNavController().navigateUp()
+                            }.show()
+                        binding.btnRegister.setText(R.string.create_admin)
+                    }
 
-                    AlertDialog.Builder(requireContext()).setTitle("Successful")
-                        .setIcon(R.drawable.successful)
-                        .setMessage(response?.data!!.success.message)
-                        .setPositiveButton("Proceed") { _, _ ->
-                            findNavController().navigateUp()
-                        }.show()
-                }
-
-                is Resource.Error ->{
-                    val errorMessage = response.error.toString()
-                    Log.d(
-                        "CreateAdminFragment",
-                        "onViewCreated: -> $errorMessage "
-                    )
-                    binding.btnRegister.setText(R.string.retry)
-                    AlertDialog.Builder(requireContext()).setTitle("Failed")
-                        .setIcon(R.drawable.baseline_error_24)
-                        .setMessage(errorMessage)
-                        .setPositiveButton(R.string.retry) { _, _ ->
-                            // do nothing
-                        }.show()
-                    binding.etEmail.setText("")
-                    binding.etUsername.setText("")
-                    binding.etPassword.setText("")
-                    binding.etFullName.setText("")
-                    binding.etConfirmPassword.setText("")
+                    result.isError()->{
+                        val errorMessage = result.message
+                        Log.d(
+                            "CreateAdminFragment",
+                            "onViewCreated: -> $errorMessage "
+                        )
+                        binding.btnRegister.setText(R.string.retry)
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                        binding.etEmail.setText("")
+                        binding.etUsername.setText("")
+                        binding.etPassword.setText("")
+                        binding.etFullName.setText("")
+                        binding.etConfirmPassword.setText("")
+                    }
                 }
             }
         }

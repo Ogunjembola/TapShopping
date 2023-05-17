@@ -47,3 +47,9 @@ data class Review(
     val images: List<String>,
     val userID: String
 )
+data class Variant(
+    val _id: String,
+    val colour: List<String>,
+    val images: List<String>,
+    val size: List<String>
+)

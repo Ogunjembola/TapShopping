@@ -20,8 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AdminViewModel @Inject constructor(private val repository: ShoppingRepository) : ViewModel() {
 
-    private val _createAdmin: MutableLiveData<Resource<out AdminAuthResponse>> = MutableLiveData()
-    val createAdmin: LiveData<Resource<out AdminAuthResponse>>
+    private val _createAdmin: MutableLiveData<Resource<AdminAuthResponse>> = MutableLiveData()
+    val createAdmin: LiveData<Resource<AdminAuthResponse>>
         get() = _createAdmin
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()

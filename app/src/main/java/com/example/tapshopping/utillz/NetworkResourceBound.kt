@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
-suspend inline fun <reified T> safeApiCall(crossinline apiToBeCalled: suspend () -> Response<T>): Resource<T> {
+suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<T> {
 
     // Returning api response
     // wrapped in Resource class
@@ -26,28 +26,30 @@ suspend inline fun <reified T> safeApiCall(crossinline apiToBeCalled: suspend ()
                 // In case of success response we
                 // are returning Resource.Success object
                 // by passing our data in it.
-                Resource.Success(data = response.body())
+                Resource.success(data = response.body())
             } else {
-                val error = response.errorBody()?.string()
+                //In case of error response we
+                // are returning the expected errorMessage
+                // from the errorResponse object
 
-
-                val message = getAuthErrorResponse(error).errorResponse.message
-                Log.d("NetworkResourceBound", "safeApiCall: errorResponse -> $message ")
-                Resource.Error( message = message )
+                val errorBody = response.errorBody()?.string()
+                val errorMessage = getAuthErrorResponse(errorBody).errorResponse.message
+                Log.d("NetworkResourceBound", "safeApiCall: errorResponse -> $errorMessage ")
+                Resource.error(message = errorMessage)
             }
 
         } catch (e: HttpException) {
             // Returning HttpException's message
             // wrapped in Resource.Error
-            Resource.Error(message = e.message ?: "An error occurred")
+            Resource.error(message = e.message ?: "An error occurred")
         } catch (e: IOException) {
             // Returning no internet message
             // wrapped in Resource.Error
-            Resource.Error(message = "Please check your network connection")
+            Resource.error("Please check your network connection")
         } catch (e: Exception) {
             // Returning 'Something went wrong' in case
             // of unknown error wrapped in Resource.Error
-            Resource.Error(message = "An error occurred")
+            Resource.error(message = "An error occurred")
         }
     }
 }

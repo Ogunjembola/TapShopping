@@ -25,7 +25,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private val BASE_URL = "https://lab-ecom-api-4c56x6bkca-uc.a.run.app/"
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()

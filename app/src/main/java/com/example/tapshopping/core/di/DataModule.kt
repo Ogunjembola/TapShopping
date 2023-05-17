@@ -19,14 +19,5 @@ abstract class DataModule {
     @Singleton
     abstract fun bindShoppingRepository(impl: ShoppingRepositoryImpl): ShoppingRepository
 
-    @Binds
-    @Singleton
-    abstract fun bindInitiateShoppingRepository(impl: ShoppingRepositoryImpl): ShoppingRepository
-
-//    @Provides
-//    @Singleton
-//    fun providesDataStorePreference(@ApplicationContext context: Context): DataStore<Preferences>{
-//        return context.createDataStore(name = SHOPPING_DATA_STORE_NAME)
-//    }
 
 }

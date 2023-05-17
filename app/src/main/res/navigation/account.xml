@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/accountFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -26,8 +26,8 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.tapshopping.ui.fragment.HomeFragment"
+        android:id="@+id/accountFragment"
+        android:name="com.example.tapshopping.ui.fragment.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
