@@ -24,7 +24,7 @@ class ProductAdapter(private val products: List<Product> = emptyList()) :
         holder.bindData(product)
     }
 
-    override fun getItemCount() = com.example.tapshopping.data.model.products.size
+    override fun getItemCount() = products.size
 
 
     class ProductViewHolder(private val item: ItemProductBinding) :
@@ -32,9 +32,9 @@ class ProductAdapter(private val products: List<Product> = emptyList()) :
 
         fun bindData(product: Product) {
             item.apply {
-                productImage.setImageResource(product.image)
+                productImage.setImageResource(product.noOfRatings)
                 productDescription.text = product.description
-                productTitle.text = product.title
+                productTitle.text = product.name
             }
         }
     }

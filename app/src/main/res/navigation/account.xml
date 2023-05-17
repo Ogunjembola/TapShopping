@@ -9,5 +9,23 @@
         android:id="@+id/accountFragment"
         android:name="com.example.tapshopping.ui.fragment.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/to_adminFragment"
+            app:destination="@id/adminFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.tapshopping.ui.fragment.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" >
+        <action
+            android:id="@+id/action_adminFragment_to_createAdminFragment"
+            app:destination="@id/createAdminFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAdminFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateAdminFragment"
+        android:label="fragment_create_admin"
+        tools:layout="@layout/fragment_create_admin" />
 </navigation>
