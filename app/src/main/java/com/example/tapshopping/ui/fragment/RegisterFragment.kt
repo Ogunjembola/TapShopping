@@ -5,21 +5,21 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
-import com.example.tapshopping.data.model.DataModel
 import com.example.tapshopping.data.model.UserRegistrationData
 import com.example.tapshopping.databinding.FragmentRegisterBinding
-import com.example.tapshopping.ui.viewmodel.RegisterViewModel
+import com.example.tapshopping.ui.viewModel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
-    private val viewModel: RegisterViewModel by viewModels()
+    //private val viewModel: LoginViewModel by viewModels()
+    private val viewModel by viewModels<UserViewModel>()
     private lateinit var binding: FragmentRegisterBinding
 
 
@@ -35,17 +35,20 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             //viewModel.postUsers()
             registerUser()
+            //activity?.finish()
+        }
+        binding.toolbarRegisterActivity.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
 
     }
 
     private fun validateRegistrationDetails(): Boolean {
         val fullName: EditText = binding.etFullName
-        val username: EditText = binding.etUserName
+        val username: EditText = binding.etUsername
         val email: EditText = binding.etEmail
         val password: EditText = binding.etPassword
         val confirmPassword: EditText = binding.etConfirmPassword
-        val cb_terms_and_condition: CheckBox = binding.cbTermsAndCondition
         return when {
             TextUtils.isEmpty(fullName.text.toString().trim() { it <= ' ' }) -> {
                 Toast.makeText(context, getString(R.string.error_msg_full_name), Toast.LENGTH_LONG)
@@ -91,16 +94,10 @@ class RegisterFragment : Fragment() {
                 false
             }
 
-            !cb_terms_and_condition.isChecked -> {
-                Toast.makeText(
-                    context, getString(R.string.error_msg_agree_terms), Toast.LENGTH_LONG
-                ).show()
-                false
-            }
 
             else -> {
 
-                Toast.makeText(context, "Your details are valid ", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "User Registered in successfully are valid ", Toast.LENGTH_LONG).show()
 
                 true
             }
@@ -137,7 +134,7 @@ class RegisterFragment : Fragment() {
             val et_email: EditText = binding.etEmail
             val et_password: EditText = binding.etPassword
             val et_full_name: EditText = binding.etFullName
-            val et_username: EditText = binding.etUserName
+            val et_username: EditText = binding.etUsername
 
             val userData = UserRegistrationData(
                 email = et_email.text.toString(),

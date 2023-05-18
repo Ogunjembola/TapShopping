@@ -29,6 +29,10 @@ class AccountFragment : Fragment() {
             adminSelectable.setOnClickListener {
                 findNavController().navigate(AccountFragmentDirections.toAdminFragment())
             }
+            userConstraint.setOnClickListener {
+                findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToLogindUser())
+
+            }
         }
     }
 }

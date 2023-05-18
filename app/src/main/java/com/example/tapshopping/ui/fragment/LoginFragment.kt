@@ -13,12 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
 import com.example.tapshopping.data.model.UserLoginData
 import com.example.tapshopping.databinding.FragmentLoginBinding
-import com.example.tapshopping.ui.viewModel.LoginViewModel
+import com.example.tapshopping.ui.viewModel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
-    private val viewModel: LoginViewModel by viewModels()
+   // private val viewModel:  by viewModels()
+    private val viewModel by viewModels<UserViewModel>()
     private lateinit var binding: FragmentLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 }
 
                 R.id.tv_register -> {
-                    findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+                    findNavController().navigate(R.id.action_loginUser_to_registerUserFragment)
+                   // findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToLogindUser())
+
                 }
             }
         }
@@ -86,7 +89,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
             else -> {
 
-                Toast.makeText(context, "Your details are valid ", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "User Logged in successfully are valid ", Toast.LENGTH_LONG).show()
 
                 true
             }
