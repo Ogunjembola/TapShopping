@@ -201,4 +201,6 @@
     <string name="unable_to_login_user_to_the_server">Unable to login user to the server</string>
     <string name="userName">Username</string>
     <string name="unable_to_register_user_to_the_server">Unable to register user to the server</string>
+    <string name="user">User</string>
+    <string name="create_user">Create User</string>
 </resources>

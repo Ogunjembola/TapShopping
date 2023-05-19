@@ -5,5 +5,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class ShopApplication: Application() {
+class
+ShopApplication: Application() {
 }
