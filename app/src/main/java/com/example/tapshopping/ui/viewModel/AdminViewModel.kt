@@ -31,6 +31,7 @@ class AdminViewModel @Inject constructor(private val repository: ShoppingReposit
     fun createAdminAccount(fullName: String, userName: String, email: String, password: String) {
 
         viewModelScope.launch {
+            _createAdmin.postValue(Resource.loading())
             val createAdminData = CreateAdmin(createAdminData = CreateAdminData(
                 email = email,
                 name = fullName,
