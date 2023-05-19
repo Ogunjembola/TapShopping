@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -65,16 +67,15 @@ class CreateAdminFragment : Fragment() {
         viewModel.createAdmin.observe(viewLifecycleOwner) { response ->
             response?.let {result ->
 
+                binding.progressBar.isVisible = result.isLoading()
+                binding.btnRegister.isEnabled = !result.isLoading()
+
                 when {
                     result.isLoading() -> {
                         binding.btnRegister.setText(R.string.loading)
                     }
                     result.isSuccess() -> {
-                        binding.etEmail.setText("")
-                        binding.etUsername.setText("")
-                        binding.etPassword.setText("")
-                        binding.etFullName.setText("")
-                        binding.etConfirmPassword.setText("")
+                       clearTextField()
 
                         AlertDialog.Builder(requireContext()).setTitle("Successful")
                             .setIcon(R.drawable.successful)
@@ -87,10 +88,7 @@ class CreateAdminFragment : Fragment() {
 
                     result.isError()->{
                         val errorMessage = result.message
-                        Log.d(
-                            "CreateAdminFragment",
-                            "onViewCreated: -> $errorMessage "
-                        )
+
                         binding.btnRegister.setText(R.string.retry)
                         AlertDialog.Builder(requireContext()).setTitle("Failed")
                             .setIcon(R.drawable.baseline_error_24)
@@ -98,11 +96,7 @@ class CreateAdminFragment : Fragment() {
                             .setPositiveButton(R.string.retry) { _, _ ->
                                 // do nothing
                             }.show()
-                        binding.etEmail.setText("")
-                        binding.etUsername.setText("")
-                        binding.etPassword.setText("")
-                        binding.etFullName.setText("")
-                        binding.etConfirmPassword.setText("")
+                       clearTextField()
                     }
                 }
             }
@@ -110,27 +104,33 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun textInputValidator() {
+
         binding.etEmail.setOnFocusChangeListener { _, focused ->
+            emailText = binding.etEmail.text.toString()
             if (!focused) {
                 binding.tilEmail.helperText = validEmail()
             }
         }
         binding.etPassword.setOnFocusChangeListener { _, focused ->
+            password = binding.etPassword.text.toString()
             if (!focused) {
                 binding.tilPassword.helperText = validPassword()
             }
         }
         binding.etConfirmPassword.setOnFocusChangeListener { _, focused ->
+            confirmPassword = binding.etConfirmPassword.text.toString()
             if (!focused) {
                 binding.tilConfirmPassword.helperText = validConfirmPassword()
             }
         }
         binding.etUsername.setOnFocusChangeListener { _, focused ->
+            username = binding.etUsername.text.toString()
             if (!focused) {
                 binding.tilUsername.helperText = validUserName()
             }
         }
         binding.etFullName.setOnFocusChangeListener { _, focused ->
+            fullName = binding.etFullName.text.toString()
             if (!focused) {
                 binding.tilFullName.helperText = validFullName()
             }
@@ -138,7 +138,6 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun validConfirmPassword(): String? {
-        confirmPassword = binding.etConfirmPassword.text.toString()
         if (confirmPassword != password) {
             return "Password does not match"
         }
@@ -146,7 +145,6 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun validEmail(): String? {
-        emailText = binding.etEmail.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
             return "Invalid Email Address"
         }
@@ -154,7 +152,6 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun validFullName(): String? {
-        fullName = binding.etFullName.text.toString()
         if (!fullName!!.matches("^[A-Za-z]+ [A-Za-z]+\$".toRegex())) {
             return "Invalid Full Name"
         } else if (fullName.isNullOrEmpty()) {
@@ -164,7 +161,6 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun validUserName(): String? {
-        username = binding.etUsername.text.toString()
         if (username!!.length < 5) {
             return "Minimum 5 character username"
         }
@@ -172,7 +168,6 @@ class CreateAdminFragment : Fragment() {
     }
 
     private fun validPassword(): String? {
-        password = binding.etPassword.text.toString()
         if (password!!.length < 8) {
             return "Minimum 8 character password"
         }
@@ -195,6 +190,19 @@ class CreateAdminFragment : Fragment() {
         val validEmail = binding.tilEmail.helperText == null
         val validConfirmPassword = binding.tilConfirmPassword.helperText == null
         return validName && validUserName && validPassword && validEmail && validConfirmPassword
+    }
+
+    private fun clearTextField(){
+        binding.etEmail.setText("")
+        binding.etUsername.setText("")
+        binding.etPassword.setText("")
+        binding.etFullName.setText("")
+        binding.etConfirmPassword.setText("")
+        binding.tilUsername.helperText = "*Required"
+        binding.tilEmail.helperText = "*Required"
+        binding.tilPassword.helperText = "*Required"
+        binding.tilFullName.helperText = "*Required"
+        binding.tilConfirmPassword.helperText = "*Required"
     }
 
 }

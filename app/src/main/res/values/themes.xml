@@ -40,7 +40,7 @@
         <item name="iconSize">18dp</item>
         <item name="cornerRadius">7dp</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
-        <item name="iconTint">?attr/colorOnPrimary</item>
+<!--        <item name="iconTint">?attr/colorOnPrimary</item>-->
     </style>
 
 </resources>
