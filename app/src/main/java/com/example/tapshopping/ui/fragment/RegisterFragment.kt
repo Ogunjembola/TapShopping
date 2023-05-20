@@ -1,12 +1,15 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,6 +35,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.btnRegister.setOnClickListener {
             //viewModel.postUsers()
             registerUser()
@@ -97,7 +101,6 @@ class RegisterFragment : Fragment() {
 
             else -> {
 
-                Toast.makeText(context, "User Registered in successfully are valid ", Toast.LENGTH_LONG).show()
 
                 true
             }
@@ -105,19 +108,40 @@ class RegisterFragment : Fragment() {
 
         }
     }
-    private  fun observerViewModel() {
+
+    private fun observerViewModel() {
         viewModel.users.observe(viewLifecycleOwner) { users ->
             users?.let { result ->
+                binding.loadingBar.isVisible = result.isLoading()
+                binding.btnRegister.isEnabled = !result.isLoading()
+
                 when {
-                    result.isSuccess() ->{
-                       Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show()
+                    result.isSuccess() -> {
+                        clearTextField()
+
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(result.data!!.success.message)
+                            .setPositiveButton("Proceed") { _, _ ->
+                                findNavController().navigateUp()
+                            }.show()
+                        binding.btnRegister.setText(R.string.create_user)
                     }
-                    result.isLoading() ->{
-                        binding.loadingBar.visibility = View.GONE
-                        binding.listError.visibility =  View.GONE
+
+                    result.isLoading() -> {
+                        binding.btnRegister.setText(R.string.loading)
                     }
-                    result.isError() ->{
-                        binding.listError.visibility =  View.GONE
+
+                    result.isError() -> {
+                        val errorMessage = result.message
+                        binding.btnRegister.setText(R.string.retry)
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                        clearTextField()
                     }
                 }
 
@@ -131,19 +155,37 @@ class RegisterFragment : Fragment() {
         if (validateRegistrationDetails()) {
 
             // Show the progress dialog.
-            val et_email: EditText = binding.etEmail
+            val et_email: TextView = binding.etEmail
             val et_password: EditText = binding.etPassword
             val et_full_name: EditText = binding.etFullName
             val et_username: EditText = binding.etUsername
-
-            val userData = UserRegistrationData(
-                email = et_email.text.toString(),
-                name = et_full_name.text.toString(),
-                password = et_password.text.toString(),
-                username = et_username.text.toString()
+            val email: String = et_email.text.toString().trim { it <= ' ' }
+            val username: String = et_username.text.toString().trim { it <= ' ' }
+            val full_name: String = et_full_name.text.toString().trim { it <= ' ' }
+            val password: String = et_password.text.toString().trim { it <= ' ' }
+            viewModel.registerUser(
+                fullName = full_name,
+                userName = username,
+                email = email,
+                password = password
             )
+
             observerViewModel()
-            viewModel.registerUser(userData)
-        }
+
+        } else Toast.makeText(requireContext(), "Text input not completed", Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    private fun clearTextField() {
+        binding.etEmail.setText("")
+        binding.etUsername.setText("")
+        binding.etPassword.setText("")
+        binding.etFullName.setText("")
+        binding.etConfirmPassword.setText("")
+        binding.tilUsername.helperText = "*Required"
+        binding.tilEmail.helperText = "*Required"
+        binding.tilPassword.helperText = "*Required"
+        binding.tilFullName.helperText = "*Required"
+        binding.tilConfirmPassword.helperText = "*Required"
     }
 }
