@@ -12,9 +12,11 @@ data class UsersResponse(
 ) {
     data class Content(
         @SerializedName("data")
-        val `data`: Data
+        val data: Data
     ) {
-        class Data
+        data class Data(
+            val token:String
+        )
     }
 
     data class Error(

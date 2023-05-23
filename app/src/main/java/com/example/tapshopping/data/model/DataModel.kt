@@ -9,13 +9,13 @@ data class DataModel(
 
 data class UserRegistrationData(
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("password")
-    val password: String,
+    val password: String?,
     @SerializedName("username")
-    val username: String
+    val username: String?
 )
 
 data class GetUserData(
@@ -25,7 +25,7 @@ data class GetUserData(
 
 data class UserLoginData(
     @SerializedName("password")
-    val password: String,
+    val password: String?,
     @SerializedName("username")
-    val username: String
+    val username: String?
 )

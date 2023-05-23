@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface ShoppingRepository{
-    suspend fun createUser(createUser: UserRegistrationData):Flow<Resource<UsersResponse>>
-    suspend fun  getUser(userLogin: UserLoginData):Flow<Resource<UsersResponse>>
+    suspend fun createUser(createUser: DataModel):Flow<Resource<UsersResponse>>
+    suspend fun  getUser(userLogin: GetUserData):Flow<Resource<UsersResponse>>
     suspend fun createAdmin(createAdmin: CreateAdmin):Flow<Resource<AdminAuthResponse>>
 
 }

@@ -1,25 +1,28 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
-import com.example.tapshopping.data.model.DataModel
-import com.example.tapshopping.data.model.UserRegistrationData
 import com.example.tapshopping.databinding.FragmentRegisterBinding
-import com.example.tapshopping.ui.viewmodel.RegisterViewModel
+import com.example.tapshopping.ui.viewModel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
-    private val viewModel: RegisterViewModel by viewModels()
+    //private val viewModel: LoginViewModel by viewModels()
+    private val viewModel by viewModels<UserViewModel>()
     private lateinit var binding: FragmentRegisterBinding
 
 
@@ -32,20 +35,27 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observerViewModel()
+
         binding.btnRegister.setOnClickListener {
             //viewModel.postUsers()
-            registerUser()
+
+                registerUser()
+                     //activity?.finish()
+        }
+        binding.toolbarRegisterActivity.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
 
     }
 
     private fun validateRegistrationDetails(): Boolean {
         val fullName: EditText = binding.etFullName
-        val username: EditText = binding.etUserName
+        val username: EditText = binding.etUsername
         val email: EditText = binding.etEmail
         val password: EditText = binding.etPassword
         val confirmPassword: EditText = binding.etConfirmPassword
-        val cb_terms_and_condition: CheckBox = binding.cbTermsAndCondition
+
         return when {
             TextUtils.isEmpty(fullName.text.toString().trim() { it <= ' ' }) -> {
                 Toast.makeText(context, getString(R.string.error_msg_full_name), Toast.LENGTH_LONG)
@@ -68,8 +78,8 @@ class RegisterFragment : Fragment() {
             TextUtils.isEmpty(password.text.toString().trim { it <= ' ' }) -> {
                 Toast.makeText(context, getString(R.string.error_msg_password), Toast.LENGTH_LONG)
                     .show()
-
                 false
+
             }
 
             TextUtils.isEmpty(confirmPassword.text.toString().trim { it <= ' ' }) -> {
@@ -82,7 +92,6 @@ class RegisterFragment : Fragment() {
             password.text.toString().trim { it <= ' ' } != confirmPassword.text.toString()
                 .trim { it <= ' ' } -> {
 
-
                 Toast.makeText(
                     context,
                     getString(R.string.error_msg_password_and_confirm_password_mismatch),
@@ -91,16 +100,9 @@ class RegisterFragment : Fragment() {
                 false
             }
 
-            !cb_terms_and_condition.isChecked -> {
-                Toast.makeText(
-                    context, getString(R.string.error_msg_agree_terms), Toast.LENGTH_LONG
-                ).show()
-                false
-            }
 
             else -> {
 
-                Toast.makeText(context, "Your details are valid ", Toast.LENGTH_LONG).show()
 
                 true
             }
@@ -108,19 +110,41 @@ class RegisterFragment : Fragment() {
 
         }
     }
-    private  fun observerViewModel() {
+
+
+    private fun observerViewModel() {
         viewModel.users.observe(viewLifecycleOwner) { users ->
             users?.let { result ->
+                binding.loadingBar.isVisible = result.isLoading()
+                binding.btnRegister.isEnabled = !result.isLoading()
+
                 when {
-                    result.isSuccess() ->{
-                       Toast.makeText(context,"Successful",Toast.LENGTH_LONG).show()
+                    result.isSuccess() -> {
+                        clearTextField()
+
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(result.data!!.success.message)
+                            .setPositiveButton("Proceed") { _, _ ->
+                                findNavController().navigateUp()
+                            }.show()
+                        binding.btnRegister.setText(R.string.create_user)
                     }
-                    result.isLoading() ->{
-                        binding.loadingBar.visibility = View.GONE
-                        binding.listError.visibility =  View.GONE
+
+                    result.isLoading() -> {
+                        binding.btnRegister.setText(R.string.loading)
                     }
-                    result.isError() ->{
-                        binding.listError.visibility =  View.GONE
+
+                    result.isError() -> {
+                        val errorMessage = result.message
+                        binding.btnRegister.setText(R.string.retry)
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                        // clearTextField()
                     }
                 }
 
@@ -129,24 +153,41 @@ class RegisterFragment : Fragment() {
 
     }
 
+
+
     private fun registerUser() {
         // Check with validate function if the entries are valid or not.
         if (validateRegistrationDetails()) {
 
             // Show the progress dialog.
-            val et_email: EditText = binding.etEmail
+            val et_email: TextView = binding.etEmail
             val et_password: EditText = binding.etPassword
             val et_full_name: EditText = binding.etFullName
-            val et_username: EditText = binding.etUserName
-
-            val userData = UserRegistrationData(
-                email = et_email.text.toString(),
-                name = et_full_name.text.toString(),
-                password = et_password.text.toString(),
-                username = et_username.text.toString()
+            val et_username: EditText = binding.etUsername
+            val email: String = et_email.text.toString().trim { it <= ' ' }
+            val username: String = et_username.text.toString().trim { it <= ' ' }
+            val _name: String = et_full_name.text.toString().trim { it <= ' ' }
+            val password: String = et_password.text.toString().trim { it <= ' ' }
+            viewModel.registerUser(
+                name = _name,
+                userName = username,
+                email = email,
+                password = password
             )
-            observerViewModel()
-            viewModel.registerUser(userData)
+
         }
+    }
+
+    private fun clearTextField() {
+        binding.etEmail.setText("")
+        binding.etUsername.setText("")
+        binding.etPassword.setText("")
+        binding.etFullName.setText("")
+        binding.etConfirmPassword.setText("")
+        binding.tilUsername.helperText = "*Required"
+        binding.tilEmail.helperText = "*Required"
+        binding.tilPassword.helperText = "*Required"
+        binding.tilFullName.helperText = "*Required"
+        binding.tilConfirmPassword.helperText = "*Required"
     }
 }

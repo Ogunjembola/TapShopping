@@ -1,5 +1,6 @@
 package com.example.tapshopping.utillz
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,12 +27,14 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<
                 // In case of success response we
                 // are returning Resource.Success object
                 // by passing our data in it.
+                Log.d("safeapi", "safeApiCall: success")
                 Resource.success(data = response.body())
+
             } else {
                 //In case of error response we
                 // are returning the expected errorMessage
                 // from the errorResponse object
-
+                Log.d("safeeror", "safeApiCall: error")
                 val errorBody = response.errorBody()?.string()
                 val errorMessage = getAuthErrorResponse(errorBody).errorResponse.message
                 Log.d("NetworkResourceBound", "safeApiCall: errorResponse -> $errorMessage ")
@@ -49,7 +52,7 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<
         } catch (e: Exception) {
             // Returning 'Something went wrong' in case
             // of unknown error wrapped in Resource.Error
-            Resource.error(message = "An error occurred")
+            Resource.error(message = e.message ?: "An error occurred")
         }
     }
 }

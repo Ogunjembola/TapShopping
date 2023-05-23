@@ -32,7 +32,7 @@ class AdminFragment : Fragment() {
             }
 
             cardAdmin.setOnClickListener {
-                findNavController().navigate(AdminFragmentDirections.actionAdminFragmentToCreateAdminFragment())
+                findNavController().navigate(R.id.to_adminFragment)
             }
         }
     }
