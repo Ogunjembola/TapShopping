@@ -5,14 +5,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.example.tapshopping.data.local.DataStoreManager
-import com.example.tapshopping.data.local.DataStoreManagerImpl
-import com.example.tapshopping.domain.ShoppingRepository
-import com.example.tapshopping.domain.ShoppingRepositoryImpl
 import com.example.tapshopping.utillz.SHOPPING_DATA_STORE_NAME
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,18 +19,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModule {
+@Module
+object DataStoreModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindShoppingRepository(impl: ShoppingRepositoryImpl): ShoppingRepository
-
-    @Binds
-    @Singleton
-    abstract fun bindDataStoreManager(dataStoreManagerImpl: DataStoreManagerImpl): DataStoreManager
+    fun providePreferenceDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            migrations = listOf(SharedPreferencesMigration(appContext, SHOPPING_DATA_STORE_NAME)),
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            produceFile = {appContext.preferencesDataStoreFile(SHOPPING_DATA_STORE_NAME)}
+        )
+    }
 }
-
-
-
