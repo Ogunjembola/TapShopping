@@ -1,7 +1,9 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +13,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
+import com.example.tapshopping.data.model.GetUserData
 import com.example.tapshopping.data.model.UserLoginData
-import com.example.tapshopping.databinding.FragmentLoginBinding
+import com.example.tapshopping.databinding.FragmentUserLoginBinding
 import com.example.tapshopping.ui.viewModel.UserViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(), View.OnClickListener {
-   // private val viewModel:  by viewModels()
+class UserLoginFragment : Fragment(), View.OnClickListener {
+    // private val viewModel:  by viewModels()
     private val viewModel by viewModels<UserViewModel>()
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentUserLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -30,22 +35,25 @@ class LoginFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(layoutInflater)
+        binding = FragmentUserLoginBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observerViewModel()
         // Click event assigned to Forgot Password text.
         binding.tvForgotPassword.setOnClickListener(this)
         // Click event assigned to Login button.
         binding.btnLogin.setOnClickListener(this)
+
         // Click event assigned to Register text.
-        binding.tvRegister.setOnClickListener(this)
+        binding.tvCustomer.setOnClickListener(this)
+        binding.tvMerchantLogin.setOnClickListener(this)
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNavigationView.visibility = View.GONE
 
-        /*binding.btnLogin.setOnClickListener {
-
-        }*/
     }
 
     override fun onClick(v: View?) {
@@ -58,9 +66,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     loginRegisteredUser()
                 }
 
-                R.id.tv_register -> {
+
+                R.id.tv_customer -> {
                     findNavController().navigate(R.id.action_loginUser_to_registerUserFragment)
-                   // findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToLogindUser())
+
+                }
+
+                R.id.tv_merchant_login -> {
+                    findNavController().navigate(R.id.action_loginUser_to_adminLogin)
 
                 }
             }
@@ -75,7 +88,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
 
             TextUtils.isEmpty(userName.text.toString().trim { it <= ' ' }) -> {
-                Toast.makeText(context, getString(R.string.error_msg_email), Toast.LENGTH_LONG)
+                Toast.makeText(context, getString(R.string.error_msg_username), Toast.LENGTH_LONG)
                     .show()
                 false
             }
@@ -89,7 +102,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
             else -> {
 
-                Toast.makeText(context, "User Logged in successfully are valid ", Toast.LENGTH_LONG).show()
 
                 true
             }
@@ -99,20 +111,38 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun observerViewModel() {
-        viewModel.users.observe(viewLifecycleOwner) { users ->
+        viewModel.userLogin.observe(viewLifecycleOwner) { users ->
             users?.let { result ->
                 when {
                     result.isSuccess() -> {
-                        Toast.makeText(context, "Successful", Toast.LENGTH_LONG).show()
+                        clearTextField()
+                        Log.d("observer", "observerViewModel: Success")
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(result.data!!.success.message)
+                            .setPositiveButton("Proceed") { _, _ ->
+                                findNavController().navigateUp()
+                            }.show()
+                        binding.btnLogin.setText(R.string.login)
                     }
 
                     result.isLoading() -> {
-                        binding.loadingBar.visibility = View.GONE
-                        binding.listError.visibility = View.GONE
+                        binding.btnLogin.setText(R.string.loading)
                     }
 
                     result.isError() -> {
-                        binding.listError.visibility = View.GONE
+
+
+                        val errorMessage = result.message
+                        Log.d("errorobsevrer", errorMessage)
+                        binding.btnLogin.setText(R.string.retry)
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                        //clearTextField()
                     }
                 }
 
@@ -122,18 +152,19 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loginRegisteredUser() {
-        val email_edt: EditText = binding.tvUsername
+        val _userName: EditText = binding.tvUsername
         val et_password: EditText = binding.etPassword
 
         if (vallidateLoginDeatails()) {
 
-            val userName = email_edt.text.toString().trim { it <= ' ' }
+            val userName = _userName.text.toString().trim { it <= ' ' }
             val password = et_password.text.toString().trim { it <= ' ' }
-            val userUserLoginData = UserLoginData(
-                password = password, username = userName
-            )
-            observerViewModel()
-            viewModel.fetchUsers(userUserLoginData)
+            viewModel.fetchUsers(userName = userName, password = password)
         }
+    }
+
+    private fun clearTextField() {
+        binding.tvUsername.setText("")
+        binding.etPassword.setText("")
     }
 }

@@ -13,8 +13,8 @@ interface NetworkService {
     suspend fun createAdmin(@Body createAdmin: CreateAdmin): Response<AdminAuthResponse>
 
     @POST("user")
-    suspend fun createUser(@Body userData: UserRegistrationData): Response<UsersResponse>
+    suspend fun createUser(@Body userData: DataModel): Response<UsersResponse>
 
-    @GET("user")
-    suspend fun getRegisteredUsers(userLogin: UserLoginData): Response<UsersResponse>
+    @POST("user/login")
+    suspend fun getRegisteredUsers(@Body userLogin: GetUserData): Response<UsersResponse>
 }

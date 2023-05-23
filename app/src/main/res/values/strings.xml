@@ -4,13 +4,14 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_orders">Orders</string>
     <string name="content_description">image</string>
-    <string name="title_login">LOGIN</string>
+    <string name="title_login">USER LOGIN</string>
+    <string name="admin_login">MERCHANT LOGIN</string>
 
     <string name="et_hint_email_id">Email ID</string>
 
     <string name="et_hint_password">Password</string>
 
-    <string name="lbl_forgot_password">Forgot Password</string>
+    <string name="lbl_forgot_password">Forget Password</string>
 
     <string name="btn_lbl_login">Login</string>
 
@@ -203,4 +204,7 @@
     <string name="unable_to_register_user_to_the_server">Unable to register user to the server</string>
     <string name="user">User</string>
     <string name="create_user">Create User</string>
+    <string name="no_account_yet">No account yet?</string>
+    <string name="merchant_login"><u>Merchant Login</u></string>
+    <string name="profile">Profile</string>
 </resources>

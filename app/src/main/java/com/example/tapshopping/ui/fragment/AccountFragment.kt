@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.tapshopping.R
 import com.example.tapshopping.databinding.FragmentAccountBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AccountFragment : Fragment() {
 
     lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return FragmentAccountBinding.inflate(inflater, container, false).run {
             binding = this
@@ -24,13 +25,19 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNavigationView.visibility = View.VISIBLE
         binding.apply {
             adminSelectable.setOnClickListener {
                 findNavController().navigate(AccountFragmentDirections.toAdminFragment())
             }
-            userConstraint.setOnClickListener {
+            authentication.setOnClickListener {
                 findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToLogindUser())
+
+            }
+            profileIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_profile2)
 
             }
         }

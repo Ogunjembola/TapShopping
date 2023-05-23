@@ -27,14 +27,14 @@ class ShoppingRepositoryImpl @Inject constructor(
             }
         }.flowOn(flowable)
 
-    override suspend fun createUser(createUser: UserRegistrationData): Flow<Resource<UsersResponse>> =
+    override suspend fun createUser(createUser: DataModel): Flow<Resource<UsersResponse>> =
         withContext(dispatcher) {
             return@withContext flow<Resource<UsersResponse>> {
                 emit(safeApiCall { networkService.createUser(createUser) })
             }.flowOn(flowable)
         }
 
-    override suspend fun getUser(userLogin: UserLoginData): Flow<Resource<UsersResponse>> =
+    override suspend fun getUser(userLogin: GetUserData): Flow<Resource<UsersResponse>> =
         withContext(dispatcher) {
             return@withContext flow<Resource<UsersResponse>> {
                 emit(safeApiCall { networkService.getRegisteredUsers(userLogin) })
