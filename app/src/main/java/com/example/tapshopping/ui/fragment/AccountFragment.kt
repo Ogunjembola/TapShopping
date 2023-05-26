@@ -10,7 +10,7 @@ import com.example.tapshopping.R
 import com.example.tapshopping.databinding.FragmentAccountBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class AccountFragment : Fragment() {
+class AccountFragment : Fragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAccountBinding
 
@@ -28,17 +28,22 @@ class AccountFragment : Fragment() {
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.visibility = View.VISIBLE
-        binding.apply {
-            adminSelectable.setOnClickListener {
-                findNavController().navigate(AccountFragmentDirections.toAdminFragment())
-            }
-            authentication.setOnClickListener {
-                findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToLogindUser())
+        binding.csAdmin.setOnClickListener (this)
+        binding.csProfile.setOnClickListener (this)
 
-            }
-            profileIcon.setOnClickListener {
-                findNavController().navigate(R.id.action_accountFragment_to_profile2)
+    }
 
+    override fun onClick(v: View?) {
+        if (v != null) {
+            when (v.id) {
+
+                R.id.cs_admin ->{
+                    findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+                }
+                R.id.cs_profile ->{
+                    findNavController().navigate(R.id.action_accountFragment_to_profile2)
+
+                }
             }
         }
     }

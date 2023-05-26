@@ -19,7 +19,9 @@
             app:destination="@id/loginUser" />
         <action
             android:id="@+id/action_accountFragment_to_profile2"
-            app:destination="@id/profile" />
+            app:destination="@id/profile"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment
@@ -37,7 +39,9 @@
             app:destination="@id/accountFragment" />
         <action
             android:id="@+id/action_loginUser_to_registerUserFragment"
-            app:destination="@id/registerUserFragment" />
+            app:destination="@id/registerUserFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_loginUser_to_adminLogin"
             app:destination="@id/adminLogin" />
@@ -49,7 +53,9 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerUserFragment_to_loginUser"
-            app:destination="@id/loginUser" />
+            app:destination="@id/loginUser"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/adminLogin"
@@ -68,6 +74,7 @@
 
         <action
             android:id="@+id/action_profile_to_accountFragment"
-            app:destination="@id/accountFragment" />
+            app:destination="@id/accountFragment"
+            app:enterAnim="@android:anim/cycle_interpolator" />
     </fragment>
 </navigation>

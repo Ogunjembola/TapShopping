@@ -30,51 +30,81 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_authentication"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#d3d3d3">
+            android:padding="8dp">
 
-            <com.example.tapshopping.utillz.TPTextView
-                android:id="@+id/TPTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/profileimage"
+                android:layout_width="100dp"
+                android:layout_height="90dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Welcome"
-                android:textColor="@color/blue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.example.tapshopping.utillz.TPTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Enter your account"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TPTextView" />
-
-            <com.example.tapshopping.utillz.TPButton
-                android:id="@+id/authentication"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:background="@color/gray"
+                android:scaleType="fitXY"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/blue"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:padding="@dimen/btn_padding"
-                android:text="Login/Sign in"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_user_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.tapshopping.utillz.TPTextViewBold
+                android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Taiwo Benson"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="TaiwoBenson@gmail.com"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintTop_toBottomOf="@+id/fullName" />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/tw_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="User/Admin"
+
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="08074749999"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -91,6 +121,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cs_admin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
@@ -140,6 +171,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cs_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
@@ -190,6 +222,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cs_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
@@ -237,6 +270,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cs_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
@@ -284,6 +318,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cs_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
@@ -329,6 +364,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         </LinearLayout>
