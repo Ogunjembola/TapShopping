@@ -1,6 +1,5 @@
 package com.example.tapshopping.data.local
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -15,6 +14,7 @@ import com.example.tapshopping.data.local.DataStoreManager.Companion.USER_NAME
 import com.example.tapshopping.utillz.get
 import com.example.tapshopping.utillz.set
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -31,12 +31,17 @@ class DataStoreManagerImpl @Inject constructor(
         private val key: String,
         private val defaultValue: String?
     ) : ReadWriteProperty<DataStoreManagerImpl, String> {
-        override fun getValue(thisRef: DataStoreManagerImpl, property: KProperty<*>): String = dataStore.get(
-            key = stringPreferencesKey(key),
-            defaultValue = defaultValue ?: ""
-        )
+        override fun getValue(thisRef: DataStoreManagerImpl, property: KProperty<*>): String =
+            dataStore.get(
+                key = stringPreferencesKey(key),
+                defaultValue = defaultValue ?: ""
+            )
 
-        override fun setValue(thisRef: DataStoreManagerImpl, property: KProperty<*>, value: String) = dataStore.set(
+        override fun setValue(
+            thisRef: DataStoreManagerImpl,
+            property: KProperty<*>,
+            value: String
+        ) = dataStore.set(
             stringPreferencesKey(key),
             value
         )
@@ -49,18 +54,18 @@ class DataStoreManagerImpl @Inject constructor(
         private val key: String,
         private val defaultValue: Int
     ) : ReadWriteProperty<Any, Int> {
-        override fun getValue(thisRef: Any, property: KProperty<*>): Int{
+        override fun getValue(thisRef: Any, property: KProperty<*>): Int {
             return runBlocking {
                 dataStore.data.first()[intPreferencesKey(key)] ?: defaultValue
             }
         }
 
-        override fun setValue(thisRef: Any, property: KProperty<*>, value: Int){
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: Int) {
             return runBlocking {
                 dataStore.edit {
-                    if (value == 0){
+                    if (value == 0) {
                         it.remove(intPreferencesKey(key))
-                    }else{
+                    } else {
                         it[intPreferencesKey(key)] = value
                     }
                 }
@@ -75,9 +80,11 @@ class DataStoreManagerImpl @Inject constructor(
         it[LOGIN_KEY] ?: false
     }
 
-    override suspend fun setIsLoggedIn(isLoggedIn: Boolean) {
-        prefDataStore.edit {
-            it[LOGIN_KEY] = isLoggedIn
+    override fun setIsLoggedIn(isLoggedIn: Boolean) {
+        runBlocking {
+            prefDataStore.edit {
+                it[LOGIN_KEY] = isLoggedIn
+            }
         }
     }
 

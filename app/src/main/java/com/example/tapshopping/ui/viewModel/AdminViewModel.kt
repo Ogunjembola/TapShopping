@@ -4,24 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tapshopping.data.model.AdminAuthResponse
-import com.example.tapshopping.data.model.CreateAdmin
-import com.example.tapshopping.data.model.CreateAdminData
+import com.example.tapshopping.data.model.AuthResponse
+import com.example.tapshopping.data.model.Registration
+import com.example.tapshopping.data.model.RegisterData
 import com.example.tapshopping.domain.ShoppingRepository
 import com.example.tapshopping.utillz.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AdminViewModel @Inject constructor(private val repository: ShoppingRepository) : ViewModel() {
 
-    private val _createAdmin: MutableLiveData<Resource<AdminAuthResponse>> = MutableLiveData()
-    val createAdmin: LiveData<Resource<AdminAuthResponse>>
+    private val _createAdmin: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
+    val createAdmin: LiveData<Resource<AuthResponse>>
         get() = _createAdmin
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
@@ -32,7 +28,7 @@ class AdminViewModel @Inject constructor(private val repository: ShoppingReposit
 
         viewModelScope.launch {
             _createAdmin.postValue(Resource.loading())
-            val createAdminData = CreateAdmin(createAdminData = CreateAdminData(
+            val createAdminData = Registration(registerData = RegisterData(
                 email = email,
                 name = fullName,
                 password = password,

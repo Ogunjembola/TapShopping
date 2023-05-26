@@ -13,16 +13,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
-import com.example.tapshopping.data.model.GetUserData
-import com.example.tapshopping.data.model.UserLoginData
+import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentUserLoginBinding
 import com.example.tapshopping.ui.viewModel.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserLoginFragment : Fragment(), View.OnClickListener {
     // private val viewModel:  by viewModels()
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
+
     private val viewModel by viewModels<UserViewModel>()
     private lateinit var binding: FragmentUserLoginBinding
 
@@ -116,13 +119,15 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
                 when {
                     result.isSuccess() -> {
                         clearTextField()
-                        Log.d("observer", "observerViewModel: Success")
-                        AlertDialog.Builder(requireContext()).setTitle("Successful")
-                            .setIcon(R.drawable.successful)
-                            .setMessage(result.data!!.success.message)
-                            .setPositiveButton("Proceed") { _, _ ->
-                                findNavController().navigateUp()
-                            }.show()
+//                        Log.d("observer", "observerViewModel: Success")
+//                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+//                            .setIcon(R.drawable.successful)
+//                            .setMessage(result.data!!.success.message)
+//                            .setPositiveButton("Proceed") { _, _ ->
+////                                findNavController().navigateUp()
+//                            }.show()
+                        dataStoreManager.setIsLoggedIn(true)
+                        findNavController().popBackStack()
                         binding.btnLogin.setText(R.string.login)
                     }
 

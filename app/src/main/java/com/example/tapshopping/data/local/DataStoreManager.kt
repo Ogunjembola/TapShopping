@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface DataStoreManager {
     val isAdmin: Flow<Boolean>
     val isLoggedIn: Flow<Boolean>
-    suspend fun setIsLoggedIn(isLoggedIn:Boolean)
+    fun setIsLoggedIn(isLoggedIn:Boolean)
     suspend fun setIsAdmin(isAdmin:Boolean)
     var userName: String
     var email: String

@@ -2,12 +2,12 @@ package com.example.tapshopping.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CreateAdmin(
+data class Registration(
     @SerializedName("data")
-    val createAdminData: CreateAdminData
+    val registerData: RegisterData
 )
 
-data class CreateAdminData(
+data class RegisterData(
     val email: String,
     val name: String,
     val password: String,

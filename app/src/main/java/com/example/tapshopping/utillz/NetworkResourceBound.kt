@@ -36,7 +36,7 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): Resource<
                 // from the errorResponse object
                 Log.d("safeeror", "safeApiCall: error")
                 val errorBody = response.errorBody()?.string()
-                val errorMessage = getAuthErrorResponse(errorBody).errorResponse.message
+                val errorMessage = getAuthErrorResponse(errorBody).error.message
                 Log.d("NetworkResourceBound", "safeApiCall: errorResponse -> $errorMessage ")
                 Resource.error(message = errorMessage)
             }
