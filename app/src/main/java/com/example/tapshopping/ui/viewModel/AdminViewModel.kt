@@ -63,7 +63,7 @@ class AdminViewModel @Inject constructor(
             repository.loginAdmin(loginData).collect{
                 _loginAdmin.postValue(it)
                 if (it.isSuccess()){
-                    dataStoreManager.token = it.data!!.content.data.token
+                    dataStoreManager.token = it.data!!.responseData.data.token
                 }
             }
         }

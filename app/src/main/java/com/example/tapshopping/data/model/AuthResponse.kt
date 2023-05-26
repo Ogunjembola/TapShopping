@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class AuthResponse(
     @SerializedName("content")
-    val content: Content,
+    val responseData: ResponseData,
     @SerializedName("error")
     val error: Error,
     @SerializedName("success")
     val success: Success
-) {
-    data class Content(
+)
+    data class ResponseData(
         @SerializedName("data")
         val data: Data
     ) {
@@ -36,4 +36,3 @@ data class AuthResponse(
         @SerializedName("status")
         val status: Int
     )
-}

@@ -25,6 +25,37 @@ class UserViewModel @Inject constructor(
     val userLogin: LiveData<Resource<AuthResponse>> get() = _userLogin
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
 
+    private val _userData: MutableLiveData<Resource<GetUserResponse>> = MutableLiveData()
+    val userData: LiveData<Resource<GetUserResponse>>
+    get() = _userData
+
+    fun getUserData(){
+        viewModelScope.launch {
+        _userData.postValue(Resource.loading())
+
+            val token = dataStoreManager.token
+
+            Log.d("UserViewModel", "getUserDataToken:$token ")
+
+            shoppingRepository.getUserData(token ="Bearer ".plus(token)).collect{getUserData ->
+                _userData.postValue(getUserData)
+                if (getUserData.isSuccess()){
+                    dataStoreManager.userName = getUserData.data!!.userData.data.user.username
+                    dataStoreManager.fullName = getUserData.data.userData.data.user.name
+                    dataStoreManager.email = getUserData.data.userData.data.user.email
+
+                    Log.d("UserViewModel", "getUserData: " +
+                            "${getUserData.data!!.userData.data.user.username} \n " +
+                            "${getUserData.data.userData.data.user.name} \n" +
+                            getUserData.data.userData.data.user.email
+                    )
+                }else if (getUserData.isError()){
+                    Log.d("UserViewModel", "getUserData: ${getUserData.message}")
+                }
+
+            }
+        }
+    }
 
     fun fetchUsers(userName: String, password: String) {
         viewModelScope.launch {
@@ -40,41 +71,41 @@ class UserViewModel @Inject constructor(
 
                 if (response.isSuccess()) {
                     _userLogin.postValue(Resource.success(response.data))
-                    dataStoreManager.userName = userName
+//                    dataStoreManager.userName = userName
+                    dataStoreManager.token = response.data!!.responseData.data.token
                 } else {
                     _userLogin.postValue(Resource.error(response.message))
                 }
-                //Log.d("password-user", response.)
             }
 
         }
     }
 
 
-        fun registerUser(name: String, userName: String, email: String, password: String) {
-            Resource.loading(true)
-            viewModelScope.launch {
-                _user.value = Resource.loading()
-                val createUser = Registration(
-                    RegisterData(
-                        email = email,
-                        name = name,
-                        password = password,
-                        username = userName
-                    )
+    fun registerUser(name: String, userName: String, email: String, password: String) {
+        Resource.loading(true)
+        viewModelScope.launch {
+            _user.value = Resource.loading()
+            val createUser = Registration(
+                RegisterData(
+                    email = email,
+                    name = name,
+                    password = password,
+                    username = userName
                 )
+            )
 
-                try {
-                    shoppingRepository.createUser(createUser)
-                        .collect { response ->
-                            _user.postValue(response)
-                        }
-                } catch (e: Throwable) {
-                    _errorMessage.postValue(e.localizedMessage)
-                }
-
+            try {
+                shoppingRepository.createUser(createUser)
+                    .collect { response ->
+                        _user.postValue(response)
+                    }
+            } catch (e: Throwable) {
+                _errorMessage.postValue(e.localizedMessage)
             }
+
         }
-
-
     }
+
+
+}
