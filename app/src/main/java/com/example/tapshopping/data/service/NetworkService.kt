@@ -11,6 +11,9 @@ interface NetworkService {
     @POST("admin")
     suspend fun createAdmin(@Body createAdmin: Registration): Response<AuthResponse>
 
+    @POST("admin/login")
+    suspend fun adminLogin(@Body loginAdmin: Login): Response<AuthResponse>
+
     @POST("user")
     suspend fun createUser(@Body userData: Registration): Response<AuthResponse>
 

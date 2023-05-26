@@ -10,6 +10,7 @@ import com.example.tapshopping.data.local.DataStoreManager.Companion.ADMIN_LOGIN
 import com.example.tapshopping.data.local.DataStoreManager.Companion.EMAIL
 import com.example.tapshopping.data.local.DataStoreManager.Companion.FULL_NAME
 import com.example.tapshopping.data.local.DataStoreManager.Companion.LOGIN_KEY
+import com.example.tapshopping.data.local.DataStoreManager.Companion.TOKEN
 import com.example.tapshopping.data.local.DataStoreManager.Companion.USER_NAME
 import com.example.tapshopping.utillz.get
 import com.example.tapshopping.utillz.set
@@ -97,4 +98,5 @@ class DataStoreManagerImpl @Inject constructor(
     override var userName: String by StringPreference(prefDataStore, USER_NAME, "")
     override var email: String by StringPreference(prefDataStore, EMAIL, "")
     override var fullName: String by StringPreference(prefDataStore, FULL_NAME, "")
+    override var token: String by StringPreference(prefDataStore, TOKEN, "")
 }

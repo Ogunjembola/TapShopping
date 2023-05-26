@@ -1,7 +1,9 @@
 package com.example.tapshopping.domain
 
 import com.example.tapshopping.core.di.CoroutineModule
-import com.example.tapshopping.data.model.*
+import com.example.tapshopping.data.model.AuthResponse
+import com.example.tapshopping.data.model.Login
+import com.example.tapshopping.data.model.Registration
 import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.Resource
 import com.example.tapshopping.utillz.safeApiCall
@@ -40,5 +42,15 @@ class ShoppingRepositoryImpl @Inject constructor(
                 emit(safeApiCall { networkService.getRegisteredUsers(userLogin) })
             }.flowOn(flowable)
         }
+
+    override suspend fun loginAdmin(loginAdmin: Login): Flow<Resource<AuthResponse>> =
+        withContext(dispatcher) {
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.adminLogin(loginAdmin)
+                })
+            }
+        }.flowOn(flowable)
+
 }
 
