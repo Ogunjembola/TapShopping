@@ -30,27 +30,6 @@ class HomeFragment : Fragment() {
     lateinit var dataStoreManager: DataStoreManager
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val navController = findNavController()
-
-//        val currentBackEntry: NavBackStackEntry? = navController.currentBackStackEntry
-//        runBlocking {
-//            dataStoreManager.isLoggedIn.collect {success ->
-//                if (!success){
-//                    val startDestination = navController.graph.startDestinationId
-//                    val navOptions =  NavOptions.Builder()
-//                        .setPopUpTo(startDestination,true)
-//                        .build()
-//
-//                    navController.navigate(startDestination, null, navOptions)
-//                }
-//            }
-//        }
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,10 +47,6 @@ class HomeFragment : Fragment() {
         } else {
             findNavController().navigate(R.id.loginUser)
         }
-
-    }
-
-    fun manageNavigation() {
 
     }
 
