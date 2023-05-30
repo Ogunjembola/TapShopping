@@ -25,9 +25,13 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.visibility = View.VISIBLE
+        binding.apply {
+            adminSelectable.setOnClickListener {
+                findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+            }
+        }
         binding.csAdmin.setOnClickListener (this)
         binding.csProfile.setOnClickListener (this)
 

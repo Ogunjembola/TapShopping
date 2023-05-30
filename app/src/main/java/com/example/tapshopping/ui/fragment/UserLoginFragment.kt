@@ -11,18 +11,25 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
-import com.example.tapshopping.data.model.GetUserData
-import com.example.tapshopping.data.model.UserLoginData
+import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentUserLoginBinding
 import com.example.tapshopping.ui.viewModel.UserViewModel
+import com.example.tapshopping.utillz.SUCCESSFULLY_LOGGED_IN
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserLoginFragment : Fragment(), View.OnClickListener {
     // private val viewModel:  by viewModels()
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
+
     private val viewModel by viewModels<UserViewModel>()
     private lateinit var binding: FragmentUserLoginBinding
 
@@ -42,6 +49,7 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observerViewModel()
+        getUserData()
         // Click event assigned to Forgot Password text.
         binding.tvForgotPassword.setOnClickListener(this)
         // Click event assigned to Login button.
@@ -110,20 +118,46 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun getUserData(){
+        viewModel.userData.observe(viewLifecycleOwner) {userData ->
+            userData?.let {response ->
+                when{
+                    response.isSuccess() ->{
+                        dataStoreManager.setIsLoggedIn(true)
+                        Log.d("observer", "observerViewModel: Success")
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(SUCCESSFULLY_LOGGED_IN)
+                            .setPositiveButton(R.string.proceed){_, _ ->
+                            }
+                            .show()
+                        binding.btnLogin.setText(R.string.login)
+
+                        findNavController().popBackStack()
+                    }
+                    response.isError() ->{
+                        val errorMessage = response.message
+                        Log.d("errorobsevrer", errorMessage)
+                        binding.btnLogin.setText(R.string.retry)
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                    }
+                }
+            }
+        }
+    }
+
     private fun observerViewModel() {
         viewModel.userLogin.observe(viewLifecycleOwner) { users ->
             users?.let { result ->
                 when {
                     result.isSuccess() -> {
                         clearTextField()
-                        Log.d("observer", "observerViewModel: Success")
-                        AlertDialog.Builder(requireContext()).setTitle("Successful")
-                            .setIcon(R.drawable.successful)
-                            .setMessage(result.data!!.success.message)
-                            .setPositiveButton("Proceed") { _, _ ->
-                                findNavController().navigateUp()
-                            }.show()
-                        binding.btnLogin.setText(R.string.login)
+                        viewModel.getUserData()
                     }
 
                     result.isLoading() -> {

@@ -207,5 +207,5 @@
     <string name="no_account_yet">No account yet?</string>
     <string name="merchant_login"><u>Merchant Login</u></string>
     <string name="profile">Profile</string>
-
+    <string name="proceed">Proceed</string>
 </resources>
