@@ -38,47 +38,12 @@
         android:id="@+id/createAdminFragment"
         android:name="com.example.tapshopping.ui.fragment.CreateAdminFragment"
         android:label="fragment_create_admin"
-        tools:layout="@layout/fragment_create_admin" />
-            android:id="@+id/action_logindUser_to_accountFragment"
-            app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_loginUser_to_registerUserFragment"
-            app:destination="@id/registerUserFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_loginUser_to_adminLogin"
-            app:destination="@id/adminLogin" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerUserFragment"
-        android:name="com.example.tapshopping.ui.fragment.RegisterFragment"
-        android:label="fragment_register_user"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerUserFragment_to_loginUser"
-            app:destination="@id/loginUser"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/adminLogin"
-        android:name="com.example.tapshopping.ui.fragment.AdminLoginFragment"
-        android:label="fragment_admin_login"
-        tools:layout="@layout/fragment_admin_login" >
-        <action
-            android:id="@+id/action_registerUserFragment_to_loginUser"
-            app:destination="@id/loginUser" />
+        tools:layout="@layout/fragment_create_admin">
     </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.example.tapshopping.ui.fragment.UserProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_user_profile">
-
-        <action
-            android:id="@+id/action_profile_to_accountFragment"
-            app:destination="@id/accountFragment"
-            app:enterAnim="@android:anim/cycle_interpolator" />
     </fragment>
 </navigation>
