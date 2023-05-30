@@ -10,7 +10,7 @@ import com.example.tapshopping.R
 import com.example.tapshopping.databinding.FragmentAccountBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class AccountFragment : Fragment() {
+class AccountFragment : Fragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAccountBinding
 
@@ -30,6 +30,24 @@ class AccountFragment : Fragment() {
         binding.apply {
             adminSelectable.setOnClickListener {
                 findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+            }
+        }
+        binding.csAdmin.setOnClickListener (this)
+        binding.csProfile.setOnClickListener (this)
+
+    }
+
+    override fun onClick(v: View?) {
+        if (v != null) {
+            when (v.id) {
+
+                R.id.cs_admin ->{
+                    findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+                }
+                R.id.cs_profile ->{
+                    findNavController().navigate(R.id.action_accountFragment_to_profile2)
+
+                }
             }
         }
     }
