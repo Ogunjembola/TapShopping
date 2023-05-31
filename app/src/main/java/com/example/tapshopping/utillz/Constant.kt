@@ -11,4 +11,5 @@ const val API_READ_TIMEOUT = 50L
 const val API_WRITE_TIMEOUT = 50L
 
 const val SUCCESSFULLY_LOGGED_IN = "LOGIN SUCCESSFUL"
+const val INFO_UPDATE_SUCCESSFUL = "Information Updated Successfully"
 

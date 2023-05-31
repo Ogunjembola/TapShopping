@@ -34,6 +34,10 @@ class AdminFragment : Fragment() {
             cardAdmin.setOnClickListener {
                 findNavController().navigate(AdminFragmentDirections.toCreateAdminFragment())
             }
+
+            updateAdminCard.setOnClickListener {
+                findNavController().navigate(AdminFragmentDirections.toUpdateAdminFragment())
+            }
         }
     }
 

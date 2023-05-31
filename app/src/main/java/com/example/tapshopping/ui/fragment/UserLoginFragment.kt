@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserLoginFragment : Fragment(), View.OnClickListener {
-    // private val viewModel:  by viewModels()
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 
@@ -58,10 +57,6 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
         // Click event assigned to Register text.
         binding.tvCustomer.setOnClickListener(this)
         binding.tvMerchantLogin.setOnClickListener(this)
-//        val bottomNavigationView =
-//            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-//        bottomNavigationView.visibility = View.GONE
-
     }
 
     override fun onClick(v: View?) {

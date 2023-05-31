@@ -31,6 +31,10 @@ class AdminViewModel @Inject constructor(
     val adminData: LiveData<Resource<GetAdminResponse>>
         get() = _adminData
 
+    private val _updateAdmin: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
+    val updateAdmin: LiveData<Resource<AuthResponse>>
+        get() = _updateAdmin
+
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     val errorLiveData: LiveData<String>
         get() = _errorMessage
@@ -80,22 +84,48 @@ class AdminViewModel @Inject constructor(
 
             val token = dataStoreManager.token
 
-            repository.getAdminData(token = "Bearer ".plus(token)).collect{response ->
+            repository.getAdminData(token = "Bearer ".plus(token)).collect { response ->
                 _adminData.postValue(response)
-                if (response.isSuccess()){
-                    dataStoreManager.userName = response.data!!.adminData.dataResponse.admin.username
+                if (response.isSuccess()) {
+                    dataStoreManager.userName =
+                        response.data!!.adminData.dataResponse.admin.username
+                    dataStoreManager.userId = response.data.adminData.dataResponse.admin.adminId
+                    dataStoreManager.email = response.data.adminData.dataResponse.admin.email
+                    dataStoreManager.fullName = response.data.adminData.dataResponse.admin.fullName
+                    dataStoreManager.userType = "Merchant"
                     dataStoreManager.setIsLoggedIn(true)
                     dataStoreManager.setIsAdmin(true)
-                    dataStoreManager.userId = response.data!!.adminData.dataResponse.admin.adminId
-                    dataStoreManager.email = response.data!!.adminData.dataResponse.admin.email
-                    dataStoreManager.fullName = response.data!!.adminData.dataResponse.admin.fullName
-                    dataStoreManager.userType = "Merchant"
 
-                    Log.d("AdminViewModel", "getAdminData=>: ${response.data.adminData.dataResponse.admin.username} \n " +
-                            "${response.data.adminData.dataResponse.admin.adminId} \n" +
-                            "${response.data.adminData.dataResponse.admin.email}  \n" +
-                            response.data.adminData.dataResponse.admin.fullName
+                    Log.d(
+                        "AdminViewModel",
+                        "getAdminData=>: ${response.data.adminData.dataResponse.admin.username} \n " +
+                                "${response.data.adminData.dataResponse.admin.adminId} \n" +
+                                "${response.data.adminData.dataResponse.admin.email}  \n" +
+                                response.data.adminData.dataResponse.admin.fullName
                     )
+                }
+            }
+        }
+    }
+
+    fun updateAdminData(fullName: String, password: String, userName: String) {
+        viewModelScope.launch {
+            _adminData.postValue(Resource.loading())
+
+            val token = dataStoreManager.token
+
+            val updateAdminData = UpdateUser(
+                UpdateUserData(
+                    name = fullName,
+                    password = password,
+                    username = userName
+                )
+            )
+            repository.updateAdminData(token ="Bearer".plus(token), updateUser = updateAdminData).collect{response ->
+                _updateAdmin.postValue(response)
+                if (response.isSuccess()){
+                    dataStoreManager.userName = userName
+                    dataStoreManager.fullName = fullName
                 }
             }
         }

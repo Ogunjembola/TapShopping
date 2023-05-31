@@ -152,8 +152,4 @@ class AdminLoginFragment : Fragment() {
         }
     }
 
-    private fun navigateToHome(){
-        val startDestination = findNavController()
-
-    }
 }

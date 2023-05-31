@@ -57,6 +57,18 @@ class ShoppingRepositoryImpl @Inject constructor(
         }.flowOn(flowable)
     }
 
+    override suspend fun updateAdminData(
+        token: String,
+        updateUser: UpdateUser
+    ): Flow<Resource<AuthResponse>> =
+        withContext(dispatcher) {
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.updateAdmin(token = token, updateUser = updateUser)
+                })
+            }
+        }.flowOn(flowable)
+
     override suspend fun loginAdmin(loginAdmin: Login): Flow<Resource<AuthResponse>> =
         withContext(dispatcher) {
             return@withContext flow {
@@ -65,6 +77,7 @@ class ShoppingRepositoryImpl @Inject constructor(
                 })
             }
         }.flowOn(flowable)
+
 
 }
 
