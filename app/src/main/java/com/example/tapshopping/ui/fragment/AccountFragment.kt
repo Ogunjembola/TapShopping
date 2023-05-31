@@ -1,18 +1,29 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
+import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentAccountBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.IOException
+import javax.inject.Inject
 
 class AccountFragment : Fragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAccountBinding
+    lateinit var profileTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -25,13 +36,19 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.visibility = View.VISIBLE
-        binding.apply {
-            adminSelectable.setOnClickListener {
-                findNavController().navigate(AccountFragmentDirections.toAdminFragment())
-            }
-        }
+        profileTextView = binding.userProfileTextView
+        val firstName = DataStoreManager.FULL_NAME
+        val lastName = DataStoreManager.EMAIL
+        val shortName = firstName.first().toString() + lastName.first().toString()
+        profileTextView .text = shortName
+
+        binding.fullName.text= DataStoreManager.FULL_NAME
+        binding.email.text= DataStoreManager.EMAIL
+
+
         binding.csAdmin.setOnClickListener (this)
         binding.csProfile.setOnClickListener (this)
 
@@ -51,4 +68,6 @@ class AccountFragment : Fragment(), View.OnClickListener {
             }
         }
     }
+
+
 }
