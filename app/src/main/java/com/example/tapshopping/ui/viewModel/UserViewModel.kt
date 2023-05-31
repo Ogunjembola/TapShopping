@@ -44,7 +44,7 @@ class UserViewModel @Inject constructor(
                     dataStoreManager.fullName = getUserData.data.userData.data.user.name
                     dataStoreManager.email = getUserData.data.userData.data.user.email
                     dataStoreManager.userId = getUserData.data.userData.data.user.userId
-                    dataStoreManager.userId = "User"
+                    dataStoreManager.userType = "User"
 
                 }else if (getUserData.isError()){
                     Log.d("UserViewModel", "getUserData: ${getUserData.message}")

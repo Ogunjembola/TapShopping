@@ -1,5 +1,6 @@
 package com.example.tapshopping.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -85,10 +86,16 @@ class AdminViewModel @Inject constructor(
                     dataStoreManager.userName = response.data!!.adminData.dataResponse.admin.username
                     dataStoreManager.setIsLoggedIn(true)
                     dataStoreManager.setIsAdmin(true)
-                    dataStoreManager.userId = response.data.adminData.dataResponse.admin.adminId
-                    dataStoreManager.email = response.data.adminData.dataResponse.admin.email
-                    dataStoreManager.fullName = response.data.adminData.dataResponse.admin.fullName
+                    dataStoreManager.userId = response.data!!.adminData.dataResponse.admin.adminId
+                    dataStoreManager.email = response.data!!.adminData.dataResponse.admin.email
+                    dataStoreManager.fullName = response.data!!.adminData.dataResponse.admin.fullName
                     dataStoreManager.userType = "Merchant"
+
+                    Log.d("AdminViewModel", "getAdminData=>: ${response.data.adminData.dataResponse.admin.username} \n " +
+                            "${response.data.adminData.dataResponse.admin.adminId} \n" +
+                            "${response.data.adminData.dataResponse.admin.email}  \n" +
+                            response.data.adminData.dataResponse.admin.fullName
+                    )
                 }
             }
         }
