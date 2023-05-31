@@ -84,21 +84,20 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:text="User/Admin"
-
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/profileimage"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/username" />
 
             <com.example.tapshopping.utillz.TPTextView
-                android:id="@+id/phoneNumber"
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="08074749999"
+                tools:text="Adam"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"

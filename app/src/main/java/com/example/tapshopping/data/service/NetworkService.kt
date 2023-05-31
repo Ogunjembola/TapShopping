@@ -24,4 +24,7 @@ interface NetworkService {
 
     @GET("user")
     suspend fun getUser( @Header("Authorization") token:String): Response<GetUserResponse>
+
+    @GET("admin")
+    suspend fun getAdmin(@Header("Authorization") token: String): Response<GetAdminResponse>
 }

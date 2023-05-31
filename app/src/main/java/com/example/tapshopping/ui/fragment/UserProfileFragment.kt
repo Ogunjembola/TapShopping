@@ -20,9 +20,9 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNavigationView.visibility = View.GONE
+//        val bottomNavigationView =
+//            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+//        bottomNavigationView.visibility = View.GONE
     }
 
 }

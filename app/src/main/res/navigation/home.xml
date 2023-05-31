@@ -18,7 +18,9 @@
         tools:layout="@layout/fragment_user_login" >
         <action
             android:id="@+id/action_logindUser_to_accountFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginUser_to_registerUserFragment"
             app:destination="@id/registerUserFragment" />
@@ -45,6 +47,11 @@
         <action
             android:id="@+id/action_registerUserFragment_to_loginUser"
             app:destination="@id/loginUser" />
+        <action
+            android:id="@+id/action_adminLogin_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

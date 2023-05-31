@@ -19,6 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow24"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <com.example.tapshopping.utillz.TPTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,6 +115,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:padding="@dimen/clickable_text_view_padding"
         android:text="@string/lbl_forgot_password"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="@dimen/forgot_password_text_size"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"

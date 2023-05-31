@@ -43,12 +43,9 @@ class UserViewModel @Inject constructor(
                     dataStoreManager.userName = getUserData.data!!.userData.data.user.username
                     dataStoreManager.fullName = getUserData.data.userData.data.user.name
                     dataStoreManager.email = getUserData.data.userData.data.user.email
+                    dataStoreManager.userId = getUserData.data.userData.data.user.userId
+                    dataStoreManager.userId = "User"
 
-                    Log.d("UserViewModel", "getUserData: " +
-                            "${getUserData.data!!.userData.data.user.username} \n " +
-                            "${getUserData.data.userData.data.user.name} \n" +
-                            getUserData.data.userData.data.user.email
-                    )
                 }else if (getUserData.isError()){
                     Log.d("UserViewModel", "getUserData: ${getUserData.message}")
                 }

@@ -58,9 +58,9 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
         // Click event assigned to Register text.
         binding.tvCustomer.setOnClickListener(this)
         binding.tvMerchantLogin.setOnClickListener(this)
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNavigationView.visibility = View.GONE
+//        val bottomNavigationView =
+//            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+//        bottomNavigationView.visibility = View.GONE
 
     }
 
@@ -82,6 +82,7 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
 
                 R.id.tv_merchant_login -> {
                     findNavController().navigate(R.id.action_loginUser_to_adminLogin)
+//                    findNavController().popBackStack()
 
                 }
             }
@@ -137,7 +138,6 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
                     }
                     response.isError() ->{
                         val errorMessage = response.message
-                        Log.d("errorobsevrer", errorMessage)
                         binding.btnLogin.setText(R.string.retry)
                         AlertDialog.Builder(requireContext()).setTitle("Failed")
                             .setIcon(R.drawable.baseline_error_24)

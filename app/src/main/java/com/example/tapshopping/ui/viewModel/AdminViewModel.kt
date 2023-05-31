@@ -26,6 +26,10 @@ class AdminViewModel @Inject constructor(
     val loginAdmin: LiveData<Resource<AuthResponse>>
         get() = _loginAdmin
 
+    private val _adminData: MutableLiveData<Resource<GetAdminResponse>> = MutableLiveData()
+    val adminData: LiveData<Resource<GetAdminResponse>>
+        get() = _adminData
+
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     val errorLiveData: LiveData<String>
         get() = _errorMessage
@@ -60,10 +64,31 @@ class AdminViewModel @Inject constructor(
             val loginData = Login(
                 LoginData(password = password, username = userName)
             )
-            repository.loginAdmin(loginData).collect{
+            repository.loginAdmin(loginData).collect {
                 _loginAdmin.postValue(it)
-                if (it.isSuccess()){
+                if (it.isSuccess()) {
                     dataStoreManager.token = it.data!!.responseData.data.token
+                }
+            }
+        }
+    }
+
+    fun getAdminData() {
+        viewModelScope.launch {
+            _adminData.postValue(Resource.loading())
+
+            val token = dataStoreManager.token
+
+            repository.getAdminData(token = "Bearer ".plus(token)).collect{response ->
+                _adminData.postValue(response)
+                if (response.isSuccess()){
+                    dataStoreManager.userName = response.data!!.adminData.dataResponse.admin.username
+                    dataStoreManager.setIsLoggedIn(true)
+                    dataStoreManager.setIsAdmin(true)
+                    dataStoreManager.userId = response.data.adminData.dataResponse.admin.adminId
+                    dataStoreManager.email = response.data.adminData.dataResponse.admin.email
+                    dataStoreManager.fullName = response.data.adminData.dataResponse.admin.fullName
+                    dataStoreManager.userType = "Merchant"
                 }
             }
         }
