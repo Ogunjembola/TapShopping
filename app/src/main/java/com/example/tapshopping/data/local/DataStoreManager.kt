@@ -18,6 +18,7 @@ interface DataStoreManager {
         val ADMIN_LOGIN = booleanPreferencesKey("admin_login")
         val LOGIN_KEY = booleanPreferencesKey("login_key")
         const val USER_NAME = "username"
+        const val PhoneNumber = "phone_number"
         const val EMAIL = "email"
         const val FULL_NAME = "full_name"
         const val TOKEN = "token"
