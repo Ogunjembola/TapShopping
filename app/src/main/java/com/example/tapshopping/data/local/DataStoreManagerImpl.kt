@@ -11,7 +11,9 @@ import com.example.tapshopping.data.local.DataStoreManager.Companion.EMAIL
 import com.example.tapshopping.data.local.DataStoreManager.Companion.FULL_NAME
 import com.example.tapshopping.data.local.DataStoreManager.Companion.LOGIN_KEY
 import com.example.tapshopping.data.local.DataStoreManager.Companion.TOKEN
+import com.example.tapshopping.data.local.DataStoreManager.Companion.USER_ID
 import com.example.tapshopping.data.local.DataStoreManager.Companion.USER_NAME
+import com.example.tapshopping.data.local.DataStoreManager.Companion.USER_TYPE
 import com.example.tapshopping.utillz.get
 import com.example.tapshopping.utillz.set
 import kotlinx.coroutines.flow.Flow
@@ -99,4 +101,6 @@ class DataStoreManagerImpl @Inject constructor(
     override var email: String by StringPreference(prefDataStore, EMAIL, "")
     override var fullName: String by StringPreference(prefDataStore, FULL_NAME, "")
     override var token: String by StringPreference(prefDataStore, TOKEN, "")
+    override var userId: String by StringPreference(prefDataStore, USER_ID, "")
+    override var userType: String by StringPreference(prefDataStore, USER_TYPE, "")
 }

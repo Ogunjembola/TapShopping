@@ -48,6 +48,7 @@ UserProfileFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.toolbarUserProfileActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
@@ -138,7 +139,6 @@ UserProfileFragment : Fragment(), View.OnClickListener {
     fun imageUploadSuccces(imageURL: String) {
         // hideProgressDialog()
         mUserProfileImageURL = imageURL
-
     }
 
 }
