@@ -28,7 +28,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_authentication"
+        android:id="@+id/cs_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp">
@@ -38,17 +38,32 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/profileimage"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:layout_marginStart="16dp"
-                android:background="@color/gray"
-                android:scaleType="fitXY"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_user_placeholder"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+
+
+                    <TextView
+                        android:id="@+id/userProfile_textView"
+                        android:layout_width="150dp"
+                        android:layout_height="160dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="80sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.cardview.widget.CardView>
 
             <com.example.tapshopping.utillz.TPTextViewBold
                 android:id="@+id/fullName"
@@ -58,9 +73,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Taiwo Benson"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.tapshopping.utillz.TPTextView
@@ -71,9 +86,9 @@
                 android:layout_marginTop="8dp"
                 android:text="TaiwoBenson@gmail.com"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
                 app:layout_constraintTop_toBottomOf="@+id/fullName" />
 
             <com.example.tapshopping.utillz.TPTextView
@@ -84,25 +99,25 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:text="User/Admin"
-
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/username"
+                app:layout_constraintVertical_bias="0.023" />
 
             <com.example.tapshopping.utillz.TPTextView
-                android:id="@+id/phoneNumber"
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="08074749999"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -147,7 +162,7 @@
                     android:layout_marginStart="16dp"
                     android:text="@string/admin"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/adminIcon"
@@ -157,56 +172,6 @@
 
                 <ImageView
                     android:id="@+id/adminSelectable"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:contentDescription="@string/content_description"
-                    android:focusable="true"
-                    android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cs_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/cart_item_details_marginStart"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="@dimen/cart_item_details_marginStart"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/profileIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/baseline_person"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.example.tapshopping.utillz.TPTextView
-                    android:id="@+id/profileTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/profile"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/profileIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.6" />
-
-
-                <ImageView
-                    android:id="@+id/profileSelectable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -248,7 +213,7 @@
                     android:layout_marginStart="16dp"
                     android:text="Product"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -296,7 +261,7 @@
                     android:layout_marginStart="16dp"
                     android:text="Category"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/categoryIcon"
@@ -344,7 +309,7 @@
                     android:layout_marginStart="16dp"
                     android:text="Order"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/orderIcon"
@@ -364,8 +329,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
         </LinearLayout>

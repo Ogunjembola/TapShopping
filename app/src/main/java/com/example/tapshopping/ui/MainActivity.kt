@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tapshopping.R
 import com.example.tapshopping.databinding.ActivityMainBinding
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+
         setUpBottomNav()
 
     }
