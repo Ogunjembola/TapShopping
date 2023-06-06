@@ -31,6 +31,7 @@
         android:id="@+id/cs_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/cart_item_details_marginStart"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
