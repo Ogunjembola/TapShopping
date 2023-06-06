@@ -49,7 +49,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
             when (v.id) {
 
                 R.id.cs_admin -> {
-                    findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+                    findNavController().navigate(AccountFragmentDirections.toCreateAdminFragment())
                 }
                 R.id.cs_profile -> {
                     findNavController().navigate(R.id.action_accountFragment_to_profile2)

@@ -34,12 +34,13 @@
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cs_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/profileimage"
+                android:id="@+id/profileImage"
                 android:layout_width="100dp"
                 android:layout_height="90dp"
                 android:layout_marginStart="16dp"
@@ -48,7 +49,8 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_user_placeholder"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/content_description"/>
 
                 <com.example.tapshopping.utillz.TPTextViewBold
                 android:id="@+id/fullName"
@@ -56,11 +58,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Taiwo Benson"
+                tools:text="Taiwo Benson"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.tapshopping.utillz.TPTextView
@@ -69,11 +71,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="TaiwoBenson@gmail.com"
+                tools:text="TaiwoBenson@gmail.com"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/fullName" />
 
             <com.example.tapshopping.utillz.TPTextView
@@ -83,12 +85,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="User/Admin"
+                tools:text="User/Admin"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/username" />
 
             <com.example.tapshopping.utillz.TPTextView
@@ -101,7 +103,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileimage"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -124,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/cart_item_details_marginStart"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="@dimen/cart_item_details_marginStart"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
@@ -144,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/admin"
+                    android:text="@string/create_admin"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -168,57 +170,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cs_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/cart_item_details_marginStart"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="@dimen/cart_item_details_marginStart"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/profileIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/baseline_person"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.example.tapshopping.utillz.TPTextView
-                    android:id="@+id/profileTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/profile"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/profileIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.6" />
-
-
-                <ImageView
-                    android:id="@+id/profileSelectable"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:contentDescription="@string/content_description"
-                    android:focusable="true"
-                    android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs_product"
@@ -245,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Product"
+                    android:text="@string/product"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -293,7 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Category"
+                    android:text="@string/category"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -341,7 +292,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Order"
+                    android:text="@string/order"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -363,9 +314,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
         </LinearLayout>
 

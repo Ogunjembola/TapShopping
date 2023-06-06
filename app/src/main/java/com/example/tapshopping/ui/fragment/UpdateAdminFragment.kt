@@ -129,37 +129,4 @@ class UpdateAdminFragment : Fragment() {
 
     }
 
-//    private fun getAdminData(){
-//        viewModel.adminData.observe(viewLifecycleOwner) {adminData ->
-//            adminData?.let {response ->
-//                when{
-//                    response.isSuccess() ->{
-////                        dataStoreManager.userName = response.data!!.adminData.dataResponse.admin.username
-//                        Log.d("observer", "observerViewModel: Success")
-//                        AlertDialog.Builder(requireContext()).setTitle("Successful")
-//                            .setIcon(R.drawable.successful)
-//                            .setMessage(SUCCESSFULLY_LOGGED_IN)
-//                            .setPositiveButton(R.string.proceed){ _, _ ->
-//                            }
-//                            .show()
-//                        binding.btnLogin.setText(R.string.login)
-//                        findNavController().navigate(AdminLoginFragmentDirections.actionAdminLoginToHomeFragment())
-//
-////                        findNavController().popBackStack()
-//                    }
-//                    response.isError() ->{
-//                        val errorMessage = response.message
-//                        binding.btnLogin.setText(R.string.retry)
-//                        AlertDialog.Builder(requireContext()).setTitle("Failed")
-//                            .setIcon(R.drawable.baseline_error_24)
-//                            .setMessage(errorMessage)
-//                            .setPositiveButton(R.string.retry) { _, _ ->
-//                                // do nothing
-//                            }.show()
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 }
