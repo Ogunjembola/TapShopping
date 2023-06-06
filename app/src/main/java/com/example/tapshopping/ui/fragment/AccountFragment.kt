@@ -1,10 +1,16 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,12 +21,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AccountFragment : Fragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAccountBinding
+    lateinit var profileTextView: TextView
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
@@ -41,6 +51,21 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
         binding.csAdmin.setOnClickListener(this)
         binding.csProfile.setOnClickListener(this)
+
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNavigationView.visibility = View.VISIBLE
+        profileTextView = binding.userProfileTextView
+        val firstName = DataStoreManager.FULL_NAME
+        val lastName = DataStoreManager.EMAIL
+        val shortName = firstName.first().toString() + lastName.first().toString()
+        profileTextView .text = shortName
+
+        binding.fullName.text= DataStoreManager.FULL_NAME
+        binding.email.text= DataStoreManager.EMAIL
+
+
+        binding.csAdmin.setOnClickListener (this)
+        binding.csProfile.setOnClickListener (this)
 
     }
 
