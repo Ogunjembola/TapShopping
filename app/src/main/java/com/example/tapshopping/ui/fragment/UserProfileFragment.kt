@@ -2,8 +2,6 @@ package com.example.tapshopping.ui.fragment
 
 import android.Manifest
 import android.app.Activity
-import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -13,29 +11,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.tapshopping.utillz.showImageChooser
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
-import com.example.tapshopping.databinding.FragmentUserLoginBinding
 import com.example.tapshopping.databinding.FragmentUserProfileBinding
 import com.example.tapshopping.utillz.GlideLoader
 import com.example.tapshopping.utillz.PICK_IMAGE_REQUEST_CODE
 import com.example.tapshopping.utillz.READ_STORAGE_PERMISSION_CODE
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.example.tapshopping.utillz.showImageChooser
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class
 UserProfileFragment : Fragment(), View.OnClickListener {
+
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
     private lateinit var binding: FragmentUserProfileBinding
     private var mSelectedImageFileUri: Uri? = null
     private var mUserProfileImageURL: String = " "
+    private var isEditable: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,10 +53,22 @@ UserProfileFragment : Fragment(), View.OnClickListener {
         binding.toolbarUserProfileActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNavigationView.visibility = View.GONE
         binding.ivUserPhoto.setOnClickListener(this)
+
+        setUpProfile()
+
+
+        binding.btnSave.setOnClickListener {
+            activateEditText()
+            isEditable = if (isEditable){
+                binding.etFullName.isEnabled = true
+                binding.btnSave.setText(R.string.btn_lbl_save)
+                !isEditable
+            }else{
+                binding.btnSave.setText(R.string.update)
+                true
+            }
+        }
 
 
     }
@@ -139,6 +152,28 @@ UserProfileFragment : Fragment(), View.OnClickListener {
     fun imageUploadSuccces(imageURL: String) {
         // hideProgressDialog()
         mUserProfileImageURL = imageURL
+    }
+
+    private fun setUpProfile(){
+        binding.apply {
+            etFullName.setText(dataStoreManager.fullName)
+            etEmail.setText(dataStoreManager.email)
+            etUserName.setText(dataStoreManager.userName)
+        }
+    }
+
+    private fun activateEditText(){
+            binding.etFullName.isClickable = true
+            binding.etFullName.isFocusable = true
+            binding.etFullName.isEnabled = true
+
+            binding.etUserName.isClickable = true
+            binding.etUserName.isFocusable = true
+            binding.etUserName.isEnabled = true
+
+            binding.etFullName.isClickable = true
+            binding.etFullName.isFocusable = true
+            binding.etFullName.isEnabled = true
     }
 
 }
