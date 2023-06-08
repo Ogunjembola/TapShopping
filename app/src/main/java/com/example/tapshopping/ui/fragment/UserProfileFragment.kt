@@ -55,6 +55,7 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.toolbarUserProfileActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
@@ -278,6 +279,7 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         }
     }
 
+
     private fun cameraPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -294,6 +296,11 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
                 PERMISSION_REQUEST_CODE
             )
         }
+
+
+    fun imageUploadSuccces(imageURL: String) {
+        // hideProgressDialog()
+        mUserProfileImageURL = imageURL
 
     }
 

@@ -14,6 +14,7 @@ const val API_READ_TIMEOUT = 50L
 const val API_WRITE_TIMEOUT = 50L
 
 const val SUCCESSFULLY_LOGGED_IN = "LOGIN SUCCESSFUL"
+const val INFO_UPDATE_SUCCESSFUL = "Information Updated Successfully"
 //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult in the Base Activity.
 const val READ_STORAGE_PERMISSION_CODE = 2
 

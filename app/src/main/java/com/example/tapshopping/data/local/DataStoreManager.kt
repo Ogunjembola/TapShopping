@@ -13,6 +13,8 @@ interface DataStoreManager {
     var email: String
     var fullName: String
     var token: String
+    var userId: String
+    var userType: String
 
     companion object{
         val ADMIN_LOGIN = booleanPreferencesKey("admin_login")
@@ -22,5 +24,7 @@ interface DataStoreManager {
         const val EMAIL = "email"
         const val FULL_NAME = "full_name"
         const val TOKEN = "token"
+        const val USER_ID = "userId"
+        const val USER_TYPE = "user_type"
     }
 }

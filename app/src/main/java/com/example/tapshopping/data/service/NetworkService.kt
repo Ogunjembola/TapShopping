@@ -2,10 +2,7 @@ package com.example.tapshopping.data.service
 
 import com.example.tapshopping.data.model.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface NetworkService {
@@ -23,5 +20,14 @@ interface NetworkService {
     suspend fun getRegisteredUsers(@Body userLogin: Login): Response<AuthResponse>
 
     @GET("user")
-    suspend fun getUser( @Header("Authorization") token:String): Response<GetUserResponse>
+    suspend fun getUser(@Header("Authorization") token: String): Response<GetUserResponse>
+
+    @GET("admin")
+    suspend fun getAdmin(@Header("Authorization") token: String): Response<GetAdminResponse>
+
+    @PUT("admin")
+    suspend fun updateAdmin(
+        @Header("Authorization") token: String,
+        @Body updateUser: UpdateUser
+    ): Response<AuthResponse>
 }

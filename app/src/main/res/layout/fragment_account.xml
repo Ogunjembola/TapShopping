@@ -66,7 +66,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.example.tapshopping.utillz.TPTextViewBold
+                <com.example.tapshopping.utillz.TPTextViewBold
                 android:id="@+id/fullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="08074749999"
+                tools:text="Adam"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/cardView2"
