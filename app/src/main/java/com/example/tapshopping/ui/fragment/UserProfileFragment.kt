@@ -142,13 +142,13 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
                 }
 
                 PICK_IMAGE_REQUEST_CODE -> {
-                     mSelectedImageFileUri = data?.data
+                    mSelectedImageFileUri = data?.data
                     if (mSelectedImageFileUri != null) {
                         // Load and display the selected image
                         // ...
                         GlideLoader(requireContext()).loadUserPicture(
                             mSelectedImageFileUri!!, binding.ivUserPhoto
-                    )
+                        )
 
                     } else {
                         Toast.makeText(
@@ -159,59 +159,7 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
                     }
 
                 }
-
-//                    if (mSelectedImageFileUri != null) {
-//                        val inputStream = requireContext().contentResolver.openInputStream(
-//                            mSelectedImageFileUri!!
-//                        )
-//                        val bitmap = BitmapFactory.decodeStream(inputStream)
-//                        inputStream?.close()
-//
-//                        if (bitmap != null) {
-//                            binding.ivUserPhoto.setImageBitmap(bitmap)
-//                        } else {
-//                            Toast.makeText(
-//                                requireContext(),
-//                                "Failed to load image from gallery.",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//
-//                        }
-
             }
-//                if (data != null) {
-//                    try {
-//
-////                        // The uri of selected image from phone storage.
-//                        mSelectedImageFileUri = data.data!!
-//                        Log.d("User", "onActivityResult:${data.data!!} ")
-//                        val inputStream = requireContext().contentResolver.openInputStream(
-//                            mSelectedImageFileUri!!
-//                        )
-//                        val bitmap = BitmapFactory.decodeStream(inputStream)
-//                        inputStream?.close()
-//
-//                        if (bitmap != null) {
-//                            binding.ivUserPhoto.setImageBitmap(bitmap)
-//                        } else {
-//                            // Handle the case where bitmap is null
-//                        }
-//
-////                        GlideLoader(requireContext()).loadUserPicture(
-////                            mSelectedImageFileUri!!, binding.ivUserPhoto
-////                        )
-//////                        )
-//                    } catch (e: IOException) {
-//                        e.printStackTrace()
-//                        Toast.makeText(
-//                            requireContext(),
-//                            resources.getString(R.string.image_selection_failed),
-//                            Toast.LENGTH_SHORT
-//                        )
-//                            .show()
-//                    }
-//                }
-
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
             // A log is printed when user close or cancel the image selection.
@@ -240,14 +188,11 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
                 if (optionsMenu[i] == "Take Photo") {
                     // Open the camera and get the photo
                     cameraPermission()
-//                    val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                    startActivityForResult(takePicture, 0)
+
                 } else if (optionsMenu[i] == "Choose from Gallery") {
                     // choose from  external storage
                     galleryPermission()
-//                    val pickPhoto =
-//                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                    startActivityForResult(pickPhoto, 1)
+
 
                 } else if (optionsMenu[i] == "Exit") {
                     dialogInterface.dismiss()
@@ -298,50 +243,10 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         }
 
 
-    fun imageUploadSuccces(imageURL: String) {
-        // hideProgressDialog()
-        mUserProfileImageURL = imageURL
+        fun imageUploadSuccces(imageURL: String) {
+            // hideProgressDialog()
+            mUserProfileImageURL = imageURL
 
-    }
-
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File =
-            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = absolutePath
         }
     }
-//    private fun dispatchTakePictureIntent() {
-//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-//            // Ensure that there's a camera activity to handle the intent
-//            takePictureIntent.resolveActivity(packageManager)?.also {
-//                // Create the File where the photo should go
-//                val photoFile: File? = try {
-//                    createImageFile()
-//                } catch (ex: IOException) {
-//                    // Error occurred while creating the File
-//
-//                    null
-//                }
-//                // Continue only if the File was successfully created
-//                photoFile?.also {
-//                    val photoURI: Uri = FileProvider.getUriForFile(
-//                        requireContext(),
-//                        "com.example.android.fileprovider",
-//                        it
-//                    )
-//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//                    startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE)
-//                }
-//            }
-//        }
-//    }
 }

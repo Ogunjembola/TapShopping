@@ -62,7 +62,7 @@
     <string name="title_activity_dashboard">MainActivity</string>
     <string name="title_add_product">ADD PRODUCT</string>
     <string name="et_hint_product_category">Product Category</string>
-    <string name="et_hint_product_price">Product Price ($)</string>
+    <string name="et_hint_product_price">Product Price (₦)</string>
     <string name="et_hint_product_description">Product Description</string>
     <string name="et_hint_product_quantity">Product Quantity</string>
     <string name="btn_lbl_submit">SUBMIT</string>
@@ -208,5 +208,6 @@
     <string name="merchant_login"><u>Merchant Login</u></string>
     <string name="profile">Profile</string>
     <string name="proceed">Proceed</string>
-    <string name="update_admin_info">Update Admin Information</string>
+    <string name="product_title">Product Title</string>
+    <string name="merchant">Merchant</string>
 </resources>
