@@ -1,8 +1,10 @@
 package com.example.tapshopping.utillz
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.provider.MediaStore
 import com.example.tapshopping.ui.fragment.UserProfileFragment
+
 
 const val SHOPPING_DATA_STORE_NAME ="shoppingDataStoreName"
 
@@ -18,6 +20,9 @@ const val READ_STORAGE_PERMISSION_CODE = 2
 
 // A unique code of image selection from Phone Storage.
 const val PICK_IMAGE_REQUEST_CODE = 2
+const val PERMISSION_REQUEST_CODE = 3
+const val CAMERA_REQUEST_CODE = 1
+
 fun showImageChooser(activity: UserProfileFragment) {
     // An intent for launching the image selection of phone storage.
     val galleryIntent = Intent(
@@ -26,4 +31,8 @@ fun showImageChooser(activity: UserProfileFragment) {
     )
     // Launches the image selection of phone storage using the constant code.
     activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+}
+
+fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+
 }
