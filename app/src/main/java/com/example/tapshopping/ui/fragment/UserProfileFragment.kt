@@ -37,8 +37,9 @@ import java.io.FileOutputStream
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.Date   
-  
+import java.util.Date
+import javax.inject.Inject
+
 @AndroidEntryPoint
 class
 UserProfileFragment : Fragment(), View.OnClickListener {
