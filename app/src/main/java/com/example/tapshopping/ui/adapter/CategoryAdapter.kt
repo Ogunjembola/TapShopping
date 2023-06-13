@@ -22,8 +22,8 @@ class CategoryAdapter(private val categories: List<Category> = emptyList()):Recy
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         holder.bind.apply {
-            imgCat.setImageResource(category.catImage)
-            categoryName.text = category.catName
+//            imgCat.setImageResource(category.categoryData.description)
+            categoryName.text = category.categoryData.name
         }
     }
     class CategoryViewHolder(binding: ItemCategoriesBinding) : RecyclerView.ViewHolder(binding.root){
