@@ -37,9 +37,4 @@ interface NetworkService {
         @Body category: Category
     ): Response<AuthResponse>
 
-//    @PUT
-//    suspend fun updateCategory(
-//        @Header("Authorization") token: String,
-//        @Path("")
-//    )
 }
