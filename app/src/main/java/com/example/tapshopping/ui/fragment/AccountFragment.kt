@@ -1,10 +1,10 @@
 package com.example.tapshopping.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentAccountBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,7 +20,6 @@ import javax.inject.Inject
 class AccountFragment : Fragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAccountBinding
-    lateinit var profileTextView: TextView
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
@@ -43,21 +41,6 @@ class AccountFragment : Fragment(), View.OnClickListener {
         binding.csAdmin.setOnClickListener(this)
         binding.csProfile.setOnClickListener(this)
 
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNavigationView.visibility = View.VISIBLE
-        profileTextView = binding.userProfileTextView
-        val firstName = DataStoreManager.FULL_NAME
-        val lastName = DataStoreManager.EMAIL
-        val shortName = firstName.first().toString() + lastName.first().toString()
-        profileTextView .text = shortName
-
-        binding.fullName.text= DataStoreManager.FULL_NAME
-        binding.email.text= DataStoreManager.EMAIL
-
-
-        binding.csAdmin.setOnClickListener (this)
-        binding.csProfile.setOnClickListener (this)
-
     }
 
     override fun onClick(v: View?) {
@@ -65,7 +48,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
             when (v.id) {
 
                 R.id.cs_admin -> {
-                    findNavController().navigate(AccountFragmentDirections.toAdminFragment())
+                    findNavController().navigate(AccountFragmentDirections.toCreateAdminFragment())
                 }
                 R.id.cs_profile -> {
                     findNavController().navigate(R.id.action_accountFragment_to_profile2)
@@ -77,7 +60,8 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
     private fun addProfileDetail() {
         binding.apply {
-            fullName.text = dataStoreManager.fullName
+            val expectedFullName = dataStoreManager.fullName
+            fullName.text = expectedFullName
             email.text = dataStoreManager.email
             twType.text = dataStoreManager.userType
             username.text = dataStoreManager.userName
@@ -87,7 +71,10 @@ class AccountFragment : Fragment(), View.OnClickListener {
                     csAdmin.isVisible = isAdmin
                 }
             }
-
+            val separatedNames: List<String> = expectedFullName.split(" ")
+            Log.d("AccountFragment ", "separatedNames: $separatedNames ")
+            val shortName:String = separatedNames[0].first() + separatedNames[1].first().toString()
+            userProfileTextView.text = shortName
         }
     }
 }

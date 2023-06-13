@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
+import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentUserProfileBinding
 import com.example.tapshopping.utillz.PERMISSION_REQUEST_CODE
 import com.example.tapshopping.utillz.CAMERA_REQUEST_CODE
@@ -33,16 +34,23 @@ import com.example.tapshopping.utillz.showImageChooser
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 import java.io.FileOutputStream
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.Date   
+  
+@AndroidEntryPoint
+class
+UserProfileFragment : Fragment(), View.OnClickListener {
 
-
-class UserProfileFragment : Fragment(), View.OnClickListener {
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
     private lateinit var binding: FragmentUserProfileBinding
     private var mSelectedImageFileUri: Uri? = null
     private var mUserProfileImageURL: String = " "
+    private var isEditable: Boolean = false
     lateinit var currentPhotoPath: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,11 +67,23 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         binding.toolbarUserProfileActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNavigationView.visibility = View.GONE
         binding.ivUserPhoto.setOnClickListener(this)
         binding.btnSave.setOnClickListener(this)
+
+        setUpProfile()
+
+
+        binding.btnSave.setOnClickListener {
+            activateEditText()
+            isEditable = if (isEditable){
+                binding.etFullName.isEnabled = true
+                binding.btnSave.setText(R.string.btn_lbl_save)
+                !isEditable
+            }else{
+                binding.btnSave.setText(R.string.update)
+                true
+            }
+        }
 
 
     }
@@ -221,7 +241,6 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
     private fun cameraPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -246,4 +265,27 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
 
         }
     }
+
+    private fun setUpProfile(){
+        binding.apply {
+            etFullName.setText(dataStoreManager.fullName)
+            etEmail.setText(dataStoreManager.email)
+            etUserName.setText(dataStoreManager.userName)
+        }
+    }
+
+    private fun activateEditText(){
+            binding.etFullName.isClickable = true
+            binding.etFullName.isFocusable = true
+            binding.etFullName.isEnabled = true
+
+            binding.etUserName.isClickable = true
+            binding.etUserName.isFocusable = true
+            binding.etUserName.isEnabled = true
+
+            binding.etFullName.isClickable = true
+            binding.etFullName.isFocusable = true
+            binding.etFullName.isEnabled = true
+    }
+
 }

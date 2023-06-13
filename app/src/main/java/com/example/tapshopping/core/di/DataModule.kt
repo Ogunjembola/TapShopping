@@ -9,6 +9,8 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.local.DataStoreManagerImpl
+import com.example.tapshopping.domain.ShoppingAdminAuthRepository
+import com.example.tapshopping.domain.ShoppingAdminAuthRepositoryImpl
 import com.example.tapshopping.domain.ShoppingRepository
 import com.example.tapshopping.domain.ShoppingRepositoryImpl
 import com.example.tapshopping.utillz.SHOPPING_DATA_STORE_NAME
@@ -34,6 +36,10 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun bindDataStoreManager(dataStoreManagerImpl: DataStoreManagerImpl): DataStoreManager
+
+    @Binds
+    @Singleton
+    abstract fun bindShoppingAdminAuthRepository(shoppingAdminAuthRepositoryImpl: ShoppingAdminAuthRepositoryImpl): ShoppingAdminAuthRepository
 }
 
 

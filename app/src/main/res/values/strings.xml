@@ -210,4 +210,11 @@
     <string name="proceed">Proceed</string>
     <string name="product_title">Product Title</string>
     <string name="merchant">Merchant</string>
+    <string name="update_admin_info">Update Admin Information</string>
+    <string name="product">Product</string>
+    <string name="category">Category</string>
+    <string name="order">Order</string>
+    <string name="new_password">New password</string>
+    <string name="update_password">Update Password</string>
+    <string name="update">Update</string>
 </resources>
