@@ -116,9 +116,6 @@ class UserProfileFragment : Fragment(), View.OnClickListener {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMERA_REQUEST_CODE)
             }
-            /* else{
-               Toast.makeText(context, "Permission was denied."+"Don't worry  you can allow it in the settings", Toast.LENGTH_LONG).show()
-           }*/
         }
     }
 
