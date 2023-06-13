@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.model.*
+import com.example.tapshopping.domain.ShoppingAdminAuthRepository
 import com.example.tapshopping.domain.ShoppingRepository
 import com.example.tapshopping.utillz.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AdminViewModel @Inject constructor(
-    private val repository: ShoppingRepository,
+    private val repository: ShoppingAdminAuthRepository,
     private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 

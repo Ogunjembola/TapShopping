@@ -30,4 +30,11 @@ interface NetworkService {
         @Header("Authorization") token: String,
         @Body updateUser: UpdateUser
     ): Response<AuthResponse>
+
+    @POST("admin/categories/category")
+    suspend fun createCategory(
+        @Header("Authorization") token: String,
+        @Body category: Category
+    ): Response<AuthResponse>
+
 }
