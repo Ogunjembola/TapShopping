@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.AdminLoginFragment">
+    tools:context=".ui.fragment.UpdateAdminFragment">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -52,12 +52,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="@string/admin_login"
+        android:text="@string/merchant"
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/full_name"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login">
+
+        <com.example.tapshopping.utillz.TPEditText
+            android:id="@+id/tv_fullName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:padding="@dimen/et_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/et_textSize" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -71,7 +96,7 @@
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_login">
+        app:layout_constraintTop_toBottomOf="@+id/nameTextInputLayout">
 
         <com.example.tapshopping.utillz.TPEditText
             android:id="@+id/tv_username"
@@ -122,7 +147,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <com.example.tapshopping.utillz.TPButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_updateAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -132,7 +157,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
         android:padding="@dimen/btn_padding"
-        android:text="@string/btn_lbl_login"
+        android:text="@string/update_admin"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_text_size"
         app:layout_constraintEnd_toEndOf="@+id/tv_forgot_password"

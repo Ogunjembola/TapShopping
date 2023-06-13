@@ -31,5 +31,4 @@
         android:elevation="10dp"
         app:menu="@menu/menu" />
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

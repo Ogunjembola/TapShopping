@@ -20,25 +20,28 @@ class ShoppingRepositoryImpl @Inject constructor(
 
     private val flowable = Dispatchers.IO
 
-    override suspend fun createAdmin(createAdmin: CreateAdmin): Flow<Resource<AdminAuthResponse>> =
-        withContext(dispatcher) {
-            return@withContext flow<Resource<AdminAuthResponse>> {
-                emit(safeApiCall { networkService.createAdmin(createAdmin) })
-            }
-        }.flowOn(flowable)
 
-    override suspend fun createUser(createUser: DataModel): Flow<Resource<UsersResponse>> =
+    override suspend fun createUser(createUser: Registration): Flow<Resource<AuthResponse>> =
         withContext(dispatcher) {
-            return@withContext flow<Resource<UsersResponse>> {
+            return@withContext flow<Resource<AuthResponse>> {
                 emit(safeApiCall { networkService.createUser(createUser) })
             }.flowOn(flowable)
         }
 
-    override suspend fun getUser(userLogin: GetUserData): Flow<Resource<UsersResponse>> =
+    override suspend fun getUser(userLogin: Login): Flow<Resource<AuthResponse>> =
         withContext(dispatcher) {
-            return@withContext flow<Resource<UsersResponse>> {
+            return@withContext flow<Resource<AuthResponse>> {
                 emit(safeApiCall { networkService.getRegisteredUsers(userLogin) })
             }.flowOn(flowable)
         }
+
+    override suspend fun getUserData(token: String): Flow<Resource<GetUserResponse>> {
+        return withContext(dispatcher) {
+            return@withContext flow<Resource<GetUserResponse>> {
+                emit(safeApiCall { networkService.getUser(token) })
+            }
+        }.flowOn(flowable)
+    }
+
 }
 

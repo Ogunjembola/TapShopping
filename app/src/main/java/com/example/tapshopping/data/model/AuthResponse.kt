@@ -2,15 +2,15 @@ package com.example.tapshopping.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UsersResponse(
+data class AuthResponse(
     @SerializedName("content")
-    val content: Content,
+    val responseData: ResponseData,
     @SerializedName("error")
     val error: Error,
     @SerializedName("success")
     val success: Success
-) {
-    data class Content(
+)
+    data class ResponseData(
         @SerializedName("data")
         val data: Data
     ) {
@@ -36,4 +36,3 @@ data class UsersResponse(
         @SerializedName("status")
         val status: Int
     )
-}
