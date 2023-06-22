@@ -10,7 +10,7 @@ import com.example.tapshopping.data.model.CategoryData
 import com.example.tapshopping.databinding.DisplayCategoryBinding
 
 class CategoryAdapter(
-    private val itemSelectedPosition: (CategoryData) -> Unit,
+    private val itemSelected: (CategoryData) -> Unit,
     private val showOptionMenu: (Boolean) -> Unit
 ) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -75,6 +75,7 @@ class CategoryAdapter(
         currentSelectedPosition = position
         notifyDataSetChanged()
         showOptionMenu.invoke(true)
+        itemSelected.invoke(categories[position])
 
         return true
     }

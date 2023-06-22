@@ -18,8 +18,11 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
     @CoroutineModule.IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ShoppingCategoryRepository {
 
-    override suspend fun createCategories(category: CreateCategory, token: String): Flow<Resource<AuthResponse>> =
-        withContext(dispatcher){
+    override suspend fun createCategories(
+        category: CreateCategory,
+        token: String
+    ): Flow<Resource<AuthResponse>> =
+        withContext(dispatcher) {
             return@withContext flow {
                 emit(safeApiCall {
                     networkService.createCategory(category = category, token = token)
@@ -32,10 +35,23 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCategories(): Flow<Resource<Category>> {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             return@withContext flow<Resource<Category>> {
                 emit(safeApiCall {
                     networkService.getCategories()
+                })
+            }
+        }
+    }
+
+    override suspend fun deleteCategory(
+        token: String,
+        categoryId: String
+    ): Flow<Resource<AuthResponse>> {
+        return withContext(dispatcher) {
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.deleteCategory(token = token, categoryId = categoryId)
                 })
             }
         }

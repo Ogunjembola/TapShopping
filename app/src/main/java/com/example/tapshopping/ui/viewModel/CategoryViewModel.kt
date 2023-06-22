@@ -1,5 +1,6 @@
 package com.example.tapshopping.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,6 +29,10 @@ class CategoryViewModel @Inject constructor(
     private val _getCategories: MutableLiveData<Resource<Category>> = MutableLiveData()
     val getCategories: LiveData<Resource<Category>>
         get () = _getCategories
+
+    private val _deleteCategory: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
+    val deleteCategory: LiveData<Resource<AuthResponse>>
+        get() = _deleteCategory
 
     fun createCategory(categoryName: String, categoryDescription: String) {
         viewModelScope.launch {
@@ -59,5 +64,17 @@ class CategoryViewModel @Inject constructor(
                 _getCategories.postValue(response)
             }
         }
+    }
+
+    fun deleteCategory(categoryId: String){
+         viewModelScope.launch {
+             _deleteCategory.postValue(Resource.loading())
+             Log.d("CategoryViewModel", "deleteCategory: categoryId = $categoryId ")
+             val getToken = dataStoreManager.token
+             val token = "Bearer ".plus(getToken)
+             shoppingCategoryRepository.deleteCategory(token = token, categoryId = categoryId).collect{result ->
+                 _deleteCategory.postValue(result)
+             }
+         }
     }
 }

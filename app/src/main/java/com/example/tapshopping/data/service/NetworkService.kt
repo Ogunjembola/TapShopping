@@ -39,4 +39,16 @@ interface NetworkService {
 
     @GET("category")
     suspend fun getCategories(): Response<Category>
+
+    @DELETE("category/{categoryId}")
+    suspend fun deleteCategory(
+        @Header("Authorization") token: String,
+        @Path("categoryId") categoryId: String
+    ): Response<AuthResponse>
+
+    @PUT("category/{categoryId}")
+    suspend fun updateCategory(
+        @Header("Authorization") token: String,
+        @Path("categoryID") categoryId: String
+    ): Response<AuthResponse>
 }

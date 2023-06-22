@@ -13,4 +13,7 @@ interface ShoppingCategoryRepository {
     suspend fun updateCategories(category: CreateCategory): Flow<Resource<AuthResponse>>
 
     suspend fun getCategories(): Flow<Resource<Category>>
+
+    suspend fun deleteCategory(token: String, categoryId: String): Flow<Resource<AuthResponse>>
+//    suspend fun deleteCategory(token: String, categoryId: String): Flow<Resource<AuthResponse>>
 }

@@ -1,6 +1,8 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.example.tapshopping.databinding.FragmentCategoryBinding
 import com.example.tapshopping.ui.adapter.CategoryAdapter
 import com.example.tapshopping.ui.viewModel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
+const val TAG = "CategoryFragment"
 
 @AndroidEntryPoint
 class CategoryFragment : Fragment() {
@@ -36,14 +40,16 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryAdapter = CategoryAdapter({ index ->
-            position = index
+        categoryAdapter = CategoryAdapter({ category ->
+            deleteCategory(category.categoryId)
+            Log.d(TAG, "onViewCreated: categoryId = ${category.categoryId} ")
         }, {
             showHideMenu(it)
         })
         viewModel.getCategories()
         handleGetCategoriesObserver()
         handleOptionMenu()
+        handleDeleteCategoryObserver()
 
         binding.apply {
             fab.setOnClickListener {
@@ -78,11 +84,6 @@ class CategoryFragment : Fragment() {
         binding.apply {
             toolbarCategory.inflateMenu(R.menu.category_menu)
             showHideMenu(false)
-//            toolbarCategory.setOnMenuItemClickListener {menuItem ->
-//                when(menuItem.itemId){
-//                }
-//            }
-
         }
     }
 
@@ -91,6 +92,47 @@ class CategoryFragment : Fragment() {
             menu.findItem(R.id.delete_cat).isVisible = show
             menu.findItem(R.id.edit_cat).isVisible = show
             menu.findItem(R.id.cancel_action).isVisible = show
+        }
+    }
+
+    private fun deleteCategory(categoryId: String) {
+        binding.toolbarCategory.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.delete_cat -> {
+                    viewModel.deleteCategory(categoryId = categoryId)
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun handleDeleteCategoryObserver() {
+        viewModel.deleteCategory.observe(viewLifecycleOwner) { response ->
+            response?.let { result ->
+                when{
+                    result.isSuccess() -> {
+                        AlertDialog.Builder(requireContext()).setTitle("Successful")
+                            .setIcon(R.drawable.successful)
+                            .setMessage(result.data!!.success.message)
+                            .setPositiveButton("Proceed") { _, _ ->
+                                findNavController().navigateUp()
+                            }.show()
+                    }
+                    result.isError() -> {
+                        val errorMessage = result.message
+                        AlertDialog.Builder(requireContext()).setTitle("Failed")
+                            .setIcon(R.drawable.baseline_error_24)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(R.string.retry) { _, _ ->
+                                // do nothing
+                            }.show()
+                    }
+                }
+                binding.progressBar.isVisible = result.isLoading()
+
+            }
         }
     }
 
