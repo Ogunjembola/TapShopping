@@ -34,7 +34,9 @@ interface NetworkService {
     @POST("admin/categories/category")
     suspend fun createCategory(
         @Header("Authorization") token: String,
-        @Body category: Category
+        @Body category: CreateCategory
     ): Response<AuthResponse>
 
+    @GET("category")
+    suspend fun getCategories(): Response<Category>
 }

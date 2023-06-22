@@ -22,6 +22,9 @@
         <action
             android:id="@+id/to_createAdminFragment"
             app:destination="@id/createAdminFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
 
     </fragment>
     <fragment
@@ -41,4 +44,18 @@
         android:name="com.example.tapshopping.ui.fragment.UpdateAdminFragment"
         android:label="fragment_update_admin"
         tools:layout="@layout/fragment_update_admin" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.tapshopping.ui.fragment.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_createCategoryFragment"
+            app:destination="@id/createCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCategoryFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateCategoryFragment"
+        android:label="fragment_create_category"
+        tools:layout="@layout/fragment_create_category" />
 </navigation>

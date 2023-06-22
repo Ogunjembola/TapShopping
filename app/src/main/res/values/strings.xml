@@ -217,4 +217,12 @@
     <string name="new_password">New password</string>
     <string name="update_password">Update Password</string>
     <string name="update">Update</string>
+    <string name="category_name">Category name</string>
+    <string name="category_description">Category description</string>
+    <string name="create_category">Create Category</string>
+    <string name="error_msg_category_name">Please input a valid name</string>
+    <string name="error_msg_cat_description">Enter a valid description</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

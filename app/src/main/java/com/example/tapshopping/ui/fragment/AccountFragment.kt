@@ -40,6 +40,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
 
         binding.csAdmin.setOnClickListener(this)
         binding.csProfile.setOnClickListener(this)
+        binding.csCategory.setOnClickListener(this)
 
     }
 
@@ -52,7 +53,9 @@ class AccountFragment : Fragment(), View.OnClickListener {
                 }
                 R.id.cs_profile -> {
                     findNavController().navigate(R.id.action_accountFragment_to_profile2)
-
+                }
+                R.id.cs_category -> {
+                    findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToCategoryFragment())
                 }
             }
         }

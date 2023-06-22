@@ -1,16 +1,27 @@
 package com.example.tapshopping.data.model
 
-import com.example.tapshopping.R
 import com.google.gson.annotations.SerializedName
 
 data class Category(
-    @SerializedName("data")
-    val categoryData: CategoryData
+    @SerializedName("error")
+    val error: Error,
+    @SerializedName("success")
+    val success: Success,
+    @SerializedName("content")
+    val categoryContent: CategoryContent
+)
+
+data class CategoryContent(
+@SerializedName("data")
+val categories:ArrayList<CategoryData>
 )
 
 data class CategoryData(
+    @SerializedName("_id")
+    val categoryId: String,
     @SerializedName("name")
-    val name: String,
+    val categoryName: String,
     @SerializedName("description")
-    val description: String
+    val categoryDescription: String,
+    var isSelected:Boolean = false
 )

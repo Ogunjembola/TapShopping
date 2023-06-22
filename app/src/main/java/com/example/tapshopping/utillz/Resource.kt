@@ -5,16 +5,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
-//sealed class Resource<T>(
-//    val data: T? = null,
-//    val error: String? = null,
-//) {
-//
-//    class Success<T>(data: T?) : Resource<T>(data)
-//    class Loading : Resource<Nothing>()
-//    class Error<T>(message: String) : Resource<T>(error = message)
-//}
-
 class Resource <out T>(
     val status: Status,
     val data: T?,
