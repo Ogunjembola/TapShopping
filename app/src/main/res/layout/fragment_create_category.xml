@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:paddingTop="@dimen/btn_padding"
                 android:paddingBottom="@dimen/btn_padding"
-                android:text="@string/create_category"
+                android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/btn_textSize"

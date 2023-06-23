@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
+import com.example.tapshopping.data.model.CategoryData
 import com.example.tapshopping.databinding.FragmentCategoryBinding
 import com.example.tapshopping.ui.adapter.CategoryAdapter
 import com.example.tapshopping.ui.viewModel.CategoryViewModel
@@ -41,7 +42,7 @@ class CategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         categoryAdapter = CategoryAdapter({ category ->
-            deleteCategory(category.categoryId)
+            deleteCategory(category)
             Log.d(TAG, "onViewCreated: categoryId = ${category.categoryId} ")
         }, {
             showHideMenu(it)
@@ -53,7 +54,7 @@ class CategoryFragment : Fragment() {
 
         binding.apply {
             fab.setOnClickListener {
-                findNavController().navigate(CategoryFragmentDirections.actionCategoryFragmentToCreateCategoryFragment())
+                findNavController().navigate(CategoryFragmentDirections.toCreateCategoryFragment(null))
             }
             toolbarCategory.setNavigationOnClickListener {
                 findNavController().popBackStack()
@@ -95,11 +96,15 @@ class CategoryFragment : Fragment() {
         }
     }
 
-    private fun deleteCategory(categoryId: String) {
+    private fun deleteCategory(category: CategoryData) {
         binding.toolbarCategory.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.delete_cat -> {
-                    viewModel.deleteCategory(categoryId = categoryId)
+                    viewModel.deleteCategory(categoryId = category.categoryId)
+                    true
+                }
+                R.id.edit_cat -> {
+                    findNavController().navigate(CategoryFragmentDirections.toCreateCategoryFragment(category))
                     true
                 }
 

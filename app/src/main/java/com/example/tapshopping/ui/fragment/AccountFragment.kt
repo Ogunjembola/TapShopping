@@ -55,7 +55,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
                     findNavController().navigate(R.id.action_accountFragment_to_profile2)
                 }
                 R.id.cs_category -> {
-                    findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToCategoryFragment())
+                    findNavController().navigate(AccountFragmentDirections.toCategoryFragment())
                 }
             }
         }

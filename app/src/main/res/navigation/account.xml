@@ -23,7 +23,7 @@
             android:id="@+id/to_createAdminFragment"
             app:destination="@id/createAdminFragment" />
         <action
-            android:id="@+id/action_accountFragment_to_categoryFragment"
+            android:id="@+id/to_categoryFragment"
             app:destination="@id/categoryFragment" />
 
     </fragment>
@@ -50,12 +50,17 @@
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_createCategoryFragment"
+            android:id="@+id/to_createCategoryFragment"
             app:destination="@id/createCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/createCategoryFragment"
         android:name="com.example.tapshopping.ui.fragment.CreateCategoryFragment"
         android:label="fragment_create_category"
-        tools:layout="@layout/fragment_create_category" />
+        tools:layout="@layout/fragment_create_category" >
+        <argument
+            android:name="category"
+            app:argType="com.example.tapshopping.data.model.CategoryData"
+            app:nullable="true" />
+    </fragment>
 </navigation>

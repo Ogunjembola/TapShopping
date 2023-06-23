@@ -30,10 +30,6 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun updateCategories(category: CreateCategory): Flow<Resource<AuthResponse>> {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getCategories(): Flow<Resource<Category>> {
         return withContext(dispatcher) {
             return@withContext flow<Resource<Category>> {
@@ -52,6 +48,20 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
             return@withContext flow {
                 emit(safeApiCall {
                     networkService.deleteCategory(token = token, categoryId = categoryId)
+                })
+            }
+        }
+    }
+
+    override suspend fun updateCategory(
+        token: String,
+        categoryId: String,
+        category: CreateCategory
+    ): Flow<Resource<AuthResponse>> {
+        return withContext(dispatcher){
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.updateCategory(token = token, categoryId = categoryId, category = category)
                 })
             }
         }

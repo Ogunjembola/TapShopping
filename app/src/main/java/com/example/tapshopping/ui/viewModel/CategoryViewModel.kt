@@ -22,17 +22,24 @@ class CategoryViewModel @Inject constructor(
     private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 
+    private val getToken = dataStoreManager.token
+    private val token = "Bearer ".plus(getToken)
+
     private val _createCategory: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
     val createCategory: LiveData<Resource<AuthResponse>>
         get() = _createCategory
 
     private val _getCategories: MutableLiveData<Resource<Category>> = MutableLiveData()
     val getCategories: LiveData<Resource<Category>>
-        get () = _getCategories
+        get() = _getCategories
 
     private val _deleteCategory: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
     val deleteCategory: LiveData<Resource<AuthResponse>>
         get() = _deleteCategory
+
+    private val _updateCategory: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
+    val updateCategory: LiveData<Resource<AuthResponse>>
+        get() = _updateCategory
 
     fun createCategory(categoryName: String, categoryDescription: String) {
         viewModelScope.launch {
@@ -57,24 +64,44 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun getCategories(){
+    fun getCategories() {
         viewModelScope.launch {
             _getCategories.postValue(Resource.loading())
-            shoppingCategoryRepository.getCategories().collect{response ->
+            shoppingCategoryRepository.getCategories().collect { response ->
                 _getCategories.postValue(response)
             }
         }
     }
 
-    fun deleteCategory(categoryId: String){
-         viewModelScope.launch {
-             _deleteCategory.postValue(Resource.loading())
-             Log.d("CategoryViewModel", "deleteCategory: categoryId = $categoryId ")
-             val getToken = dataStoreManager.token
-             val token = "Bearer ".plus(getToken)
-             shoppingCategoryRepository.deleteCategory(token = token, categoryId = categoryId).collect{result ->
-                 _deleteCategory.postValue(result)
-             }
-         }
+    fun deleteCategory(categoryId: String) {
+        viewModelScope.launch {
+            _deleteCategory.postValue(Resource.loading())
+            Log.d("CategoryViewModel", "deleteCategory: categoryId = $categoryId ")
+            shoppingCategoryRepository.deleteCategory(token = token, categoryId = categoryId)
+                .collect { result ->
+                    _deleteCategory.postValue(result)
+                }
+        }
+    }
+
+    fun updateCategory(categoryId: String, updatedCatName: String, updatedCatDescription: String) {
+        viewModelScope.launch {
+            _updateCategory.postValue(Resource.loading())
+            val category = CreateCategory(
+                CreateCategoryData(
+                    name = updatedCatName,
+                    description = updatedCatDescription
+                )
+            )
+            shoppingCategoryRepository.updateCategory(
+                token = token,
+                categoryId = categoryId,
+                category = category
+            )
+                .collect { response ->
+                    _updateCategory.postValue(response)
+                }
+
+        }
     }
 }

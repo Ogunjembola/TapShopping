@@ -8,12 +8,17 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShoppingCategoryRepository {
 
-    suspend fun createCategories(category: CreateCategory, token: String): Flow<Resource<AuthResponse>>
-
-    suspend fun updateCategories(category: CreateCategory): Flow<Resource<AuthResponse>>
+    suspend fun createCategories(
+        category: CreateCategory,
+        token: String
+    ): Flow<Resource<AuthResponse>>
 
     suspend fun getCategories(): Flow<Resource<Category>>
 
     suspend fun deleteCategory(token: String, categoryId: String): Flow<Resource<AuthResponse>>
-//    suspend fun deleteCategory(token: String, categoryId: String): Flow<Resource<AuthResponse>>
+    suspend fun updateCategory(
+        token: String,
+        categoryId: String,
+        category: CreateCategory
+    ): Flow<Resource<AuthResponse>>
 }

@@ -1,6 +1,8 @@
 package com.example.tapshopping.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class Category(
     @SerializedName("error")
@@ -15,7 +17,7 @@ data class CategoryContent(
 @SerializedName("data")
 val categories:ArrayList<CategoryData>
 )
-
+@Parcelize
 data class CategoryData(
     @SerializedName("_id")
     val categoryId: String,
@@ -24,4 +26,4 @@ data class CategoryData(
     @SerializedName("description")
     val categoryDescription: String,
     var isSelected:Boolean = false
-)
+):Parcelable
