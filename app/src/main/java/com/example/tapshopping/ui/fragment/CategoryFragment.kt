@@ -24,8 +24,6 @@ class CategoryFragment : Fragment() {
     lateinit var binding: FragmentCategoryBinding
     private val viewModel by viewModels<CategoryViewModel>()
     private lateinit var categoryAdapter: CategoryAdapter
-    var position = -1
-    var show = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
