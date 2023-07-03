@@ -15,7 +15,7 @@ import com.example.tapshopping.databinding.FragmentAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+const val SHOW_BOTTOM_SHEET = "Product_category_bottom_sheet"
 @AndroidEntryPoint
 class AccountFragment : Fragment(), View.OnClickListener {
 
@@ -41,6 +41,7 @@ class AccountFragment : Fragment(), View.OnClickListener {
         binding.csAdmin.setOnClickListener(this)
         binding.csProfile.setOnClickListener(this)
         binding.csCategory.setOnClickListener(this)
+        binding.product.setOnClickListener(this)
 
     }
 
@@ -56,6 +57,9 @@ class AccountFragment : Fragment(), View.OnClickListener {
                 }
                 R.id.cs_category -> {
                     findNavController().navigate(AccountFragmentDirections.toCategoryFragment())
+                }
+                R.id.product -> {
+                    showBottomSheet()
                 }
             }
         }
@@ -80,4 +84,10 @@ class AccountFragment : Fragment(), View.OnClickListener {
             userProfileTextView.text = shortName
         }
     }
+
+    private fun showBottomSheet(){
+        val productCategoryBottomSheet = ProductCategoryBottomSheet()
+        productCategoryBottomSheet.show(requireActivity().supportFragmentManager, productCategoryBottomSheet.tag)
+    }
+
 }

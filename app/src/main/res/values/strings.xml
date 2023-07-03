@@ -224,5 +224,6 @@
     <string name="error_msg_cat_description">Enter a valid description</string>
     <string name="edit">Edit</string>
     <string name="cancel">Cancel</string>
+    <string name="select_product_category">SELECT PRODUCT CATEGORY</string>
 
 </resources>
