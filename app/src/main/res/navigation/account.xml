@@ -25,6 +25,9 @@
         <action
             android:id="@+id/to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/to_createProductFragment"
+            app:destination="@id/createProductFragment" />
 
     </fragment>
     <fragment
@@ -63,4 +66,9 @@
             app:argType="com.example.tapshopping.data.model.CategoryData"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/createProductFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateProductFragment"
+        android:label="fragment_create_product"
+        tools:layout="@layout/fragment_create_product" />
 </navigation>

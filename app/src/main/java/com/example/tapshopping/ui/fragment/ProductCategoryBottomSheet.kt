@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.databinding.ProductCategoryBinding
 import com.example.tapshopping.ui.adapter.ProductCategoryAdapter
 import com.example.tapshopping.ui.viewModel.CategoryViewModel
@@ -36,7 +37,9 @@ class ProductCategoryBottomSheet : BottomSheetDialogFragment() {
 
         adapter = ProductCategoryAdapter{
 
-            Toast.makeText(context, "${it.categoryName} is selected", Toast.LENGTH_SHORT ).show()
+            findNavController().navigate(AccountFragmentDirections.toCreateProductFragment())
+            dismiss()
+//            Toast.makeText(context, "${it.categoryName} is selected", Toast.LENGTH_SHORT ).show()
         }
 
         binding.recyclerView.adapter = adapter

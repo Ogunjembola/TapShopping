@@ -69,6 +69,8 @@ class CategoryViewModel @Inject constructor(
             _getCategories.postValue(Resource.loading())
             shoppingCategoryRepository.getCategories().collect { response ->
                 _getCategories.postValue(response)
+
+                Log.d("CategoryViewModel", "token: $token ")
             }
         }
     }
