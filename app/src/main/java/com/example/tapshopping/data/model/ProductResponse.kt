@@ -3,7 +3,7 @@ package com.example.tapshopping.data.model
 import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
-    val content: AuthResponse,
+    val content: Content,
     val error: Error,
     val success: Success
 )

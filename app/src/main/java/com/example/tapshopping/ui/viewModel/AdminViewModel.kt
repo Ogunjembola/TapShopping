@@ -41,7 +41,6 @@ class AdminViewModel @Inject constructor(
         get() = _errorMessage
 
     fun createAdminAccount(fullName: String, userName: String, email: String, password: String) {
-
         viewModelScope.launch {
             _createAdmin.postValue(Resource.loading())
             val createAdminData = Registration(

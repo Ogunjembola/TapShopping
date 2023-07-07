@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCatAdapter() {
-        categoryAdapter = CategoryAdapter()
+        categoryAdapter = CategoryAdapter({}, {})
         binding.homeCategoriesListRv.adapter = categoryAdapter
     }
 

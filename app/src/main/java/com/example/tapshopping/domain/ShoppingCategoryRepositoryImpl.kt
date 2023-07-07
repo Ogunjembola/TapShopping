@@ -3,6 +3,7 @@ package com.example.tapshopping.domain
 import com.example.tapshopping.core.di.CoroutineModule
 import com.example.tapshopping.data.model.AuthResponse
 import com.example.tapshopping.data.model.Category
+import com.example.tapshopping.data.model.CreateCategory
 import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.Resource
 import com.example.tapshopping.utillz.safeApiCall
@@ -17,8 +18,11 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
     @CoroutineModule.IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ShoppingCategoryRepository {
 
-    override suspend fun createCategories(category: Category, token: String): Flow<Resource<AuthResponse>> =
-        withContext(dispatcher){
+    override suspend fun createCategories(
+        category: CreateCategory,
+        token: String
+    ): Flow<Resource<AuthResponse>> =
+        withContext(dispatcher) {
             return@withContext flow {
                 emit(safeApiCall {
                     networkService.createCategory(category = category, token = token)
@@ -26,7 +30,40 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun updateCategories(category: Category): Flow<Resource<AuthResponse>> {
-        TODO("Not yet implemented")
+    override suspend fun getCategories(): Flow<Resource<Category>> {
+        return withContext(dispatcher) {
+            return@withContext flow<Resource<Category>> {
+                emit(safeApiCall {
+                    networkService.getCategories()
+                })
+            }
+        }
+    }
+
+    override suspend fun deleteCategory(
+        token: String,
+        categoryId: String
+    ): Flow<Resource<AuthResponse>> {
+        return withContext(dispatcher) {
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.deleteCategory(token = token, categoryId = categoryId)
+                })
+            }
+        }
+    }
+
+    override suspend fun updateCategory(
+        token: String,
+        categoryId: String,
+        category: CreateCategory
+    ): Flow<Resource<AuthResponse>> {
+        return withContext(dispatcher){
+            return@withContext flow {
+                emit(safeApiCall {
+                    networkService.updateCategory(token = token, categoryId = categoryId, category = category)
+                })
+            }
+        }
     }
 }
