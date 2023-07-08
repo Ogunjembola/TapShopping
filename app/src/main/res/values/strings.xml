@@ -229,5 +229,11 @@
     <string name="please_note_selected_images">Please note selected images must meet the minimum requirement of 400px width and 400px height</string>
     <string name="upload_video">Upload Video</string>
     <string name="add_picture_of_your_products">Add picture of your products. You can add a total number of 4 images</string>
+    <string name="create_product">Create product</string>
+    <string name="enter_product_name">Enter product name</string>
+    <string name="enter_product_description">Enter product description</string>
+    <string name="product_price">Product price</string>
+    <string name="discounted_price">Discounted price</string>
+    <string name="quantity">Quantity</string>
 
 </resources>

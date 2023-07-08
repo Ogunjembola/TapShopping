@@ -36,8 +36,7 @@ class ProductCategoryBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ProductCategoryAdapter{
-
-            findNavController().navigate(AccountFragmentDirections.toCreateProductFragment())
+            findNavController().navigate(AccountFragmentDirections.toCreateProductFragment(it.categoryId))
             dismiss()
 //            Toast.makeText(context, "${it.categoryName} is selected", Toast.LENGTH_SHORT ).show()
         }

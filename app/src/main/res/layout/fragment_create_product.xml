@@ -198,14 +198,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/submit"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="50dp"
             android:text="Continue"
             app:cornerRadius="10dp"
             app:elevation="10dp"
-            android:textColor="@color/colorDarkGrey"
-            app:backgroundTint="@color/colorLightGrey"
+            android:enabled="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/material_button_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView1" />
