@@ -1,18 +1,17 @@
 package com.example.tapshopping.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ProductResponse(
-    val content: AuthResponse,
+    val content: Content,
     val error: Error,
     val success: Success
 )
-
 data class Content(
     @SerializedName("data")
     val products: List<Product>
 )
-
 data class Product(
     val __v: Int,
     @SerializedName("_id")
@@ -33,14 +32,13 @@ data class Product(
     val reviews: List<Review>,
     val updatedAt: String,
     val variant: List<Variant>
-)
+) : Serializable
 
 data class Rating(
     val _id: String,
     val rate: Int,
     val userID: String
 )
-
 data class Review(
     val _id: String,
     val comment: String,

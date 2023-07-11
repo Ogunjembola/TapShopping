@@ -66,6 +66,11 @@
     <string name="et_hint_product_description">Product Description</string>
     <string name="et_hint_product_quantity">Product Quantity</string>
     <string name="btn_lbl_submit">SUBMIT</string>
+    <string name="title_product_details">PRODUCT DETAILS</string>
+
+    <string name="lbl_product_description">Product Description</string>
+
+    <string name="lbl_product_details_stock_quantity">Stock Quantity</string>
 
 
     <string name="err_msg_select_product_image">Please select product image.</string>
