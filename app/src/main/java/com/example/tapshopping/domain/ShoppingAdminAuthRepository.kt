@@ -10,7 +10,7 @@ interface ShoppingAdminAuthRepository {
 
     suspend fun updateAdminData(token: String, updateUser: UpdateUser): Flow<Resource<AuthResponse>>
 
-    suspend fun createAdmin(createAdmin: Registration):Flow<Resource<AuthResponse>>
+    suspend fun createAdmin(createAdmin: Registration): Flow<Resource<AuthResponse>>
 
-    suspend fun loginAdmin(loginAdmin: Login):Flow<Resource<AuthResponse>>
+    suspend fun loginAdmin(loginAdmin: Login): Flow<Resource<AuthResponse>>
 }
