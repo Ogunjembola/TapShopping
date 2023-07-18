@@ -23,6 +23,9 @@ const val PICK_IMAGE_REQUEST_CODE = 2
 const val PERMISSION_REQUEST_CODE = 3
 const val CAMERA_REQUEST_CODE = 1
 
+const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+
 fun showImageChooser(activity: UserProfileFragment) {
     // An intent for launching the image selection of phone storage.
     val galleryIntent = Intent(

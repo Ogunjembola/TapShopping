@@ -6,6 +6,23 @@ import retrofit2.http.*
 
 
 interface NetworkService {
+    @DELETE("user/cart")
+    suspend fun deleteCart(@Header("Authorization") token: String): Response<CartResponse>
+
+    @GET("user/cart")
+    suspend fun getCart(@Header("Authorization") token: String): Response<CartResponse>
+
+    @POST("user/cart")
+    suspend fun createCart(
+        @Body createCart: Cart,
+        @Header("Authorization") token: String
+    ): Response<CartResponse>
+
+    @GET("product/6310c71798c307ca17e97ce2")
+    suspend fun getAProducts(@Header("Authorization") token: String): Response<ProductResponse>
+
+    @GET("product")
+    suspend fun getProducts(@Header("Authorization") token: String): Response<ProductResponse>
 
     @POST("admin")
     suspend fun createAdmin(@Body createAdmin: Registration): Response<AuthResponse>

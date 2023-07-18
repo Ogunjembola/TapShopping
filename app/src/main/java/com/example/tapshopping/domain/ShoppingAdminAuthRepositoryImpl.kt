@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ShoppingAdminAuthRepositoryImpl @Inject constructor(
     private val networkService: NetworkService,
     @CoroutineModule.IoDispatcher private val dispatcher: CoroutineDispatcher
-) : ShoppingAdminAuthRepository{
+) : ShoppingAdminAuthRepository {
 
     private val flowable = Dispatchers.IO
 
