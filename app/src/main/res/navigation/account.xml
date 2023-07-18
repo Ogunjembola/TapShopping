@@ -22,6 +22,12 @@
         <action
             android:id="@+id/to_createAdminFragment"
             app:destination="@id/createAdminFragment" />
+        <action
+            android:id="@+id/to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/to_createProductFragment"
+            app:destination="@id/createProductFragment" />
 
     </fragment>
     <fragment
@@ -41,4 +47,45 @@
         android:name="com.example.tapshopping.ui.fragment.UpdateAdminFragment"
         android:label="fragment_update_admin"
         tools:layout="@layout/fragment_update_admin" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.tapshopping.ui.fragment.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/to_createCategoryFragment"
+            app:destination="@id/createCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCategoryFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateCategoryFragment"
+        android:label="fragment_create_category"
+        tools:layout="@layout/fragment_create_category" >
+        <argument
+            android:name="category"
+            app:argType="com.example.tapshopping.data.model.CategoryData"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProductFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateProductFragment"
+        android:label="fragment_create_product"
+        tools:layout="@layout/fragment_create_product" >
+        <argument
+            android:name="categoryID"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/to_createProductDetailsFragment"
+            app:destination="@id/createProductDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProductDetailsFragment"
+        android:name="com.example.tapshopping.ui.fragment.CreateProductDetailsFragment"
+        android:label="fragment_create_product_details"
+        tools:layout="@layout/fragment_create_product_details" >
+        <argument
+            android:name="imageData"
+            app:argType="string[]" />
+    </fragment>
 </navigation>

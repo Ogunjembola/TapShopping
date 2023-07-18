@@ -51,7 +51,28 @@ interface NetworkService {
     @POST("admin/categories/category")
     suspend fun createCategory(
         @Header("Authorization") token: String,
-        @Body category: Category
+        @Body category: CreateCategory
     ): Response<AuthResponse>
 
+    @GET("category")
+    suspend fun getCategories(): Response<Category>
+
+    @DELETE("admin/categories/category/{categoryId}")
+    suspend fun deleteCategory(
+        @Header("Authorization") token: String,
+        @Path("categoryId") categoryId: String
+    ): Response<AuthResponse>
+
+    @PUT("admin/categories/category/{categoryId}")
+    suspend fun updateCategory(
+        @Header("Authorization") token: String,
+        @Path("categoryId") categoryId: String,
+        @Body category: CreateCategory
+    ): Response<AuthResponse>
+
+    @POST("admin/products/product")
+    suspend fun createProduct(
+        @Header("Authorization") token: String,
+        @Body productData: CreateProduct
+    ): Response<AuthResponse>
 }

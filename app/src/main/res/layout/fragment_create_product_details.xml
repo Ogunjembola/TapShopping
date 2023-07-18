@@ -4,7 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.CreateAdminFragment">
+    tools:context=".ui.fragment.CreateProductDetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow24">
+
+        <com.example.tapshopping.utillz.TPTextViewBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/create_product"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -18,26 +37,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_register_activity"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow24">
-
-        <com.example.tapshopping.utillz.TPTextViewBold
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/create_an_account"
-            android:textColor="@color/black"
-            android:textSize="@dimen/toolbar_title_text_size" />
-
-    </androidx.appcompat.widget.Toolbar>
-
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
@@ -45,163 +44,152 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_register_activity">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutConstraints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            android:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_full_name"
+                android:id="@+id/til_productName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/full_name"
+                android:hint="@string/enter_product_name"
                 android:textColorHint="@color/black"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.example.tapshopping.utillz.TPEditText
-                    android:id="@+id/et_full_name"
+                    android:id="@+id/et_productName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/et_textSize" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_user_name"
+                android:id="@+id/til_productDescription"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:hint="@string/username"
+                android:layout_marginTop="15dp"
+                android:hint="@string/enter_product_description"
                 android:textColorHint="@color/black"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_full_name">
+                app:layout_constraintTop_toBottomOf="@+id/til_productName">
 
                 <com.example.tapshopping.utillz.TPEditText
-                    android:id="@+id/et_user_name"
+                    android:id="@+id/et_productDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/et_textSize" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_email"
+                android:id="@+id/til_productPrice"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:hint="@string/email"
+                android:layout_marginTop="15dp"
+                android:hint="@string/product_price"
                 android:textColorHint="@color/black"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_user_name">
+                app:layout_constraintTop_toBottomOf="@+id/til_productDescription">
 
                 <com.example.tapshopping.utillz.TPEditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_productPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
+                    android:drawableLeft="@drawable/baseline_currency_lira_24"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/et_textSize" />
-
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_password"
+                android:id="@+id/til_discountPrice"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:hint="@string/et_hint_password"
+                android:layout_marginTop="15dp"
+                android:hint="@string/discounted_price"
                 android:textColorHint="@color/black"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_email"
-                app:passwordToggleEnabled="true">
+                app:layout_constraintTop_toBottomOf="@+id/til_productPrice">
 
                 <com.example.tapshopping.utillz.TPEditText
-                    android:id="@+id/et_password"
+                    android:id="@+id/et_discountPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="text"
+                    android:drawableLeft="@drawable/baseline_currency_lira_24"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/et_textSize" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_confirm_password"
+                android:id="@+id/til_productQty"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:hint="@string/confirm_password"
+                android:layout_marginTop="15dp"
+                android:hint="@string/quantity"
                 android:textColorHint="@color/black"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_password"
-                app:passwordToggleEnabled="true">
+                app:layout_constraintTop_toBottomOf="@+id/til_discountPrice">
 
                 <com.example.tapshopping.utillz.TPEditText
-                    android:id="@+id/et_confirm_password"
+                    android:id="@+id/et_productQty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/et_textSize" />
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.example.tapshopping.utillz.TPButton
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_createCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="45dp"
                 android:background="@drawable/button_background"
-                android:foreground="?attr/selectableItemBackground"
-                android:focusable="true"
                 android:enabled="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:paddingTop="@dimen/btn_padding"
                 android:paddingBottom="@dimen/btn_padding"
-                android:text="@string/create_admin"
+                android:text="@string/submit"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/btn_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_confirm_password" />
+                app:layout_constraintTop_toBottomOf="@+id/til_productQty" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

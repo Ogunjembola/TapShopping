@@ -3,6 +3,7 @@ package com.example.tapshopping.utillz
 import android.content.Intent
 import android.graphics.Bitmap
 import android.provider.MediaStore
+import androidx.fragment.app.Fragment
 import com.example.tapshopping.ui.fragment.UserProfileFragment
 
 
@@ -15,8 +16,16 @@ const val API_WRITE_TIMEOUT = 50L
 
 const val SUCCESSFULLY_LOGGED_IN = "LOGIN SUCCESSFUL"
 const val INFO_UPDATE_SUCCESSFUL = "Information Updated Successfully"
+
+const val REQUEST_CODE_CAMERA = 100
+const val REQUEST_CODE_GALLERY = 200
+const val REQUEST_CODE_EXTRA = "requestCodeExtra"
+
+
+
+
 //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult in the Base Activity.
-const val READ_STORAGE_PERMISSION_CODE = 2
+const val READ_STORAGE_PERMISSION_CODE = 4
 
 // A unique code of image selection from Phone Storage.
 const val PICK_IMAGE_REQUEST_CODE = 2
@@ -26,7 +35,7 @@ const val CAMERA_REQUEST_CODE = 1
 const val EXTRA_PRODUCT_ID: String = "extra_product_id"
 const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
 
-fun showImageChooser(activity: UserProfileFragment) {
+fun showImageChooser(activity: Fragment) {
     // An intent for launching the image selection of phone storage.
     val galleryIntent = Intent(
         Intent.ACTION_PICK,
@@ -34,8 +43,4 @@ fun showImageChooser(activity: UserProfileFragment) {
     )
     // Launches the image selection of phone storage using the constant code.
     activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
-}
-
-fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-
 }

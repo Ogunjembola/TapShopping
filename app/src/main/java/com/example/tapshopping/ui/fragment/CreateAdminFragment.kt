@@ -119,10 +119,10 @@ class CreateAdminFragment : Fragment() {
                 binding.tilConfirmPassword.helperText = validConfirmPassword()
             }
         }
-        binding.etUsername.setOnFocusChangeListener { _, focused ->
-            username = binding.etUsername.text.toString()
+        binding.etUserName.setOnFocusChangeListener { _, focused ->
+            username = binding.etUserName.text.toString()
             if (!focused) {
-                binding.tilUsername.helperText = validUserName()
+                binding.tilUserName.helperText = validUserName()
             }
         }
         binding.etFullName.setOnFocusChangeListener { _, focused ->
@@ -181,7 +181,7 @@ class CreateAdminFragment : Fragment() {
 
     private fun isEnabled(): Boolean {
         val validName = binding.tilFullName.helperText == null
-        val validUserName = binding.tilUsername.helperText == null
+        val validUserName = binding.tilUserName.helperText == null
         val validPassword = binding.tilPassword.helperText == null
         val validEmail = binding.tilEmail.helperText == null
         val validConfirmPassword = binding.tilConfirmPassword.helperText == null
@@ -190,11 +190,11 @@ class CreateAdminFragment : Fragment() {
 
     private fun clearTextField(){
         binding.etEmail.setText("")
-        binding.etUsername.setText("")
+        binding.etUserName.setText("")
         binding.etPassword.setText("")
         binding.etFullName.setText("")
         binding.etConfirmPassword.setText("")
-        binding.tilUsername.helperText = "*Required"
+        binding.tilUserName.helperText = "*Required"
         binding.tilEmail.helperText = "*Required"
         binding.tilPassword.helperText = "*Required"
         binding.tilFullName.helperText = "*Required"

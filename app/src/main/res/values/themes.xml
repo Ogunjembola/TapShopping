@@ -36,9 +36,9 @@
         <item name="height">?attr/actionBarSize</item>
     </style>
 
-    <style name="Button.TextButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="iconSize">18dp</item>
-        <item name="cornerRadius">7dp</item>
+        <item name="cornerRadius">10dp</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
 <!--        <item name="iconTint">?attr/colorOnPrimary</item>-->
     </style>
