@@ -3,14 +3,11 @@ package com.example.tapshopping.ui.fragment
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,16 +22,22 @@ import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.databinding.FragmentCreateProductBinding
 import com.example.tapshopping.utillz.REQUEST_CODE_CAMERA
 import com.example.tapshopping.utillz.REQUEST_CODE_GALLERY
+import com.example.tapshopping.utillz.bitmapToUri
+import com.example.tapshopping.utillz.uriToBase64
 
 
 class CreateProductFragment : Fragment() {
     private lateinit var binding: FragmentCreateProductBinding
     private var imagePosition = -1
     private var categoryID: String? = ""
-    private var imageUri4: Uri? =  null
-    private var imageUri1: Uri? =  null
-    private var imageUri2: Uri? =  null
-    private var imageUri3: Uri? =  null
+    private var imageUri4: Uri? = null
+    private var imageUri1: Uri? = null
+    private var imageUri2: Uri? = null
+    private var imageUri3: Uri? = null
+    private var imageString1: String? = null
+    private var imageString2: String? = null
+    private var imageString3: String? = null
+    private var imageString4: String? = null
 
     private val imageActivityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -53,7 +56,7 @@ class CreateProductFragment : Fragment() {
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri1 = bitmapToUri(imageBitmap)
+                            imageUri1 = bitmapToUri(requireContext(), imageBitmap)
                             binding.uploadImage.setImageURI(imageUri1)
 
                             -1
@@ -67,7 +70,7 @@ class CreateProductFragment : Fragment() {
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri2 = bitmapToUri(imageBitmap)
+                            imageUri2 = bitmapToUri(requireContext(), imageBitmap)
                             binding.uploadImage1.setImageURI(imageUri2)
                             -1
                         }
@@ -80,7 +83,7 @@ class CreateProductFragment : Fragment() {
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri3 = bitmapToUri(imageBitmap)
+                            imageUri3 = bitmapToUri(requireContext(), imageBitmap)
                             binding.uploadImage2.setImageURI(imageUri3)
                             -1
                         }
@@ -93,7 +96,7 @@ class CreateProductFragment : Fragment() {
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri4 = bitmapToUri(imageBitmap)
+                            imageUri4 = bitmapToUri(requireContext(), imageBitmap)
                             binding.uploadImage3.setImageURI(imageUri4)
                             -1
                         }
@@ -127,7 +130,6 @@ class CreateProductFragment : Fragment() {
                 findNavController().navigateUp()
             }
 
-
             addImage.setOnClickListener {
                 imagePosition = REQUEST_CODE_GALLERY
                 chooseImage()
@@ -143,6 +145,16 @@ class CreateProductFragment : Fragment() {
             addImage3.setOnClickListener {
                 imagePosition = REQUEST_CODE_GALLERY + 3
                 chooseImage()
+            }
+            submit.setOnClickListener {
+                setupUploadData()
+                val uploadedData =
+                    arrayOf(categoryID, imageString1, imageString2, imageString3, imageString4)
+                findNavController().navigate(
+                    CreateProductFragmentDirections.toCreateProductDetailsFragment(
+                        uploadedData
+                    )
+                )
             }
         }
     }
@@ -223,34 +235,28 @@ class CreateProductFragment : Fragment() {
     }
 
     private fun updateButtonState() {
-        val isAnyImageUploaded = imageUri4 != null || imageUri1 != null || imageUri2 != null || imageUri3 != null
+        val isAnyImageUploaded =
+            imageUri4 != null || imageUri1 != null || imageUri2 != null || imageUri3 != null
         binding.submit.isEnabled = isAnyImageUploaded
     }
 
-    // Convert Bitmap to Uri
-    private fun bitmapToUri(bitmap: Bitmap): Uri? {
-        val resolver: ContentResolver = requireContext().contentResolver
-
-        // Create a ContentValues object to hold the image metadata
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, "Image_${System.currentTimeMillis()}.jpg")
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+    private fun setupUploadData() {
+        if (imageUri1 != null) {
+            imageString1 = uriToBase64(requireContext(), imageUri1!!)
         }
 
-        // Insert the image metadata into the MediaStore
-        val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-
-        // Try to open an output stream for the image Uri
-        imageUri?.let { uri ->
-            resolver.openOutputStream(uri)?.use { outputStream ->
-                // Compress the bitmap to the output stream
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-                outputStream.flush()
-            }
+        if (imageUri2 != null) {
+            imageString2 = uriToBase64(requireContext(), imageUri2!!)
         }
 
-        return imageUri
+        if (imageUri3 != null) {
+            imageString3 = uriToBase64(requireContext(), imageUri3!!)
+        }
+
+        if (imageUri4 != null) {
+            imageString4 = uriToBase64(requireContext(), imageUri4!!)
+        }
     }
+
 
 }

@@ -8,10 +8,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,19 +23,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.databinding.FragmentUserProfileBinding
-import com.example.tapshopping.utillz.PERMISSION_REQUEST_CODE
 import com.example.tapshopping.utillz.CAMERA_REQUEST_CODE
 import com.example.tapshopping.utillz.GlideLoader
+import com.example.tapshopping.utillz.PERMISSION_REQUEST_CODE
 import com.example.tapshopping.utillz.PICK_IMAGE_REQUEST_CODE
 import com.example.tapshopping.utillz.READ_STORAGE_PERMISSION_CODE
 import com.example.tapshopping.utillz.showImageChooser
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.io.File
-import java.io.FileOutputStream
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint

@@ -6,6 +6,8 @@ import com.example.tapshopping.domain.ShoppingAdminAuthRepository
 import com.example.tapshopping.domain.ShoppingAdminAuthRepositoryImpl
 import com.example.tapshopping.domain.ShoppingCategoryRepository
 import com.example.tapshopping.domain.ShoppingCategoryRepositoryImpl
+import com.example.tapshopping.domain.ShoppingProductRepository
+import com.example.tapshopping.domain.ShoppingProductRepositoryImpl
 import com.example.tapshopping.domain.ShoppingRepository
 import com.example.tapshopping.domain.ShoppingRepositoryImpl
 import dagger.Binds
@@ -33,6 +35,11 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun bindShoppingCategoryRepository(shoppingCategoryRepositoryImpl: ShoppingCategoryRepositoryImpl): ShoppingCategoryRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindShoppingProductRepository(shoppingProductRepositoryImpl: ShoppingProductRepositoryImpl): ShoppingProductRepository
+
 }
 
 

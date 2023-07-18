@@ -52,4 +52,10 @@ interface NetworkService {
         @Path("categoryId") categoryId: String,
         @Body category: CreateCategory
     ): Response<AuthResponse>
+
+    @POST("admin/products/product")
+    suspend fun createProduct(
+        @Header("Authorization") token: String,
+        @Body productData: CreateProduct
+    ): Response<AuthResponse>
 }
