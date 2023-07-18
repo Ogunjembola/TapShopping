@@ -2,6 +2,8 @@ package com.example.tapshopping.core.di
 
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.local.DataStoreManagerImpl
+import com.example.tapshopping.domain.CartRepository
+import com.example.tapshopping.domain.CartRepostoryImpl
 import com.example.tapshopping.domain.ShoppingAdminAuthRepository
 import com.example.tapshopping.domain.ShoppingAdminAuthRepositoryImpl
 import com.example.tapshopping.domain.ShoppingCategoryRepository
@@ -31,6 +33,10 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun bindShoppingAdminAuthRepository(shoppingAdminAuthRepositoryImpl: ShoppingAdminAuthRepositoryImpl): ShoppingAdminAuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCarRepository(impl: CartRepostoryImpl): CartRepository
 
     @Binds
     @Singleton

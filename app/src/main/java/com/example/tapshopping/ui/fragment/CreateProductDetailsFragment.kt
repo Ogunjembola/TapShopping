@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.databinding.FragmentCreateProductDetailsBinding
 
 class CreateProductDetailsFragment : Fragment() {
@@ -29,5 +30,9 @@ class CreateProductDetailsFragment : Fragment() {
                     " Third image: ${imageData[3]} \n" +
                     " Forth image: ${imageData[4]}  "
         )
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
