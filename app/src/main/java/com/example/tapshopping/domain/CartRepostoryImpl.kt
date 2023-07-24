@@ -1,8 +1,10 @@
 package com.example.tapshopping.domain
 
 import com.example.tapshopping.core.di.CoroutineModule
-import com.example.tapshopping.data.model.Cart
+import com.example.tapshopping.data.model.CartDelete
+import com.example.tapshopping.data.model.CartDeleteResponse
 import com.example.tapshopping.data.model.CartResponse
+import com.example.tapshopping.data.model.CreateCart
 import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.Resource
 import com.example.tapshopping.utillz.safeApiCall
@@ -19,7 +21,7 @@ class CartRepostoryImpl @Inject constructor(
 ): CartRepository {
     private val flowable = Dispatchers.IO
 
-    override suspend fun createCart(createCart: Cart, token: String): Flow<Resource<CartResponse>> =
+    override suspend fun createCart(createCart: CreateCart, token: String): Flow<Resource<CartResponse>> =
         withContext(dispatcher){
             return@withContext flow<Resource<CartResponse>> {
                 emit(safeApiCall {
@@ -34,14 +36,19 @@ class CartRepostoryImpl @Inject constructor(
                 emit(safeApiCall {
                     networkService.getCart(token)
                 })
+            }.flowOn(flowable)
+        }
+
+    override suspend fun deleteCart(
+        deleteCart: CartDelete,
+        token: String
+    ): Flow<Resource<CartDeleteResponse>> =
+        withContext(dispatcher){
+            return@withContext flow<Resource<CartDeleteResponse>> {
+                emit(safeApiCall {
+                    networkService.deleteCart(deleteCart,token)
+                })
             }.flowOn(dispatcher)
         }
-    override suspend fun deleteCart(token: String, uuid: String): Flow<Resource<CartResponse>> =
-        withContext(dispatcher){
-            return@withContext flow<Resource<CartResponse>> {
-                emit(safeApiCall {
-                    networkService.deleteCart(token)
-                })
-            }
-        }
+
 }

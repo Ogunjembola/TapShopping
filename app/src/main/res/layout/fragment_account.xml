@@ -130,7 +130,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs_admin"
                 android:layout_width="match_parent"
@@ -162,8 +161,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/adminIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.6" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <ImageView
@@ -175,12 +173,17 @@
                     android:contentDescription="@string/content_description"
                     android:focusable="true"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/adminTv"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/adminTv" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/cs_admin"
+                android:background="@color/blue" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs_product"
@@ -211,10 +214,9 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
 
                 <ImageView
                     android:id="@+id/productSelectable"
@@ -225,10 +227,16 @@
                     android:contentDescription="@string/content_description"
                     android:focusable="true"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/product"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/product" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/view_divider_product"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/cs_product"
+                android:background="@color/blue" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs_category"
@@ -261,8 +269,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/categoryIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/categoryIcon" />
 
                 <ImageView
                     android:id="@+id/categorySelectable"
@@ -273,11 +280,16 @@
                     android:contentDescription="@string/content_description"
                     android:focusable="true"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/category"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/category" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <View
+                android:id="@+id/view_divider_categories"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/cs_category"
+                android:background="@color/blue" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cs_order"
                 android:layout_width="match_parent"
@@ -307,10 +319,9 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/orderIcon"
                     app:layout_constraintStart_toEndOf="@+id/orderIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/orderIcon" />
 
                 <ImageView
                     android:id="@+id/orderSelectable"
@@ -321,11 +332,16 @@
                     android:contentDescription="@string/content_description"
                     android:focusable="true"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/order"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/order" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <View
+                android:id="@+id/view_divider_order"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/cs_order"
+                android:background="@color/blue" />
         </LinearLayout>
 
     </ScrollView>

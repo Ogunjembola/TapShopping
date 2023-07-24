@@ -50,7 +50,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         mProductDetails= arguments?.getSerializable("value") as Product
         mProductDetails?.productId
-        Log.d("ProductDetailsFragment", "Product ID: ${mProductDetails?.productId}")
+            // Log.d("ProductDetailsFragment", "Product ID: ${mProductDetails?.productId}")
         mProductDetails = Product(
             __v = mProductDetails?.__v ?: 0,
             averageRating = mProductDetails?.averageRating ?: 0,
@@ -76,6 +76,9 @@ class ProductDetails : Fragment(), View.OnClickListener {
         observerViewModel()
        binding.btnAddToCart.setOnClickListener(this)
         binding.btnGoToCart.setOnClickListener(this)
+        binding.toolbarProductDetailsActivity.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -90,10 +93,12 @@ class ProductDetails : Fragment(), View.OnClickListener {
                     viewModel.createCartList(
                         userID = dataStoreManager.userId,
                         basePrice = mProductDetails?.price,
-                        productID = mProductDetails?.productId,
+                        productID = mProductDetails?.productId ?: String(),
                         quantity = 1,
                         totalPrice = mProductDetails?.price
                     )
+
+                    Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
                 }
             }
         }
@@ -109,18 +114,21 @@ class ProductDetails : Fragment(), View.OnClickListener {
                     }
                     result.isSuccess() -> {
                         addToCartSuccess()
+                        Log.d("cart added", "cart added: ${addToCartSuccess()}")
                     }
                     result.isError() -> {
                         val errorMessage = result.message
-                        binding.btnAddToCart.text = getString(R.string.retry)
+                        binding.btnAddToCart.text = getString(R.string.loading)
                         AlertDialog.Builder(requireContext())
                             .setTitle("Failed")
                             .setIcon(R.drawable.baseline_error_24)
                             .setMessage(errorMessage)
-                            .setPositiveButton(R.string.retry) { _, _ ->
+                            .setPositiveButton(R.string.okay) { _, _ ->
                                 // do nothing
                             }
                             .show()
+                        Log.d("cart error", "cart added: ${errorMessage}")
+                        binding.btnAddToCart.visibility = View.GONE
                     }
                 }
             }

@@ -8,8 +8,10 @@ import com.example.tapshopping.data.service.NetworkService
 import com.example.tapshopping.utillz.Resource
 import com.example.tapshopping.utillz.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -17,7 +19,7 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
     private val networkService: NetworkService,
     @CoroutineModule.IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ShoppingCategoryRepository {
-
+    private val flowable = Dispatchers.IO
     override suspend fun createCategories(
         category: CreateCategory,
         token: String
@@ -37,7 +39,7 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
                     networkService.getCategories()
                 })
             }
-        }
+        }.flowOn(flowable)
     }
 
     override suspend fun deleteCategory(
@@ -50,7 +52,7 @@ class ShoppingCategoryRepositoryImpl @Inject constructor(
                     networkService.deleteCategory(token = token, categoryId = categoryId)
                 })
             }
-        }
+        }.flowOn(flowable)
     }
 
     override suspend fun updateCategory(

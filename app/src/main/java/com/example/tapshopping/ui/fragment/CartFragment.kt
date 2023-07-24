@@ -5,17 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.model.CartProduct
-import com.example.tapshopping.data.model.ResponseDataClass
 import com.example.tapshopping.databinding.FragmentCartBinding
 import com.example.tapshopping.ui.adapter.CartAdapterList
 import com.example.tapshopping.ui.viewModel.CartViewModel
@@ -45,7 +42,7 @@ class CartFragment : Fragment(),CartAdapterList.CartItemListener {
         setUpCartAdapter()
         observeCartViewModel()
         cartItemViewModel.getCartItems()
-        cartItemViewModel.deleteCartItem(mProductId)
+       // cartItemViewModel.deleteCartItem(mProductId,userID = dataStoreManager.userId)
 
     }
 
@@ -64,18 +61,19 @@ class CartFragment : Fragment(),CartAdapterList.CartItemListener {
                 when {
                     result.isSuccess() -> {
                         binding.rvCartItemsList.visibility = View.VISIBLE
-                        val cartList = result.data!!.content.data
+                        val cartList = result.data!!.content.data.products
                         cartAdapterList.updateCart(cartList)
+                        Log.e("cart success", " cart items success: $cartList")
                     }
-
                     result.isLoading() -> {
                         binding.progressBar2.isVisible = true
                     }
-
                     result.isError() -> {
                         binding.progressBar2.isVisible = false
-                        binding.listError.visibility = View.VISIBLE
+                        binding.tvNoCartItemFound.visibility = View.VISIBLE
+                        binding.tvNoCartItemFound.visibility = View.VISIBLE
                         val errorMessage = result.message ?: "Unknown error"
+                        binding.tvNoCartItemFound.text = errorMessage
                         Log.e("cart error", "Failed to fetch cart items: $errorMessage")
                     }
                 }
@@ -111,7 +109,7 @@ class CartFragment : Fragment(),CartAdapterList.CartItemListener {
         val cartItemId = selectedCartItem?.productID
 
         if (cartItemId != null) {
-            cartItemViewModel.deleteCartItem(cartItemId)
+            //cartItemViewModel.deleteCartItem(cartItemId, userID = dataStoreManager.userId)
         } else {
             Toast.makeText(requireContext(), "No cart item selected", Toast.LENGTH_SHORT).show()
         }

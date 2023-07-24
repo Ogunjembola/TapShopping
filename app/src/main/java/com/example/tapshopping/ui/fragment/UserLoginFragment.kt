@@ -69,7 +69,6 @@ class UserLoginFragment : Fragment(), View.OnClickListener {
                     loginRegisteredUser()
                 }
 
-
                 R.id.tv_customer -> {
                     findNavController().navigate(R.id.action_loginUser_to_registerUserFragment)
 

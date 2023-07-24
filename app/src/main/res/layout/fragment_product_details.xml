@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.ProductDetails">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_product_details_activity"
         android:layout_width="match_parent"
@@ -14,7 +13,8 @@
         android:background="@drawable/app_gradient_color_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_white_color_back_24dp">
 
         <TextView
             android:id="@+id/tv_title"
