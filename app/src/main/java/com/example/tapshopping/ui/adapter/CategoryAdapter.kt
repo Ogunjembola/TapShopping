@@ -52,6 +52,7 @@ class CategoryAdapter(
 
         holder.bind.apply {
             categoryName.text = category.categoryName
+            catDescription.text = category.categoryDescription
             categoryCard.setOnLongClickListener { markSelectedItem(position) }
             categoryCard.setOnClickListener { deSelectItemSelected(position) }
 
