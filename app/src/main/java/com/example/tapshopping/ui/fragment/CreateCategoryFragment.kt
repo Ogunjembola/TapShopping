@@ -15,6 +15,7 @@ import com.example.tapshopping.R
 import com.example.tapshopping.data.model.CategoryData
 import com.example.tapshopping.databinding.FragmentCreateCategoryBinding
 import com.example.tapshopping.ui.viewModel.CategoryViewModel
+import com.example.tapshopping.utillz.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +47,7 @@ class CreateCategoryFragment : Fragment() {
         updateCategoryObserver()
 
         binding.btnCreateCategory.setOnClickListener {
+            it.hideKeyboard()
             if (category == null) {
                 createCategory()
             } else {

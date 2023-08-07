@@ -120,8 +120,8 @@ class CategoryFragment : Fragment() {
                             .setIcon(R.drawable.successful)
                             .setMessage(result.data!!.success.message)
                             .setPositiveButton("Proceed") { _, _ ->
-                                findNavController().navigateUp()
                             }.show()
+                        viewModel.getCategories()
                     }
                     result.isError() -> {
                         val errorMessage = result.message

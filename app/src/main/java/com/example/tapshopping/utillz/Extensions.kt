@@ -1,5 +1,9 @@
 package com.example.tapshopping.utillz
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -24,4 +28,9 @@ fun <T> DataStore<Preferences>.set(
             it[key] = value
         }
     }
+}
+
+fun View.hideKeyboard(){
+    val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(windowToken,0)
 }

@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_padding"
+                    android:imeOptions="actionNext"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +99,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
