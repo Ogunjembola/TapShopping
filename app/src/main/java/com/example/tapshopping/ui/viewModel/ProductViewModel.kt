@@ -1,5 +1,6 @@
 package com.example.tapshopping.ui.viewModel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,34 @@ class ProductViewModel @Inject constructor(
     private val shoppingProductRepository: ShoppingProductRepository,
     dataStoreManager: DataStoreManager
 ) : ViewModel() {
+
+    private val _imageUri1: MutableLiveData<Uri?> = MutableLiveData()
+    val imageUri1: MutableLiveData<Uri?> = _imageUri1
+
+    private val _imageUri2: MutableLiveData<Uri?> = MutableLiveData()
+    val imageUri2: LiveData<Uri?> = _imageUri2
+
+    private val _imageUri3: MutableLiveData<Uri?> = MutableLiveData()
+    val imageUri3: LiveData<Uri?> = _imageUri3
+
+    private val _imageUri4: MutableLiveData<Uri?> = MutableLiveData()
+    val imageUri4: LiveData<Uri?> = _imageUri4
+
+    fun setImageUri1(imageUri: Uri?){
+        _imageUri1.postValue(imageUri)
+    }
+
+    fun setImageUri2(imageUri: Uri?){
+        _imageUri2.postValue(imageUri)
+    }
+
+    fun setImageUri3(imageUri: Uri?){
+        _imageUri3.postValue(imageUri)
+    }
+
+    fun setImageUri4(imageUri: Uri?){
+        _imageUri4.postValue(imageUri)
+    }
 
     private val _createProduct: MutableLiveData<Resource<AuthResponse>> = MutableLiveData()
     val createProduct: LiveData<Resource<AuthResponse>>

@@ -38,7 +38,6 @@ class ProductCategoryBottomSheet : BottomSheetDialogFragment() {
         adapter = ProductCategoryAdapter{
             findNavController().navigate(AccountFragmentDirections.toCreateProductFragment(it.categoryId))
             dismiss()
-//            Toast.makeText(context, "${it.categoryName} is selected", Toast.LENGTH_SHORT ).show()
         }
 
         binding.recyclerView.adapter = adapter
