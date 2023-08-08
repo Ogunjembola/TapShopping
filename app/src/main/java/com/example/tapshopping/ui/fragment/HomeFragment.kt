@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +21,7 @@ import com.example.tapshopping.ui.adapter.ProductAdapterList
 import com.example.tapshopping.ui.viewModel.CategoryViewModel
 import com.example.tapshopping.ui.viewModel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,7 +56,18 @@ class HomeFragment : Fragment() {
         } else {
             findNavController().navigate(R.id.loginUser)
         }
-    }
+        val currentTime = Calendar.getInstance()
+        val currentHour = currentTime.get(Calendar.HOUR_OF_DAY)
+
+        val text = when (currentHour) {
+            in 0..11 -> "Good Morning"
+            in 12..16 -> "Good Afternoon"
+            else -> "Good Evening"
+        }
+        binding.tvTitle.text = text
+
+}
+
     private fun setUpAdapter() {
         //Initialize the productAdapter
         val recyclerView: RecyclerView = binding.productRv
@@ -118,9 +129,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun clickItem(data: Product) {
-        val bundle = Bundle()
-        bundle.putSerializable("value", data)
-        findNavController().navigate(R.id.productDetails, bundle)
+        if (data != null) {
+            val bundle = Bundle()
+            bundle.putSerializable("product", data)
+
+            findNavController().navigate(HomeFragmentDirections.toProductDetails(data))
+        } else {
+            Log.e("clickItem", "Clicked product is null")
+        }
     }
+
 }
 

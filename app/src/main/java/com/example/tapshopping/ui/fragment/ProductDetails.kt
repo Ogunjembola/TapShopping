@@ -1,26 +1,21 @@
 package com.example.tapshopping.ui.fragment
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.model.Product
-import com.example.tapshopping.data.model.Variant
 import com.example.tapshopping.databinding.FragmentProductDetailsBinding
-import com.example.tapshopping.ui.viewModel.AdminViewModel
 import com.example.tapshopping.ui.viewModel.CartViewModel
 import com.example.tapshopping.utillz.GlideLoader
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +23,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetails : Fragment(), View.OnClickListener {
-    private var mProductDetails : Product? = null
+    private var mProductDetails: Product? = null
     private lateinit var binding: FragmentProductDetailsBinding
     private val viewModel by viewModels<CartViewModel>()
+    private val cartProducts = mutableListOf<Product>()
+
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 
@@ -40,7 +37,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        
+        checkProductInCart()
         // Inflate the layout for this fragment
         binding = FragmentProductDetailsBinding.inflate(layoutInflater)
         return binding.root
@@ -48,23 +45,23 @@ class ProductDetails : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mProductDetails= arguments?.getSerializable("value") as Product
-        mProductDetails?.productId
-            // Log.d("ProductDetailsFragment", "Product ID: ${mProductDetails?.productId}")
+        mProductDetails = ProductDetailsArgs.fromBundle(requireArguments()).selectedProduct
+// mProductDetails= arguments?.getSerializable("product") as Product
+//        mProductDetails?.productId
         mProductDetails = Product(
             __v = mProductDetails?.__v ?: 0,
             averageRating = mProductDetails?.averageRating ?: 0,
             categoryID = mProductDetails?.categoryID ?: "",
             createdAt = mProductDetails?.createdAt ?: "",
-            description =mProductDetails?.description ?: "" ,
-            discount =mProductDetails?.discount ?: 0 ,
+            description = mProductDetails?.description ?: "",
+            discount = mProductDetails?.discount ?: "",
             images = mProductDetails?.images ?: listOf(),
             inStock = mProductDetails?.inStock ?: false,
-            name =mProductDetails?.name ?: "" ,
-            noOfRatings = mProductDetails?.noOfRatings ?:0,
-            noOfReviews =mProductDetails?.noOfReviews ?:0,
-            price = mProductDetails?.price ?:0,
-            productId = mProductDetails?.productId ?: "" ,
+            name = mProductDetails?.name ?: "",
+            noOfRatings = mProductDetails?.noOfRatings ?: 0,
+            noOfReviews = mProductDetails?.noOfReviews ?: 0,
+            price = mProductDetails?.price ?: "",
+            productId = mProductDetails?.productId ?: "",
             quantity = mProductDetails?.quantity ?: 0,
             ratings = mProductDetails?.ratings ?: listOf(),
             reviews = mProductDetails?.reviews ?: listOf(),
@@ -72,9 +69,9 @@ class ProductDetails : Fragment(), View.OnClickListener {
             variant = mProductDetails?.variant ?: listOf()
         )
 
-         productDetailsSuccess(mProductDetails!!)
+        productDetailsSuccess(mProductDetails!!)
         observerViewModel()
-       binding.btnAddToCart.setOnClickListener(this)
+        binding.btnAddToCart.setOnClickListener(this)
         binding.btnGoToCart.setOnClickListener(this)
         binding.toolbarProductDetailsActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
@@ -89,21 +86,51 @@ class ProductDetails : Fragment(), View.OnClickListener {
 
 
                 }
-                R.id.btn_add_to_cart ->{
+
+                R.id.btn_add_to_cart -> {
+                    if (isProductInCart()) {
+                        // Product is already in the cart, handle accordingly (e.g., show a message)
+                        Toast.makeText(
+                            requireContext(),
+                            "Product is already in the cart",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        // Product is not in the cart, add it to the cart and hide the "Add to Cart" button
+                        addToCart()
+                        addToCartSuccess()
+                        Log.d("ProductDetails", "userId: ${dataStoreManager.userId}")
                     viewModel.createCartList(
-                        userID = dataStoreManager.userId,
-                        basePrice = mProductDetails?.price,
+                        user = dataStoreManager.userId,
+                        basePrice = mProductDetails?.price ?: String(),
                         productID = mProductDetails?.productId ?: String(),
                         quantity = 1,
-                        totalPrice = mProductDetails?.price
+                        totalPrice = mProductDetails?.price ?: String()
                     )
 
                     Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
+                    }
                 }
             }
         }
     }
+    private fun isProductInCart(): Boolean {
+        return cartProducts.any { it.productId == mProductDetails?.productId }
+    }
 
+    // Function to add the product to the cart
+    private fun addToCart() {
+        // Add the product to the cart
+        cartProducts.add(mProductDetails!!)
+    }
+
+    // Function to check if the product is in the cart and hide the "Add to Cart" button if necessary
+    private fun checkProductInCart() {
+        if (isProductInCart()) {
+            // Product is already in the cart, hide the "Add to Cart" button
+            binding.btnAddToCart.visibility = View.GONE
+        }
+    }
     private fun observerViewModel() {
         viewModel.createCart.observe(viewLifecycleOwner) { response ->
             response?.let { result ->
@@ -112,10 +139,12 @@ class ProductDetails : Fragment(), View.OnClickListener {
                     result.isLoading() -> {
                         binding.btnAddToCart.text = getString(R.string.loading)
                     }
+
                     result.isSuccess() -> {
                         addToCartSuccess()
                         Log.d("cart added", "cart added: ${addToCartSuccess()}")
                     }
+
                     result.isError() -> {
                         val errorMessage = result.message
                         binding.btnAddToCart.text = getString(R.string.loading)
@@ -167,7 +196,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
         // binding.commentTextView.text = productArg
         binding.usernameTextView.text = product.name
         binding.ratingBar.apply {
-           rating = product.averageRating.toFloat()
+            rating = product.averageRating.toFloat()
         }
 
         if (product.quantity.toInt() == 0) {

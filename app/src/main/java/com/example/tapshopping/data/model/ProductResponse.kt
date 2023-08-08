@@ -12,21 +12,22 @@ data class Content(
     @SerializedName("data")
     val products: List<Product>
 )
+
 data class Product(
     val __v: Int,
     @SerializedName("_id")
     val productId: String,
     val averageRating: Int,
-    val categoryID: String,
+    val categoryID: String?,
     val createdAt: String,
     val description: String,
-    val discount: Int,
+    val discount: String,
     val images: List<String>,
     val inStock: Boolean,
     val name: String,
     val noOfRatings: Int,
     val noOfReviews: Int,
-    val price: Int,
+    val price: String,
     val quantity: Int,
     val ratings: List<Rating>,
     val reviews: List<Review>,
@@ -38,16 +39,16 @@ data class Rating(
     val _id: String,
     val rate: Int,
     val userID: String
-)
+): Serializable
 data class Review(
     val _id: String,
     val comment: String,
     val images: List<String>,
     val userID: String
-)
+): Serializable
 data class Variant(
     val _id: String,
     val colour: List<String>,
     val images: List<String>,
     val size: List<String>
-)
+): Serializable

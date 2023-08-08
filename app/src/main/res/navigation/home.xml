@@ -11,7 +11,7 @@
         android:label="Home Fragment"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_productDetails"
+            android:id="@+id/to_productDetails"
             app:destination="@id/productDetails" />
     </fragment>
 
@@ -76,6 +76,11 @@
         <action
             android:id="@+id/action_productDetails_to_cartFragment2"
             app:destination="@id/cartFragment2" />
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.example.tapshopping.data.model.Product"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment

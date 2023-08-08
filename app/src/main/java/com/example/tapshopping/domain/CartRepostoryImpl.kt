@@ -1,8 +1,6 @@
 package com.example.tapshopping.domain
 
 import com.example.tapshopping.core.di.CoroutineModule
-import com.example.tapshopping.data.model.CartDelete
-import com.example.tapshopping.data.model.CartDeleteResponse
 import com.example.tapshopping.data.model.CartResponse
 import com.example.tapshopping.data.model.CreateCart
 import com.example.tapshopping.data.service.NetworkService
@@ -39,16 +37,12 @@ class CartRepostoryImpl @Inject constructor(
             }.flowOn(flowable)
         }
 
-    override suspend fun deleteCart(
-        deleteCart: CartDelete,
-        token: String
-    ): Flow<Resource<CartDeleteResponse>> =
-        withContext(dispatcher){
-            return@withContext flow<Resource<CartDeleteResponse>> {
+    override suspend fun deleteCart(token: String): Flow<Resource<CartResponse>> =
+        withContext(dispatcher) {
+            return@withContext flow<Resource<CartResponse>> {
                 emit(safeApiCall {
-                    networkService.deleteCart(deleteCart,token)
+                    networkService.deleteCart(token)
                 })
-            }.flowOn(dispatcher)
+            }.flowOn(flowable)
         }
-
 }

@@ -41,22 +41,19 @@ class ProductAdapterList(
 
     class ProductViewHolder(val item: ItemProductBinding) : RecyclerView.ViewHolder(item.root) {
 
-        fun bindData(product: Product) {
-            item.apply {
-                // Set the product image using the first image URL from the list
-                val imageUrl = product.images.firstOrNull()
-                if (imageUrl != null) {
-                    // Load the image using your preferred image loading library
-                    // For example, if you're using Glide:
-                    Glide.with(productImage.context).load(imageUrl).into(productImage)
-                } else {
-                    // Handle the case when there is no image available
-                    productImage.setImageResource(R.drawable.ic_user_placeholder)
+        fun bindData(product: Product?) {
+            if (product != null) {
+                item.apply {
+                    val imageUrl = product.images.firstOrNull()
+                    if (imageUrl != null) {
+                        Glide.with(productImage.context).load(imageUrl).into(productImage)
+                    } else {
+                        productImage.setImageResource(R.drawable.ic_user_placeholder)
+                    }
+                    price.text = "₦${product.price}"
+                    productTitle.text = product.name
                 }
-
-                productPrice.text = "₦${product.price}"
-                productTitle.text = product.name
             }
         }
     }
-}
+    }

@@ -5,9 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tapshopping.data.local.DataStoreManager
-import com.example.tapshopping.data.model.CartData
-import com.example.tapshopping.data.model.CartDeleteResponse
-import com.example.tapshopping.data.model.CartProduct
 import com.example.tapshopping.data.model.CartProductData
 import com.example.tapshopping.data.model.CartResponse
 import com.example.tapshopping.data.model.CreateCart
@@ -33,17 +30,17 @@ class CartViewModel @Inject constructor(
         get() = _cartItems
 
 
-    private val _deleteCart: MutableLiveData<Resource<CartDeleteResponse>> = MutableLiveData()
-    val deleteCart: LiveData<Resource<CartDeleteResponse>>
+    private val _deleteCart: MutableLiveData<Resource<CartResponse>> = MutableLiveData()
+    val deleteCart: LiveData<Resource<CartResponse>>
         get() = _deleteCart
 
 
     fun createCartList(
-        userID: String? = null,
-        basePrice: Int? = null,
+        user: String? = null,
+        basePrice: String,
         productID: String,
         quantity: Int,
-        totalPrice: Int? = null
+        totalPrice: String
     ) {
         viewModelScope.launch {
             _createCart.postValue(Resource.loading())
@@ -53,11 +50,13 @@ class CartViewModel @Inject constructor(
 
                     productID = productID,
                     quantity = quantity,
+                    basePrice= basePrice,
+                    totalPrice = totalPrice
 
                 )
             )
             val createCart =CreateCart(CreateCartData(products =products,
-                userID =userID ?: String()
+                user = user!!
             ))
 
             try {
@@ -79,40 +78,13 @@ class CartViewModel @Inject constructor(
                 _cartItems.postValue(response)
             }
         }
-    }
-fun deleteCartitem(cartItemId:String? = null, userID: String? = null, quantity: Int? = null){
-    viewModelScope.launch {
-        _deleteCart.postValue(Resource.loading())
-        val token = dataStoreManager.token
-//        val deleteCart = List<Product>= listOf(
-//            Product(
-//                productID= cartItemId,
-//                quantity = quantity
-//
-//            )
-//        )
-//        val cartDeleteData = Data(
-//            userID = userID,
-//            products = pro
-//
-//        )
+    } fun deleteCartItem() {
+        viewModelScope.launch {
+            _deleteCart.postValue(Resource.loading())
+            val token = dataStoreManager.token
+            repository.deleteCart("Bearer $token").collect { result ->
+                _deleteCart.postValue(result)
+            }
+        }
     }
 }
-}
-//    fun deleteCartItem(
-//        cartItemId: String? = null,
-//        userID?: String? = null , quantity: Int? = null) {
-//
-//    }
-//    }
-//}   viewModelScope.launch {
-//    _deleteCart.postValue(Resource.loading())
-//
-//    val token = dataStoreManager.token // Assuming a method to retrieve token from DataStore
-//    val deleteCart =
-//        CartDelete(CartDelete.Data(listOf(CartDelete.Data.Product(cartItemId, 1)), userID = userID))
-//    repository.deleteCart(deleteCart, token).collect { response ->
-//        _deleteCart.postValue(response)
-//    }
-//
-//}
