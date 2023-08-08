@@ -54,7 +54,7 @@ class ProductAdapterList(
                     productImage.setImageResource(R.drawable.ic_user_placeholder)
                 }
 
-                productPrice.text = "₦${product.price}"
+                price.text = "₦${product.price}"
                 productTitle.text = product.name
             }
         }

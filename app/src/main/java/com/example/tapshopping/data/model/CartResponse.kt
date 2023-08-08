@@ -6,38 +6,58 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 data class CartResponse(
+
     @SerializedName("content")
-    val content: CartContent,
-    @SerializedName("error")
-    val error: Error,
-    @SerializedName("success")
-    val success: Success,
-     // Merge CartData with CartResponse
+val content: CartContent,
 )
 
 data class CartContent(
     @SerializedName("data")
-val data: CartData
+    val data: CartData
 )
 
 data class CartData(
-    @SerializedName("products")
+    val __v: Int,
+    val _id: String,
+    val cartPrice: Int,
+    val createdAt: String,
     val products: List<CartProduct>,
-    @SerializedName("userID")
-    val userID: String? = null
+    val updatedAt: String,
+    val userID: String
 )
 
-@Parcelize
 data class CartProduct(
-    @SerializedName("basePrice")
-    val basePrice: Int? = null,
-    @SerializedName("productID")
-    val productID: String? = null,
-    @SerializedName("quantity")
-    val quantity: Int? = null,
-    @SerializedName("totalPrice")
-    val totalPrice: Int? = null
-) : Parcelable
+    val _id: String,
+    val basePrice: Int,
+    val productID: CartProductID,
+    val quantity: Int,
+    val totalPrice: Int
+)
 
+data class CartProductID(
+    val __v: Int,
+    val _id: String,
+    val averageRating: Int,
+    val categoryID: String,
+    val createdAt: String,
+    val description: String,
+    val discount: Int,
+    val images: List<Any>,
+    val inStock: Boolean,
+    val name: String,
+    val noOfRatings: Int,
+    val noOfReviews: Int,
+    val price: Int,
+    val quantity: Int,
+    val ratings: List<Any>,
+    val reviews: List<Any>,
+    val updatedAt: String,
+    val variant: List<CartVariant>
+)
+data class CartVariant(
+    val _id: String,
+    val colour: List<String>,
+    val images: List<String>,
+    val size: List<String>
+)
 
-data class ResponseDataClass(val name: String)

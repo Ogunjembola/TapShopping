@@ -8,13 +8,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cart_list_activity"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorLightGrey"
-        style="@style/ToolbarStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow24">
 
         <com.example.tapshopping.utillz.TPTextViewBold
             android:id="@+id/tv_title"
@@ -32,7 +33,7 @@
         android:id="@+id/rv_cart_items_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/rv_cart_items_marginTop"
+        android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/ll_checkout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +66,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_cart_list_activity"
+        app:layout_constraintVertical_bias="0.941"
         tools:visibility="visible">
 
         <LinearLayout
@@ -85,6 +89,7 @@
                 android:id="@+id/tv_sub_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="₦100"
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/checkout_label_value_textSize"
@@ -108,6 +113,7 @@
                 android:id="@+id/tv_shipping_charge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="₦10"
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/checkout_label_value_textSize"
@@ -131,32 +137,54 @@
                 android:id="@+id/tv_total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="₦110"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkGrey"
                 android:textSize="@dimen/checkout_label_value_textSize"
                 tools:text="₦110" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_checkout"
+            <com.example.tapshopping.utillz.TPTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lbl_payment_mode"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="@dimen/checkout_label_value_textSize" />
+
+            <com.example.tapshopping.utillz.TPTextView
+                android:id="@+id/tv_payment_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_cash_on_delivery"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="@dimen/checkout_label_value_textSize" />
+        </LinearLayout>
+        <com.example.tapshopping.utillz.TPButton
+            android:id="@+id/btn_place_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/colorLightGrey"
+            android:background="@drawable/button_background"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:paddingTop="@dimen/btn_padding"
             android:paddingBottom="@dimen/btn_padding"
-            android:text="Checkout"
-            android:textColor="@color/white"
+            android:text="@string/btn_lbl_place_order"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/btn_textSize"
-            app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_terms_and_condition" />
+
 
     </LinearLayout>
 

@@ -11,5 +11,5 @@ import kotlinx.coroutines.flow.Flow
 interface CartRepository {
     suspend fun createCart(createCart: CreateCart, token: String): Flow<Resource<CartResponse>>
     suspend fun getCart(token: String): Flow<Resource<CartResponse>>
-    suspend fun deleteCart(deleteCart : CartDelete, token: String): Flow<Resource<CartDeleteResponse>>
+    suspend fun deleteCart( token: String): Flow<Resource<CartResponse>>
 }

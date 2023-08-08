@@ -7,11 +7,12 @@ import retrofit2.http.*
 
 interface NetworkService {
 
+
     @DELETE("user/cart")
     suspend fun deleteCart(
-        deleteCart: CartDelete,
-        @Header("Authorization") token: String
-    ): Response<CartDeleteResponse>
+        @Header("Authorization")
+        token: String
+    ): Response<CartResponse>
 
     @GET("user/cart")
     suspend fun getCart(@Header("Authorization") token: String): Response<CartResponse>

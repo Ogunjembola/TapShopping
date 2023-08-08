@@ -3,12 +3,8 @@ package com.example.tapshopping.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.tapshopping.R
 import com.example.tapshopping.data.model.CategoryData
-import com.example.tapshopping.data.model.Product
 import com.example.tapshopping.databinding.ItemCategoriesBinding
-import com.example.tapshopping.databinding.ItemProductBinding
 
 class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder>() {
     var categoryList: List<CategoryData> = mutableListOf()

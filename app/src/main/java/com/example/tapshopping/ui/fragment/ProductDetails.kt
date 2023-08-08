@@ -1,26 +1,21 @@
 package com.example.tapshopping.ui.fragment
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.tapshopping.R
 import com.example.tapshopping.data.local.DataStoreManager
 import com.example.tapshopping.data.model.Product
-import com.example.tapshopping.data.model.Variant
 import com.example.tapshopping.databinding.FragmentProductDetailsBinding
-import com.example.tapshopping.ui.viewModel.AdminViewModel
 import com.example.tapshopping.ui.viewModel.CartViewModel
 import com.example.tapshopping.utillz.GlideLoader
 import dagger.hilt.android.AndroidEntryPoint
