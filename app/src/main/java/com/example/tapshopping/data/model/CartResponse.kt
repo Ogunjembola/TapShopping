@@ -31,7 +31,7 @@ data class CartResponse (
 
             @SerializedName("cartPrice")
             @Expose
-            var cartPrice: Int? = null,
+            var cartPrice: Double? = null,
 
             @SerializedName("createdAt")
             @Expose

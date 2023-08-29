@@ -1,5 +1,7 @@
 package com.example.tapshopping.ui.fragment
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
@@ -153,6 +156,10 @@ class PaymentFragment : Fragment() {
             // Ensure this code block is reached by adding a log message
             Log.d("PaymentFragment", "Button clicked") // Check logcat for this message
 
+            // Hide the keyboard
+            val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(binding.btnPlaceOrder.windowToken, 0)
+
             if (isNetworkAvailable(requireContext())) {
                 binding.loadingPayOrder.visibility = View.VISIBLE
                 binding.btnPlaceOrder.visibility = View.GONE
@@ -225,7 +232,18 @@ class PaymentFragment : Fragment() {
             override fun onSuccess(transaction: Transaction) {
                 binding.loadingPayOrder.visibility = View.GONE
                 binding.btnPlaceOrder.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Payment was successful", Toast.LENGTH_LONG).show()
+                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                alertDialogBuilder.setTitle("Payment Successful")
+                alertDialogBuilder.setMessage("Your payment was successful.")
+                alertDialogBuilder.setIcon(R.drawable.successful)
+                alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
+                    // You can perform any action here when the user clicks OK
+                    dialog.dismiss()
+                }
+
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
+                //  Toast.makeText(requireContext(), "Payment was successful", Toast.LENGTH_LONG).show()
                 this@PaymentFragment.transaction = transaction
             }
 

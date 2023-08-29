@@ -76,6 +76,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
         binding.toolbarProductDetailsActivity.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        updateAddToCartButtonVisibility()
     }
 
     override fun onClick(v: View?) {
@@ -83,7 +84,6 @@ class ProductDetails : Fragment(), View.OnClickListener {
             when (v.id) {
                 R.id.btn_go_to_cart -> {
                     findNavController().navigate(R.id.action_productDetails_to_cartFragment2)
-
 
                 }
 
@@ -99,6 +99,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
                         // Product is not in the cart, add it to the cart and hide the "Add to Cart" button
                         addToCart()
                         addToCartSuccess()
+                        updateAddToCartButtonVisibility()
                         Log.d("ProductDetails", "userId: ${dataStoreManager.userId}")
                     viewModel.createCartList(
                         user = dataStoreManager.userId,
@@ -123,7 +124,15 @@ class ProductDetails : Fragment(), View.OnClickListener {
         // Add the product to the cart
         cartProducts.add(mProductDetails!!)
     }
-
+    private fun updateAddToCartButtonVisibility() {
+        if (isProductInCart()) {
+            // Product is already in the cart, hide the "Add to Cart" button
+            binding.btnAddToCart.visibility = View.GONE
+        } else {
+            // Product is not in the cart, show the "Add to Cart" button
+            binding.btnAddToCart.visibility = View.VISIBLE
+        }
+    }
     // Function to check if the product is in the cart and hide the "Add to Cart" button if necessary
     private fun checkProductInCart() {
         if (isProductInCart()) {
