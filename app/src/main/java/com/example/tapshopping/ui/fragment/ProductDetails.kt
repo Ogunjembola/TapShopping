@@ -101,15 +101,15 @@ class ProductDetails : Fragment(), View.OnClickListener {
                         addToCartSuccess()
                         updateAddToCartButtonVisibility()
                         Log.d("ProductDetails", "userId: ${dataStoreManager.userId}")
-                    viewModel.createCartList(
-                        user = dataStoreManager.userId,
-                        basePrice = mProductDetails?.price ?: String(),
-                        productID = mProductDetails?.productId ?: String(),
-                        quantity = 1,
-                        totalPrice = mProductDetails?.price ?: String()
-                    )
+                        viewModel.createCartList(
+                            user = dataStoreManager.userId,
+                            basePrice = mProductDetails?.price ?: String(),
+                            productID = mProductDetails?.productId ?: String(),
+                            quantity = 1,
+                            totalPrice = mProductDetails?.price ?: String()
+                        )
 
-                    Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
+                        Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
                     }
                 }
             }
@@ -166,7 +166,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
                             }
                             .show()
                         Log.d("cart error", "cart added: ${errorMessage}")
-                        binding.btnAddToCart.visibility = View.GONE
+                        //binding.btnAddToCart.visibility = View.GONE
                     }
                 }
             }
@@ -174,12 +174,6 @@ class ProductDetails : Fragment(), View.OnClickListener {
     }
 
     fun addToCartSuccess() {
-        Toast.makeText(
-            requireContext(),
-            resources.getString(R.string.success_message_item_added_to_cart),
-            Toast.LENGTH_SHORT
-        ).show()
-
         // Hide the AddToCart button if the item is already in the cart.
         binding.btnAddToCart.visibility = View.GONE
         // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
@@ -222,16 +216,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
                 )
             )
         } else {
-//            binding.btnAddToCart.setOnClickListener {
-//                viewModel.createCartList(
-//                    userID = dataStoreManager.userId,
-//                    basePrice = productArg!!.price,
-//                    productID = productArg!!.productId,
-//                    quantity = 1,
-//                    totalPrice = productArg!!.price
-//                )
-//
-//            }
+
         }
     }
 }

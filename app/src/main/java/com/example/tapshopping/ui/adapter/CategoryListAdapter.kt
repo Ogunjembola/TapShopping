@@ -35,16 +35,6 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryView
         fun bindData(category: CategoryData) {
             item.apply {
                 categoryName.text = category.categoryName
-//                val imageUrl = category.images.firstOrNull()
-//                if (imageUrl != null) {
-//                    // Load the image using your preferred image loading library
-//                    // For example, if you're using Glide:
-//                    Glide.with(imgCat.context).load(imageUrl).into(imgCat)
-//                } else {
-//                    // Handle the case when there is no image available
-//                    imgCat.setImageResource(R.drawable.ic_user_placeholder)
-//                }
-
             }
         }
     }

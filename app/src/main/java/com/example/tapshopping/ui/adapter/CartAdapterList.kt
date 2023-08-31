@@ -1,5 +1,6 @@
 package com.example.tapshopping.ui.adapter
 
+import android.app.AlertDialog
 import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,9 +17,12 @@ class CartAdapterList(private val listener: CartItemListener) :
     RecyclerView.Adapter<CartAdapterList.CartViewHolder>() {
     var cartList: List<CartProduct> = mutableListOf()
     private var selectedItemPosition: Int = RecyclerView.NO_POSITION
+    // Store the holder as a property
+    private var currentHolder: CartViewHolder? = null
     fun updateCart(newCart: List<CartProduct>) {
         cartList = newCart
         notifyDataSetChanged()
+        Log.d("CartAdapterList", "Cart List Updated. Size: ${cartList.size}")
     }
 
     override fun onCreateViewHolder(
@@ -70,8 +74,13 @@ class CartAdapterList(private val listener: CartItemListener) :
 
         // Set OnClickListener for the delete button
         holder.item.ibDeleteCartItem.setOnClickListener {
-            listener.onDeleteCartItem(cart)
+            //listener.onDeleteCartItem(cart)
+            currentHolder = holder // Store the holder
+                showDeleteConfirmationDialog(cart)
+
+
         }
+
 
         // Set OnClickListener for the whole item view
         holder.itemView.setOnClickListener {
@@ -79,7 +88,16 @@ class CartAdapterList(private val listener: CartItemListener) :
             notifyDataSetChanged()
         }
     }
-
+    private fun showDeleteConfirmationDialog(cartItem: CartProduct) {
+        AlertDialog.Builder(currentHolder?.itemView?.context)
+            .setTitle("Delete Confirmation")
+            .setMessage("Are you sure you want to delete this item?")
+            .setPositiveButton("Yes") { _, _ ->
+                listener.onDeleteCartItem(cartItem)
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
     override fun getItemCount(): Int {
         return cartList.size
     }

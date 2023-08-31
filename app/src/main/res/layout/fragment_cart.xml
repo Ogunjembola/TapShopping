@@ -37,7 +37,8 @@
         app:layout_constraintBottom_toTopOf="@id/ll_checkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_cart_list_activity" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_cart_list_activity"
+        app:layout_constraintVertical_bias="0" />
 
     <com.example.tapshopping.utillz.TPTextView
         android:id="@+id/tv_no_cart_item_found"
