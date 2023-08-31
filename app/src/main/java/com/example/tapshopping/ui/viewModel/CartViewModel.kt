@@ -5,14 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tapshopping.data.local.DataStoreManager
-import com.example.tapshopping.data.model.Cart
-import com.example.tapshopping.data.model.CartData
-import com.example.tapshopping.data.model.CartProduct
+import com.example.tapshopping.data.model.CartProductData
 import com.example.tapshopping.data.model.CartResponse
+import com.example.tapshopping.data.model.CreateCart
+import com.example.tapshopping.data.model.CreateCartData
 import com.example.tapshopping.domain.CartRepository
 import com.example.tapshopping.utillz.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,31 +36,31 @@ class CartViewModel @Inject constructor(
 
 
     fun createCartList(
-        userID: String? = null,
-        basePrice: Int? = null,
-        productID: String? = null,
-        quantity: Int? = null,
-        totalPrice: Int? = null
+        user: String? = null,
+        basePrice: String,
+        productID: String,
+        quantity: Int,
+        totalPrice: String
     ) {
         viewModelScope.launch {
             _createCart.postValue(Resource.loading())
             val token = dataStoreManager.token
-            val products: List<CartProduct> = listOf(
-                CartProduct(
-                    basePrice = basePrice,
+            val products: List<CartProductData> = listOf(
+                CartProductData(
+
                     productID = productID,
                     quantity = quantity,
+                    basePrice= basePrice,
                     totalPrice = totalPrice
+
                 )
             )
-            val cartData = Cart(
-                CartData(
-                    userID = userID,
-                    products = products
-                )
-            )
+            val createCart =CreateCart(CreateCartData(products =products,
+                user = user!!
+            ))
+
             try {
-                repository.createCart(token = "Bearer ".plus(token), createCart = cartData)
+                repository.createCart(token = "Bearer ".plus(token), createCart = createCart)
                     .collect { response ->
                         _createCart.postValue(response)
                     }
@@ -74,24 +73,18 @@ class CartViewModel @Inject constructor(
     fun getCartItems() {
         viewModelScope.launch {
             _cartItems.postValue(Resource.loading())
-
             val token = dataStoreManager.token // Assuming a method to retrieve token from DataStore
             repository.getCart("Bearer $token").collect { response ->
                 _cartItems.postValue(response)
             }
         }
-    }
-
-    fun deleteCartItem(cartItemId: String) {
+    } fun deleteCartItem() {
         viewModelScope.launch {
             _deleteCart.postValue(Resource.loading())
-
-            val token = dataStoreManager.token // Assuming a method to retrieve token from DataStore
-            repository.deleteCart("Bearer $token", cartItemId).collect { response ->
-                _deleteCart.postValue(response)
+            val token = dataStoreManager.token
+            repository.deleteCart("Bearer $token").collect { result ->
+                _deleteCart.postValue(result)
             }
-
         }
-
     }
 }

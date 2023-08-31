@@ -1,6 +1,8 @@
 package com.example.tapshopping.ui.viewModel
 
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,7 +47,7 @@ class UserViewModel @Inject constructor(
                     dataStoreManager.email = getUserData.data.userData.data.user.email
                     dataStoreManager.userId = getUserData.data.userData.data.user.userId
                     dataStoreManager.userType = "User"
-
+                    Log.d("User ID", "getUser ID: ${dataStoreManager.userId}")
                 }else if (getUserData.isError()){
                     Log.d("UserViewModel", "getUserData: ${getUserData.message}")
                 }

@@ -1,7 +1,10 @@
 package com.example.tapshopping.utillz
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import com.example.tapshopping.ui.fragment.UserProfileFragment
@@ -43,4 +46,14 @@ fun showImageChooser(activity: Fragment) {
     )
     // Launches the image selection of phone storage using the constant code.
     activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+}
+fun isNetworkAvailable(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val network = connectivityManager.activeNetwork
+    val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+
+    return networkCapabilities != null &&
+            (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
 }

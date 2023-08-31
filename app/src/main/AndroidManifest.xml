@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
@@ -33,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapShopping"
         tools:targetApi="31">
+        <meta-data
+            android:name="co.paystack.android.PublicKey"
+            android:value="pk_test_c152a8b1d2feca7de3ca2f5fb121be4d759cefb8" />
 
         <activity
             android:name=".ui.MainActivity"

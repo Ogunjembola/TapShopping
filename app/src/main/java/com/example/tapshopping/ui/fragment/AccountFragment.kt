@@ -78,10 +78,16 @@ class AccountFragment : Fragment(), View.OnClickListener {
                     csAdmin.isVisible = isAdmin
                 }
             }
+
             val separatedNames: List<String> = expectedFullName.split(" ")
-            Log.d("AccountFragment ", "separatedNames: $separatedNames ")
-            val shortName:String = separatedNames[0].first() + separatedNames[1].first().toString()
+            val shortName: String = if (separatedNames.size >= 2) {
+                separatedNames[0].first() + separatedNames[1].first().toString()
+            } else {
+                // Handle the case where there are not enough names to create a short name
+                expectedFullName.take(2) // Use the first two characters of the full name
+            }
             userProfileTextView.text = shortName
+
         }
     }
 
