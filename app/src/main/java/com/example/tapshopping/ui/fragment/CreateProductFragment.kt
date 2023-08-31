@@ -18,15 +18,22 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tapshopping.databinding.FragmentCreateProductBinding
+import com.example.tapshopping.ui.viewModel.ProductViewModel
 import com.example.tapshopping.utillz.REQUEST_CODE_CAMERA
 import com.example.tapshopping.utillz.REQUEST_CODE_GALLERY
 import com.example.tapshopping.utillz.bitmapToUri
 import com.example.tapshopping.utillz.uriToBase64
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CreateProductFragment : Fragment() {
+
+    private val viewModel: ProductViewModel by viewModels()
+
     private lateinit var binding: FragmentCreateProductBinding
     private var imagePosition = -1
     private var categoryID: String? = ""
@@ -51,59 +58,49 @@ class CreateProductFragment : Fragment() {
                 when (imagePosition) {
                     REQUEST_CODE_GALLERY -> {
                         imagePosition = if (imageUri != null) {
-                            binding.uploadImage.setImageURI(imageUri)
-                            imageUri1 = imageUri
+                            viewModel.setImageUri1(imageUri)
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri1 = bitmapToUri(requireContext(), imageBitmap)
-                            binding.uploadImage.setImageURI(imageUri1)
-
+                            viewModel.setImageUri1(bitmapToUri(requireContext(), imageBitmap))
                             -1
                         }
                     }
 
                     REQUEST_CODE_GALLERY + 1 -> {
                         imagePosition = if (imageUri != null) {
-                            binding.uploadImage1.setImageURI(imageUri)
-                            imageUri2 = imageUri
+                            viewModel.setImageUri2(imageUri)
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri2 = bitmapToUri(requireContext(), imageBitmap)
-                            binding.uploadImage1.setImageURI(imageUri2)
+                            viewModel.setImageUri2(bitmapToUri(requireContext(), imageBitmap))
                             -1
                         }
                     }
 
                     REQUEST_CODE_GALLERY + 2 -> {
                         imagePosition = if (imageUri != null) {
-                            binding.uploadImage2.setImageURI(imageUri)
-                            imageUri3 = imageUri
+                            viewModel.setImageUri3(imageUri)
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri3 = bitmapToUri(requireContext(), imageBitmap)
-                            binding.uploadImage2.setImageURI(imageUri3)
+                            viewModel.setImageUri3(bitmapToUri(requireContext(), imageBitmap))
                             -1
                         }
                     }
 
                     REQUEST_CODE_GALLERY + 3 -> {
                         imagePosition = if (imageUri != null) {
-                            binding.uploadImage3.setImageURI(imageUri)
-                            imageUri4 = imageUri
+                            viewModel.setImageUri4(imageUri)
                             -1
                         } else {
                             val imageBitmap = data?.extras?.get("data") as Bitmap
-                            imageUri4 = bitmapToUri(requireContext(), imageBitmap)
-                            binding.uploadImage3.setImageURI(imageUri4)
+                            viewModel.setImageUri4(bitmapToUri(requireContext(), imageBitmap))
                             -1
                         }
                     }
 
                 }
-                updateButtonState()
             }
         }
 
@@ -123,7 +120,9 @@ class CreateProductFragment : Fragment() {
 
         Log.d(":::::::::::::::::catID", "onViewCreated: categoryId $categoryID ")
 
-        updateButtonState()
+        handleSelectedImages()
+
+
 
         binding.apply {
             toolbar.setNavigationOnClickListener {
@@ -158,7 +157,32 @@ class CreateProductFragment : Fragment() {
             }
         }
     }
+private fun handleSelectedImages(){
+    viewModel.imageUri1.observe(viewLifecycleOwner){
+        binding.uploadImage.setImageURI(it)
+        imageUri1 = it
+        updateButtonState()
+    }
 
+    viewModel.imageUri2.observe(viewLifecycleOwner){
+        binding.uploadImage1.setImageURI(it)
+        imageUri2 = it
+        updateButtonState()
+    }
+
+    viewModel.imageUri3.observe(viewLifecycleOwner){
+        binding.uploadImage2.setImageURI(it)
+        imageUri3 = it
+        updateButtonState()
+    }
+
+    viewModel.imageUri4.observe(viewLifecycleOwner){
+        binding.uploadImage3.setImageURI(it)
+        imageUri4 = it
+        updateButtonState()
+    }
+
+}
     private fun chooseImage() {
         val optionsMenu = arrayOf<CharSequence>(
             "Take Photo",

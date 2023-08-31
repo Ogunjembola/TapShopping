@@ -74,12 +74,15 @@
                     android:id="@+id/uploadImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/image_content_description"
                     android:scaleType="centerCrop"/>
 
                 <ImageView
                     android:id="@+id/addImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/image_content_description"
                     android:src="@drawable/ic_vector_add" />
 
             </FrameLayout>
@@ -112,12 +115,15 @@
                     <ImageView
                         android:id="@+id/uploadImage1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content_description"/>
 
                     <ImageView
                         android:id="@+id/addImage1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/image_content_description"
                         android:src="@drawable/ic_vector_add" />
 
                 </FrameLayout>
@@ -141,12 +147,15 @@
                     <ImageView
                         android:id="@+id/uploadImage2"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content_description"/>
 
                     <ImageView
                         android:id="@+id/addImage2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/image_content_description"
                         android:src="@drawable/ic_vector_add" />
 
                 </FrameLayout>
@@ -171,12 +180,15 @@
                     <ImageView
                         android:id="@+id/uploadImage3"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content_description"/>
 
                     <ImageView
                         android:id="@+id/addImage3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/image_content_description"
                         android:src="@drawable/ic_vector_add" />
 
                 </FrameLayout>
