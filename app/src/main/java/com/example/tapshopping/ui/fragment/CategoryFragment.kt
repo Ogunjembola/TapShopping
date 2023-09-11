@@ -49,6 +49,7 @@ class CategoryFragment : Fragment() {
         handleGetCategoriesObserver()
         handleOptionMenu()
         handleDeleteCategoryObserver()
+        binding.shimmerFrameLayout.startShimmerAnimation()
 
         binding.apply {
             fab.setOnClickListener {
@@ -67,11 +68,13 @@ class CategoryFragment : Fragment() {
 
                 when {
                     result.isSuccess() -> {
+                        binding.shimmerFrameLayout.stopShimmerAnimation()
+                        binding.toolbarCategory.visibility = View.VISIBLE
                         categoryAdapter.categories = result.data!!.categoryContent.categories
                         categoryAdapter.notifyDataSetChanged()
                     }
                 }
-                binding.progressBar.isVisible = result.isLoading()
+                binding.shimmerFrameLayout.isVisible = result.isLoading()
                 binding.errorMessage.isVisible = result.isError()
                 binding.errorMessage.text = result.message
             }
