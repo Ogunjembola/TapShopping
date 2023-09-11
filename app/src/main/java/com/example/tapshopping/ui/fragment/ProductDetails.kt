@@ -89,26 +89,28 @@ class ProductDetails : Fragment(), View.OnClickListener {
 
                 R.id.btn_add_to_cart -> {
                     if (isProductInCart()) {
-                        // Product is already in the cart, handle accordingly (e.g., show a message)
-                        Toast.makeText(
-                            requireContext(),
-                            "Product is already in the cart",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                        alertDialogBuilder
+                            .setTitle("Success")
+                            .setMessage("Product is already in the cart")
+                            .setPositiveButton("Go To Cart") { dialog, _ ->
+                                // You can add any action you want here when the user clicks OK
+                                findNavController().navigate(R.id.action_productDetails_to_cartFragment2)
+                            }
+                            .setNegativeButton("Go To Home") { dialog, _ ->
+                                // Add the code to navigate to the home page here
+                                findNavController().navigate(R.id.homeFragment)
+                            }
+                            .show() // Don't forget to call show() to display the AlertDialog
+
+
+
+                    val alertDialog = alertDialogBuilder.create()
+                        alertDialog.show()
                     } else {
                         // Product is not in the cart, add it to the cart and hide the "Add to Cart" button
                         addToCart()
-                        addToCartSuccess()
-                        updateAddToCartButtonVisibility()
-                        Log.d("ProductDetails", "userId: ${dataStoreManager.userId}")
-                        viewModel.createCartList(
-                            user = dataStoreManager.userId,
-                            basePrice = mProductDetails?.price ?: String(),
-                            productID = mProductDetails?.productId ?: String(),
-                            quantity = 1,
-                            totalPrice = mProductDetails?.price ?: String()
-                        )
-
+                       // addToCartSuccess()
                         Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
                     }
                 }
@@ -151,6 +153,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
 
                     result.isSuccess() -> {
                         addToCartSuccess()
+                        binding.btnAddToCart.visibility = View.GONE
                         Log.d("cart added", "cart added: ${addToCartSuccess()}")
                     }
 
@@ -176,9 +179,23 @@ class ProductDetails : Fragment(), View.OnClickListener {
     fun addToCartSuccess() {
         // Hide the AddToCart button if the item is already in the cart.
         binding.btnAddToCart.visibility = View.GONE
-        // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
+        // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if they want.
         binding.btnGoToCart.visibility = View.VISIBLE
+
+        // Create an AlertDialog to display a success message
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder
+            .setTitle("Success")
+            .setMessage("The item has been added to your cart successfully.")
+            .setPositiveButton("OK") { dialog, _ ->
+                // You can add any action you want here when the user clicks OK
+                dialog.dismiss()
+            }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
+
 
 
     fun productDetailsSuccess(product: Product) {

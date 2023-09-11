@@ -75,9 +75,9 @@ class CartAdapterList(private val listener: CartItemListener) :
         // Set OnClickListener for the delete button
         holder.item.ibDeleteCartItem.setOnClickListener {
             //listener.onDeleteCartItem(cart)
-            currentHolder = holder // Store the holder
-                showDeleteConfirmationDialog(cart)
-
+            //listener.onDeleteCartItem(cart)
+            currentHolder = holder
+            showDeleteConfirmationDialog(cart)
 
         }
 
