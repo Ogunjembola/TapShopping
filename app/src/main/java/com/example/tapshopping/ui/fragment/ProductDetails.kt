@@ -2,6 +2,8 @@ package com.example.tapshopping.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -93,6 +95,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
                         alertDialogBuilder
                             .setTitle("Success")
                             .setMessage("Product is already in the cart")
+                            .setIcon(R.drawable.successful)
                             .setPositiveButton("Go To Cart") { dialog, _ ->
                                 // You can add any action you want here when the user clicks OK
                                 findNavController().navigate(R.id.action_productDetails_to_cartFragment2)
@@ -102,15 +105,33 @@ class ProductDetails : Fragment(), View.OnClickListener {
                                 findNavController().navigate(R.id.homeFragment)
                             }
                             .show() // Don't forget to call show() to display the AlertDialog
+                    
 
-
-
-                    val alertDialog = alertDialogBuilder.create()
-                        alertDialog.show()
+//                    val alertDialog = alertDialogBuilder.create()
+//                        alertDialog.show()
                     } else {
                         // Product is not in the cart, add it to the cart and hide the "Add to Cart" button
                         addToCart()
-                       // addToCartSuccess()
+
+                        if (isAdded) {
+                            // Create an AlertDialog to display a success message
+                            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                            alertDialogBuilder
+                                .setTitle("Success")
+                                .setMessage("The item has been added to your cart successfully.")
+                                .setIcon(R.drawable.successful)
+                                .setPositiveButton("Go To Cart") { dialog, _ ->
+                                    // You can add any action you want here when the user clicks OK
+                                    findNavController().navigate(R.id.action_productDetails_to_cartFragment2)
+                                }
+                                .setNegativeButton("Go To Home") { dialog, _ ->
+                                    // Add the code to navigate to the home page here
+                                    findNavController().navigate(R.id.homeFragment)
+                                }
+                                .show()
+                        }
+
+                        // addToCartSuccess()
                         Log.d("ProductDetailsFragment", "User ID: ${dataStoreManager.userId}")
                     }
                 }
@@ -125,7 +146,10 @@ class ProductDetails : Fragment(), View.OnClickListener {
     private fun addToCart() {
         // Add the product to the cart
         cartProducts.add(mProductDetails!!)
+        // Update the visibility of the "Add to Cart" button
+        updateAddToCartButtonVisibility()
     }
+
     private fun updateAddToCartButtonVisibility() {
         if (isProductInCart()) {
             // Product is already in the cart, hide the "Add to Cart" button
@@ -182,19 +206,7 @@ class ProductDetails : Fragment(), View.OnClickListener {
         // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if they want.
         binding.btnGoToCart.visibility = View.VISIBLE
 
-        // Create an AlertDialog to display a success message
-        val alertDialogBuilder = AlertDialog.Builder(requireContext())
-        alertDialogBuilder
-            .setTitle("Success")
-            .setMessage("The item has been added to your cart successfully.")
-            .setPositiveButton("OK") { dialog, _ ->
-                // You can add any action you want here when the user clicks OK
-                dialog.dismiss()
-            }
-
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-    }
+           }
 
 
 
