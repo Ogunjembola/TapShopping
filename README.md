@@ -17,11 +17,11 @@ _Not available_
 ## Tech Stack
 
 - **Language**: Kotlin
-- **UI**: XML or Jetpack Compose (update if needed)
+- **UI**: XML 
 - **Architecture**: MVVM
 - **Networking**: Retrofit
 - **Image Loading**: Coil or Glide
-- **Dependency Injection**: Hilt (if used)
+- **Dependency Injection**: Hilt 
 - **State Management**: ViewModel + LiveData or StateFlow
 - **Optional**: Auth, Room, Stripe SDK
 
